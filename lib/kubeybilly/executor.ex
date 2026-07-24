@@ -28,11 +28,11 @@ defmodule Kubeybilly.Executor do
   @doc """
   The configured executor implementation.
 
-  Resolved through application config so tests substitute the Mox mock;
-  the real executor arrives in a later build step.
+  Resolved through application config so tests substitute the Mox mock
+  while dev and prod mutate the cluster through the real executor.
   """
-  @spec impl() :: module() | nil
+  @spec impl() :: module()
   def impl do
-    Application.get_env(:kubeybilly, :executor)
+    Application.get_env(:kubeybilly, :executor, Kubeybilly.Executor.Real)
   end
 end

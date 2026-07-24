@@ -126,6 +126,16 @@ defmodule Kubeybilly.Executor.RealTest do
     %{action | inverse: inverse}
   end
 
+  describe "boundary wiring" do
+    test "the executor boundary resolves the real executor by default" do
+      previous = Application.get_env(:kubeybilly, :executor)
+      Application.delete_env(:kubeybilly, :executor)
+      on_exit(fn -> Application.put_env(:kubeybilly, :executor, previous) end)
+
+      assert Kubeybilly.Executor.impl() == Real
+    end
+  end
+
   describe "guard rails" do
     test "an engaged kill switch refuses before anything else", %{root: root, budgets: budgets} do
       :persistent_term.put(@kill_key, true)
