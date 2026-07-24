@@ -17,6 +17,13 @@ config :kubeybilly, :k8s_client, Kubeybilly.K8sClient.Real
 # Root directory for incident evidence bundles.
 config :kubeybilly, :incidents_dir, "incidents"
 
+# The LLM advisor fallback for unmatched signatures is off by default:
+# a no_match escalates to a human instead (plan/02, plan/14).
+config :kubeybilly, :advisor_enabled, false
+
+# How long the correlator buffers alert groups before routing them.
+config :kubeybilly, :correlation_window_ms, 3000
+
 # Configure the endpoint
 config :kubeybilly, KubeybillyWeb.Endpoint,
   url: [host: "localhost"],
