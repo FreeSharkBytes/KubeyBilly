@@ -12,6 +12,7 @@ defmodule Kubeybilly.Application do
       {DNSCluster, query: Application.get_env(:kubeybilly, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Kubeybilly.PubSub},
       {Kubeybilly.K8sClient.Conn, []},
+      {Task.Supervisor, name: Kubeybilly.Soundings.TaskSupervisor},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
     ]
