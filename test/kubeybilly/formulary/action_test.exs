@@ -13,6 +13,7 @@ defmodule Kubeybilly.Formulary.ActionTest do
       assert action.inverse_class == :invertible
       assert action.inverse == nil
       assert action.blast_estimate == 0
+      assert action.facts == %{}
     end
 
     test "rollback_deployment accepts an integer revision" do

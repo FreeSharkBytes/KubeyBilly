@@ -12,12 +12,17 @@ defmodule Kubeybilly.Application do
       {DNSCluster, query: Application.get_env(:kubeybilly, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Kubeybilly.PubSub},
       {Kubeybilly.K8sClient.Conn, []},
+      # Mirrors the kill switch file into :persistent_term before anything
+      # that could reach a write path starts.
+      {Kubeybilly.Executor.KillSwitch, []},
       {Task.Supervisor, name: Kubeybilly.Soundings.TaskSupervisor},
       Kubeybilly.Incident.Registry,
       Kubeybilly.Incident.Monitor,
       {Kubeybilly.Incident.Supervisor, []},
       # Closes stale open records before any ingest wiring starts.
       {Kubeybilly.Incident.Recovery, []},
+      # Rebuilds the spent hourly budget from disk before ingest can act.
+      {Kubeybilly.Executor.Budgets, []},
       {Kubeybilly.Alerts.Correlator, []},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint

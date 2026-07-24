@@ -346,12 +346,13 @@ defmodule Kubeybilly.Incident.MachineTest do
 
   test "an unmatched bundle routes to the advisor when enabled",
        %{root: root} = context do
+    original_advisor = Application.get_env(:kubeybilly, :advisor)
     Application.put_env(:kubeybilly, :advisor_enabled, true)
     Application.put_env(:kubeybilly, :advisor, Kubeybilly.Incident.MachineTest.StubAdvisor)
 
     on_exit(fn ->
       Application.put_env(:kubeybilly, :advisor_enabled, false)
-      Application.delete_env(:kubeybilly, :advisor)
+      Application.put_env(:kubeybilly, :advisor, original_advisor)
     end)
 
     collector = fn target, _opts ->
@@ -483,6 +484,8 @@ defmodule Kubeybilly.Incident.MachineTest do
       assert action.name == :rollback_deployment
       assert action.params.to_revision == 1
       assert action.inverse.params.to_revision == "2"
+      assert %{"spec" => %{"template" => _template}} = action.facts.patch
+      assert action.facts.current_revision == "2"
       {:ok, %{}}
     end)
 

@@ -21,6 +21,11 @@ config :kubeybilly, :incidents_dir, "incidents"
 # where config/test.exs swaps in the Mox mock.
 config :kubeybilly, :verifier, Kubeybilly.Verification.Real
 
+# The kill switch file (plan/04): the Helm chart mounts the killswitch
+# ConfigMap key "engaged" here. nil means no switch is mounted, which
+# reads as disengaged; config/runtime.exs overrides via KILLSWITCH_PATH.
+config :kubeybilly, :killswitch_path, nil
+
 # The LLM advisor boundary (plan/14): the stub is the default in every
 # environment, so nothing depends on a network round trip unless a real
 # adapter is enabled explicitly (see config/runtime.exs). The endpoint

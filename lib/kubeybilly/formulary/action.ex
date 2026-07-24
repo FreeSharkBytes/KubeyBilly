@@ -17,10 +17,16 @@ defmodule Kubeybilly.Formulary.Action do
   `:uncordon_node` exists only as the recorded inverse of `:cordon_node`.
   It is deliberately absent from the public enum so matchers and the
   advisor can never select it; only `internal_new/2` builds it.
+
+  `facts` holds what validation read off the live cluster while proving
+  the action (the rollback merge patch, the current revision and replica
+  counts). They ride on the action because the executor receives only
+  the structs the machine hands it, and re-reading the cluster at
+  execution time would race the incident.
   """
 
   @enforce_keys [:name, :params, :inverse_class]
-  defstruct [:name, :params, :inverse_class, inverse: nil, blast_estimate: 0]
+  defstruct [:name, :params, :inverse_class, inverse: nil, blast_estimate: 0, facts: %{}]
 
   @typedoc "A publicly selectable action name."
   @type name ::
@@ -42,7 +48,8 @@ defmodule Kubeybilly.Formulary.Action do
           params: map(),
           inverse: t() | nil,
           inverse_class: inverse_class(),
-          blast_estimate: non_neg_integer()
+          blast_estimate: non_neg_integer(),
+          facts: map()
         }
 
   @public_names [
