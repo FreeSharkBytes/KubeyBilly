@@ -1,0 +1,13 @@
+# Standing orders: the policy file (plan/04), rendered from values so an
+# operator's overrides land here verbatim. Mounted read-only; the pod's Role
+# grants configmaps get/list/watch in this namespace only.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "kubeybilly.fullname" . }}-standing-orders
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kubeybilly.labels" . | nindent 4 }}
+data:
+  standing-orders.yaml: |
+    {{- toYaml .Values.standingOrders | nindent 4 }}

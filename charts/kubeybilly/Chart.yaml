@@ -1,0 +1,10 @@
+apiVersion: v2
+name: kubeybilly
+description: >-
+  KubeyBilly, the Kubernetes first responder. Freezes evidence, matches
+  deterministic signatures, and mitigates from a closed formulary under
+  standing orders. The RBAC manifest in this chart is deliberately small
+  enough to read aloud.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

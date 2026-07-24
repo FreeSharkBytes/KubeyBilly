@@ -1,0 +1,15 @@
+# Namespaced to the release namespace only: standing orders and the kill
+# switch live here as ConfigMaps, and nothing outside this namespace needs
+# ConfigMap access.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "kubeybilly.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kubeybilly.labels" . | nindent 4 }}
+rules:
+  # configmaps: standing orders, kill switch.
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch"]

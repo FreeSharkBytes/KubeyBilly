@@ -1,0 +1,12 @@
+# The kill switch (plan/04): a single key, watched by the app and checked
+# immediately before every write. Flip engaged to "true" to stop all
+# mutations; a pending action dies before it executes.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "kubeybilly.fullname" . }}-killswitch
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kubeybilly.labels" . | nindent 4 }}
+data:
+  engaged: {{ .Values.killswitch.engaged | quote }}

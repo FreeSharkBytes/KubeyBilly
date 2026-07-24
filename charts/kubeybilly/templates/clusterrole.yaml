@@ -1,0 +1,69 @@
+# The whole security pitch, small enough to read aloud (plan/13).
+#
+# Deliberately absent:
+#   - No Secrets access, on any verb. Missing-Secret incidents are detected
+#     via events (CreateContainerConfigError), never by reading Secrets.
+#   - No create on anything. KubeyBilly never makes new cluster objects.
+#   - No delete beyond pods. deny_kinds in standing orders is the policy
+#     layer; RBAC never grants the capability, so a policy bug cannot reach it.
+#   - Exactly four mutating verbs total: pods delete, deployments patch,
+#     deployments/scale patch, nodes patch. A one-to-one map onto the
+#     formulary: restart_pod, rollback_deployment / restart_workload,
+#     scale, cordon_node.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kubeybilly.fullname" . }}
+  labels:
+    {{- include "kubeybilly.labels" . | nindent 4 }}
+rules:
+  # --- Reads: soundings, signatures, verification -------------------------
+  # pods: soundings, verification.
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+  # pods/log: current and previous container logs.
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get"]
+  # events: soundings, missing ConfigMap/Secret detection.
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["get", "list"]
+  # deployments: soundings, revisions.
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch"]
+  # replicasets: revision history for rollback.
+  - apiGroups: ["apps"]
+    resources: ["replicasets"]
+    verbs: ["get", "list"]
+  # nodes: soundings.
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+  # services + endpointslices: upstream dependency check.
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list"]
+  - apiGroups: ["discovery.k8s.io"]
+    resources: ["endpointslices"]
+    verbs: ["get", "list"]
+  # --- Mutations: exactly four verbs, nothing else ------------------------
+  # pods delete: restart_pod.
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["delete"]
+  # deployments patch: rollback_deployment (template patch) and
+  # restart_workload (restartedAt annotation).
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["patch"]
+  # deployments/scale patch: scale.
+  - apiGroups: ["apps"]
+    resources: ["deployments/scale"]
+    verbs: ["patch"]
+  # nodes patch: cordon_node (spec.unschedulable).
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["patch"]

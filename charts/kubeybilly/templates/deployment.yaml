@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kubeybilly.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kubeybilly.labels" . | nindent 4 }}
+spec:
+  # Exactly one replica: incident state machines live in one BEAM node and
+  # disk is the source of truth. Two responders improvising on the same
+  # cluster is the failure mode, not the redundancy.
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "kubeybilly.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "kubeybilly.selectorLabels" . | nindent 8 }}
+      annotations:
+        # Restart the pod when either ConfigMap changes so mounted files and
+        # the app's view of policy never drift apart between watches.
+        checksum/standing-orders: {{ include (print $.Template.BasePath "/configmap-standing-orders.yaml") . | sha256sum }}
+        checksum/killswitch: {{ include (print $.Template.BasePath "/configmap-killswitch.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ include "kubeybilly.fullname" . }}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: kubeybilly
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+          ports:
+            - name: http
+              containerPort: 4000
+              protocol: TCP
+          env:
+            - name: PHX_SERVER
+              value: "true"
+            - name: PORT
+              value: "4000"
+            # Evidence bundles land on the only writable mount besides /tmp.
+            - name: INCIDENTS_DIR
+              value: /app/incidents
+            # The release writes its boot-time runtime config under
+            # RELEASE_TMP; point it at the /tmp emptyDir because the root
+            # filesystem is read-only.
+            - name: RELEASE_TMP
+              value: /tmp
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "kubeybilly.fullname" . }}
+                  key: SECRET_KEY_BASE
+          volumeMounts:
+            # The evidence volume: the one writable mount that matters.
+            - name: incidents
+              mountPath: /app/incidents
+            - name: tmp
+              mountPath: /tmp
+            # Policy and kill switch, mounted read-only. The env vars that
+            # point the app at these paths arrive with the watcher wiring in
+            # a later build step; the mounts are laid down now.
+            - name: standing-orders
+              mountPath: /etc/kubeybilly/standing-orders
+              readOnly: true
+            - name: killswitch
+              mountPath: /etc/kubeybilly/killswitch
+              readOnly: true
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: incidents
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+        - name: standing-orders
+          configMap:
+            name: {{ include "kubeybilly.fullname" . }}-standing-orders
+        - name: killswitch
+          configMap:
+            name: {{ include "kubeybilly.fullname" . }}-killswitch
