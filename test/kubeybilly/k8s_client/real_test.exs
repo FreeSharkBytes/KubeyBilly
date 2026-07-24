@@ -40,11 +40,14 @@ defmodule Kubeybilly.K8sClient.RealTest do
       refute Keyword.has_key?(op.path_params, :namespace)
     end
 
-    test "list carries the label selector as a query param" do
-      op = Real.build_list("Pod", "demo", "app=web")
+    test "list carries the label selector as a K8s.Selector struct" do
+      op = Real.build_list("Pod", "demo", "app=web,tier=front")
 
       assert op.verb == :list
-      assert op.query_params[:labelSelector] == "app=web"
+
+      assert op.query_params[:labelSelector] == %K8s.Selector{
+               match_labels: %{"app" => "web", "tier" => "front"}
+             }
     end
 
     test "list without a selector has no labelSelector param" do

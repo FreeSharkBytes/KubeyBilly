@@ -71,8 +71,24 @@ defmodule Kubeybilly.K8sClient.Real do
 
     case label_selector do
       nil -> op
-      selector -> K8s.Operation.put_query_param(op, :labelSelector, selector)
+      selector -> K8s.Operation.put_query_param(op, :labelSelector, to_selector(selector))
     end
+  end
+
+  # The k8s library serializes :labelSelector from a K8s.Selector struct, not
+  # a raw string. Only equality selectors ("k=v,k2=v2") are supported here,
+  # which is all the collector and baseline ever emit.
+  @spec to_selector(String.t()) :: K8s.Selector.t()
+  defp to_selector(selector) do
+    match_labels =
+      selector
+      |> String.split(",", trim: true)
+      |> Map.new(fn pair ->
+        [k, v] = String.split(pair, "=", parts: 2)
+        {String.trim(k), String.trim(v)}
+      end)
+
+    %K8s.Selector{match_labels: match_labels}
   end
 
   @doc "Build a pod log fetch, with `previous: true` for the prior container instance."
