@@ -5,10 +5,12 @@ defmodule Kubeybilly.Application do
 
   use Application
 
+  alias KubeybillyWeb.Plugs.WebhookAuth
+
   @impl true
   def start(_type, _args) do
     # An open ingest door must never be a silent surprise (plan/13).
-    KubeybillyWeb.Plugs.WebhookAuth.warn_if_disabled()
+    WebhookAuth.warn_if_disabled()
 
     children = [
       KubeybillyWeb.Telemetry,

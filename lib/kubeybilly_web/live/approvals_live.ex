@@ -58,9 +58,10 @@ defmodule KubeybillyWeb.ApprovalsLive do
 
   defp reload(socket) do
     awaiting =
-      Store.list()
-      |> Enum.filter(&Store.awaiting_approval?/1)
-      |> Enum.filter(&match?({:ok, _pid}, IncidentRegistry.whereis_incident(&1.id)))
+      Enum.filter(Store.list(), fn record ->
+        Store.awaiting_approval?(record) and
+          match?({:ok, _pid}, IncidentRegistry.whereis_incident(record.id))
+      end)
 
     assign(socket, :awaiting, awaiting)
   end

@@ -30,18 +30,15 @@ defmodule Kubeybilly.Incident.Store do
       end)
 
     case File.ls(root) do
-      {:ok, entries} ->
-        entries
-        |> Enum.sort(:desc)
-        |> Enum.flat_map(fn id ->
-          case Record.from_disk(id, root: root) do
-            {:ok, record} -> [record]
-            {:error, _reason} -> []
-          end
-        end)
+      {:ok, entries} -> entries |> Enum.sort(:desc) |> Enum.flat_map(&readable(root, &1))
+      {:error, _reason} -> []
+    end
+  end
 
-      {:error, _reason} ->
-        []
+  defp readable(root, id) do
+    case Record.from_disk(id, root: root) do
+      {:ok, record} -> [record]
+      {:error, _reason} -> []
     end
   end
 
