@@ -19,6 +19,7 @@ defmodule Kubeybilly.Incident.Machine do
   @behaviour :gen_statem
 
   alias Kubeybilly.Executor
+  alias Kubeybilly.Executor.Budgets
   alias Kubeybilly.Executor.KillSwitch
   alias Kubeybilly.Formulary.Inverse
   alias Kubeybilly.Formulary.Validator
@@ -442,17 +443,18 @@ defmodule Kubeybilly.Incident.Machine do
     }
   end
 
-  # Budget counters and freeze detection arrive with the executor build
-  # step; until then the context carries the honest static facts, and
-  # tests override via :context.
+  # Freeze detection arrives with the verifier build step; until then
+  # the rollout flags carry the honest static facts, and tests override
+  # via :context. The budget counts come from the executor's counters,
+  # summed with reverts included (plan/04).
   defp evaluator_context(data) do
     defaults = %{
       kill_switch_engaged: KillSwitch.engaged?(),
       rollout_in_progress: false,
       expected_rollout: false,
       maintenance_window: false,
-      actions_this_incident: 0,
-      actions_this_hour: 0,
+      actions_this_incident: Budgets.actions_this_incident(data.record.id),
+      actions_this_hour: Budgets.actions_this_hour(),
       mode: data.policy.mode
     }
 

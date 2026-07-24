@@ -21,6 +21,8 @@ defmodule Kubeybilly.Application do
       {Kubeybilly.Incident.Supervisor, []},
       # Closes stale open records before any ingest wiring starts.
       {Kubeybilly.Incident.Recovery, []},
+      # Rebuilds the spent hourly budget from disk before ingest can act.
+      {Kubeybilly.Executor.Budgets, []},
       {Kubeybilly.Alerts.Correlator, []},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
