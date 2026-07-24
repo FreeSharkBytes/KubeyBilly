@@ -11,8 +11,7 @@ defmodule Kubeybilly.Application do
       KubeybillyWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:kubeybilly, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Kubeybilly.PubSub},
-      # Start a worker by calling: Kubeybilly.Worker.start_link(arg)
-      # {Kubeybilly.Worker, arg},
+      {Kubeybilly.K8sClient.Conn, []},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
     ]
