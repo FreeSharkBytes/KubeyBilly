@@ -622,6 +622,48 @@ defmodule Kubeybilly.Incident.MachineTest do
     assert record.outcome == :interrupted
   end
 
+  ## Logbook on close
+
+  test "closing writes log.md into the bundle, whatever the outcome",
+       %{root: root} = context do
+    {pid, id} = start_machine(context, collector: slow_collector(500))
+
+    Machine.resolve(pid, "any")
+    record = await_closed(root, id)
+    assert record.outcome == :resolved_before_action
+
+    log_path = Path.join([root, id, "log.md"])
+    await_file(log_path)
+
+    log = File.read!(log_path)
+    assert log =~ "# Incident #{id} (resolved before action)"
+    assert log =~ "## Timeline"
+    assert log =~ "## Open questions"
+  end
+
+  @tag :capture_log
+  test "a logbook failure never blocks the close", %{root: root} = context do
+    id = unique_id()
+    # A directory squatting on the log path makes the write fail.
+    File.mkdir_p!(Path.join([root, id, "log.md"]))
+
+    {pid, _id} = start_machine(context, id: id, collector: slow_collector(500))
+
+    Machine.resolve(pid, "any")
+    record = await_closed(root, id)
+
+    assert record.outcome == :resolved_before_action
+    refute File.regular?(Path.join([root, id, "log.md"]))
+  end
+
+  defp await_file(path, tries \\ 200) do
+    cond do
+      File.regular?(path) -> :ok
+      tries > 0 -> Process.sleep(10) && await_file(path, tries - 1)
+      true -> flunk("file never appeared: #{path}")
+    end
+  end
+
   test "a second machine for the same workload refuses to open", context do
     suffix = System.unique_integer([:positive])
     workload = %{kind: "Deployment", name: "web", uid: "uid-dup-#{suffix}"}

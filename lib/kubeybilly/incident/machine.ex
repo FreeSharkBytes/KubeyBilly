@@ -18,6 +18,8 @@ defmodule Kubeybilly.Incident.Machine do
 
   @behaviour :gen_statem
 
+  require Logger
+
   alias Kubeybilly.Executor
   alias Kubeybilly.Executor.Budgets
   alias Kubeybilly.Executor.KillSwitch
@@ -28,6 +30,7 @@ defmodule Kubeybilly.Incident.Machine do
   alias Kubeybilly.Incident.Record
   alias Kubeybilly.Incident.Registry, as: IncidentRegistry
   alias Kubeybilly.K8sClient
+  alias Kubeybilly.Logbook
   alias Kubeybilly.Signatures.LoadedBundle
   alias Kubeybilly.Signatures.Triage
   alias Kubeybilly.Soundings.Bundle
@@ -516,8 +519,25 @@ defmodule Kubeybilly.Incident.Machine do
         end)
       )
 
+    write_logbook(data.record)
     emit(data.record, from, :closed, event)
     {:next_state, :closed, data, [{:next_event, :internal, :halt}]}
+  end
+
+  # The logbook is the handoff, not the incident: after the final record
+  # write it is generated best-effort, because a failure to render prose
+  # must never crash a close whose facts are already persisted.
+  defp write_logbook(record) do
+    case Logbook.generate(record) do
+      {:ok, _markdown} ->
+        :ok
+
+      {:error, reason} ->
+        Logger.warning("logbook generation failed for #{record.id}: #{inspect(reason)}")
+    end
+  rescue
+    error ->
+      Logger.warning("logbook generation crashed for #{record.id}: #{Exception.message(error)}")
   end
 
   defp update_record(data, fun), do: %{data | record: fun.(data.record)}
