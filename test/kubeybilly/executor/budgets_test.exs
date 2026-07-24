@@ -43,6 +43,12 @@ defmodule Kubeybilly.Executor.BudgetsTest do
     DateTime.utc_now(:second) |> DateTime.add(-minutes * 60, :second)
   end
 
+  describe "server/0" do
+    test "resolves to the application-started process by default" do
+      assert Budgets.server() == Budgets
+    end
+  end
+
   describe "consume/3" do
     test "counts the mutation against both budgets atomically", %{root: root} do
       budgets = start_budgets(root)

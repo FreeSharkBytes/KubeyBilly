@@ -47,6 +47,18 @@ defmodule Kubeybilly.Executor.Budgets do
   end
 
   @doc """
+  The budgets process the executor spends against.
+
+  Resolved through `config :kubeybilly, :budgets_server` so executor
+  tests can point the real executor at an isolated instance; everywhere
+  else it is the application-started process.
+  """
+  @spec server() :: GenServer.server()
+  def server do
+    Application.get_env(:kubeybilly, :budgets_server, __MODULE__)
+  end
+
+  @doc """
   Atomically check both budgets and count the mutation.
 
   Refusal names the exhausted budget and increments nothing; the
