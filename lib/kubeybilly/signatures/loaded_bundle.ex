@@ -104,6 +104,28 @@ defmodule Kubeybilly.Signatures.LoadedBundle do
 
   def captured_at(%__MODULE__{}), do: :error
 
+  @doc """
+  Pods with a container waiting for one of the given reasons.
+
+  Half the signature table starts from "some container is stuck waiting on
+  X", so the scan lives here once instead of in every matcher. Returns
+  `{pod, container_status}` pairs in the bundle's deterministic pod order.
+  """
+  @spec waiting_pods(t(), [String.t()]) :: [{pod(), map()}]
+  def waiting_pods(%__MODULE__{pods: pods}, reasons) when is_list(reasons) do
+    for pod <- pods,
+        container_status <- container_statuses(pod),
+        get_in(container_status, ["state", "waiting", "reason"]) in reasons,
+        do: {pod, container_status}
+  end
+
+  defp container_statuses(%{status: status}) do
+    status
+    |> Kernel.||(%{})
+    |> Map.get("containerStatuses")
+    |> List.wrap()
+  end
+
   ## Pods
 
   defp load_pods(dir) do
