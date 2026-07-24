@@ -346,13 +346,13 @@ defmodule Kubeybilly.Incident.MachineTest do
 
   test "an unmatched bundle routes to the advisor when enabled",
        %{root: root} = context do
-    original_advisor = Application.get_env(:kubeybilly, :advisor)
+    original_advisor = Application.get_env(:kubeybilly, :advisor_module)
     Application.put_env(:kubeybilly, :advisor_enabled, true)
-    Application.put_env(:kubeybilly, :advisor, Kubeybilly.Incident.MachineTest.StubAdvisor)
+    Application.put_env(:kubeybilly, :advisor_module, Kubeybilly.Incident.MachineTest.StubAdvisor)
 
     on_exit(fn ->
       Application.put_env(:kubeybilly, :advisor_enabled, false)
-      Application.put_env(:kubeybilly, :advisor, original_advisor)
+      Application.put_env(:kubeybilly, :advisor_module, original_advisor)
     end)
 
     collector = fn target, _opts ->
@@ -372,6 +372,57 @@ defmodule Kubeybilly.Incident.MachineTest do
     assert :no_action in events(record)
     refute :no_signature_match in events(record)
     assert record.signature["name"] == "stub_advisor"
+  end
+
+  test "the default triage adapter carries a model proposal end to end",
+       %{root: root} = context do
+    original_facade = Application.fetch_env!(:kubeybilly, :advisor)
+    Application.put_env(:kubeybilly, :advisor_enabled, true)
+
+    Application.put_env(
+      :kubeybilly,
+      :advisor,
+      Keyword.put(original_facade, :adapter, Kubeybilly.Advisor.AdapterMock)
+    )
+
+    on_exit(fn ->
+      Application.put_env(:kubeybilly, :advisor_enabled, false)
+      Application.put_env(:kubeybilly, :advisor, original_facade)
+    end)
+
+    stub(Kubeybilly.Advisor.AdapterMock, :propose, fn _summary ->
+      {:ok,
+       %{
+         "action" => "cordon_node",
+         "params" => %{"node" => "worker-1"},
+         "confidence" => 0.95,
+         "rationale" => "the node looks wedged"
+       }}
+    end)
+
+    stub_healthy_node()
+
+    collector = fn target, _opts ->
+      destination = Path.join(root, target.incident_id)
+      File.mkdir_p!(destination)
+      manifest = %{"incident_id" => target.incident_id, "complete" => true, "gaps" => []}
+      File.write!(Path.join(destination, "manifest.json"), Jason.encode!(manifest))
+      {:ok, manifest}
+    end
+
+    {pid, id} = start_machine(context, collector: collector)
+
+    # A capped 0.7 confidence can never clear the auto tier, so a
+    # model-proposed cordon always waits for a human.
+    await_state(pid, :awaiting_approval)
+    Machine.deny(pid)
+
+    record = await_closed(root, id)
+    assert record.outcome == :declined
+    assert record.signature["name"] == "advisor_proposed"
+    assert record.signature["confidence"] == 0.7
+    assert record.signature["rationale"] == "advisor: the node looks wedged"
+    assert record.action["name"] == "cordon_node"
   end
 
   ## Approval

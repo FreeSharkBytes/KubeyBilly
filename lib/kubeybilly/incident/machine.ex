@@ -373,10 +373,12 @@ defmodule Kubeybilly.Incident.Machine do
     end
   end
 
-  # The advisor arrives in a later build step (plan/14); until enabled,
-  # an unmatched bundle escalates to a human, which is the safe default.
+  # The advisor consults a model behind the facade's guardrails
+  # (plan/14); until enabled, an unmatched bundle escalates to a human,
+  # which is the safe default. The module is config so tests can seam it.
   defp advise(loaded) do
-    advisor = Application.get_env(:kubeybilly, :advisor)
+    advisor =
+      Application.get_env(:kubeybilly, :advisor_module, Kubeybilly.Advisor.TriageAdapter)
 
     if advisor_enabled?() and is_atom(advisor) and not is_nil(advisor) do
       advisor.advise(loaded)
