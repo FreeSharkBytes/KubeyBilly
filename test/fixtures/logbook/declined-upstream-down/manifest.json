@@ -1,0 +1,28 @@
+{
+  "captured_at": "2026-07-24T11:00:01Z",
+  "complete": true,
+  "files": [
+    {
+      "bytes": 2200,
+      "path": "pods/demo/web-6c5d4b3a2-fffff/spec.json",
+      "sha256": "aa11bb22"
+    },
+    {
+      "bytes": 1800,
+      "path": "pods/demo/web-6c5d4b3a2-fffff/status.json",
+      "sha256": "cc33dd44"
+    },
+    {
+      "bytes": 1400,
+      "path": "events/demo.json",
+      "sha256": "ee55ff66"
+    },
+    {
+      "bytes": 640,
+      "path": "metrics/baseline.json",
+      "sha256": "0077aa88"
+    }
+  ],
+  "gaps": [],
+  "incident_id": "20260724T110000Z-b2c3d4e5"
+}

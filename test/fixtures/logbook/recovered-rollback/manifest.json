@@ -1,0 +1,43 @@
+{
+  "captured_at": "2026-07-24T10:00:01Z",
+  "complete": true,
+  "files": [
+    {
+      "bytes": 48213,
+      "path": "pods/demo/web-9f8d7c6b5-aaaaa/logs-previous.txt",
+      "sha256": "9f2ce695"
+    },
+    {
+      "bytes": 1024,
+      "path": "pods/demo/web-9f8d7c6b5-aaaaa/logs-current.txt",
+      "sha256": "77aa01b3"
+    },
+    {
+      "bytes": 2048,
+      "path": "pods/demo/web-9f8d7c6b5-aaaaa/status.json",
+      "sha256": "31bbcafe"
+    },
+    {
+      "bytes": 4096,
+      "path": "owners/demo/web.json",
+      "sha256": "c0dec0de"
+    },
+    {
+      "bytes": 3072,
+      "path": "owners/demo/web-revisions.json",
+      "sha256": "beefbeef"
+    },
+    {
+      "bytes": 900,
+      "path": "events/demo.json",
+      "sha256": "abcdabcd"
+    },
+    {
+      "bytes": 512,
+      "path": "metrics/baseline.json",
+      "sha256": "f00df00d"
+    }
+  ],
+  "gaps": [],
+  "incident_id": "20260724T100000Z-a1b2c3d4"
+}
