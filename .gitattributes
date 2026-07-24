@@ -1,0 +1,11 @@
+# Normalize line endings to LF for all text files.
+* text=auto eol=lf
+
+# Binary files, no text conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+
+# Diagram sources and renders are text.
+*.svg text
+*.puml text
