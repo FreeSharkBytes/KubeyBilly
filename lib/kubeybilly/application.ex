@@ -13,6 +13,7 @@ defmodule Kubeybilly.Application do
       {Phoenix.PubSub, name: Kubeybilly.PubSub},
       {Kubeybilly.K8sClient.Conn, []},
       {Task.Supervisor, name: Kubeybilly.Soundings.TaskSupervisor},
+      Kubeybilly.Incident.Registry,
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
     ]
