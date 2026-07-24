@@ -16,6 +16,8 @@ defmodule Kubeybilly.Application do
       Kubeybilly.Incident.Registry,
       Kubeybilly.Incident.Monitor,
       {Kubeybilly.Incident.Supervisor, []},
+      # Closes stale open records before any ingest wiring starts.
+      {Kubeybilly.Incident.Recovery, []},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
     ]
