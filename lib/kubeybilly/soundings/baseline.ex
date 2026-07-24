@@ -109,28 +109,27 @@ defmodule Kubeybilly.Soundings.Baseline do
   defp service_readiness(client, namespace, workload) do
     template_labels = get_in(workload, ["spec", "template", "metadata", "labels"]) || %{}
 
-    with {:ok, services} <- client.list("Service", namespace, nil) do
-      selectored =
-        Enum.filter(services, fn service ->
-          case get_in(service, ["spec", "selector"]) do
-            selector when is_map(selector) and map_size(selector) > 0 -> true
-            _no_selector -> false
-          end
-        end)
+    with {:ok, services} <- client.list("Service", namespace, nil),
+         selectored = Enum.filter(services, &selectored?/1),
+         {:ok, namespace_services} <-
+           Enum.reduce_while(
+             selectored,
+             {:ok, %{}},
+             &collect_service_readiness(client, namespace, &1, &2)
+           ) do
+      selecting_names =
+        for service <- selectored,
+            LabelSelector.selects?(get_in(service, ["spec", "selector"]), template_labels),
+            do: get_in(service, ["metadata", "name"])
 
-      with {:ok, namespace_services} <-
-             Enum.reduce_while(
-               selectored,
-               {:ok, %{}},
-               &collect_service_readiness(client, namespace, &1, &2)
-             ) do
-        selecting_names =
-          for service <- selectored,
-              LabelSelector.selects?(get_in(service, ["spec", "selector"]), template_labels),
-              do: get_in(service, ["metadata", "name"])
+      {:ok, {Map.take(namespace_services, selecting_names), namespace_services}}
+    end
+  end
 
-        {:ok, {Map.take(namespace_services, selecting_names), namespace_services}}
-      end
+  defp selectored?(service) do
+    case get_in(service, ["spec", "selector"]) do
+      selector when is_map(selector) and map_size(selector) > 0 -> true
+      _no_selector -> false
     end
   end
 
