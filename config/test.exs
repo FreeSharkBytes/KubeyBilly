@@ -4,6 +4,14 @@ import Config
 # require a live cluster.
 config :kubeybilly, :k8s_client, Kubeybilly.K8sClient.Mock
 
+# The executor and verifier boundaries are Mox mocks in test: incidents
+# are driven end to end without mutating or watching a cluster.
+config :kubeybilly, :executor, Kubeybilly.ExecutorMock
+config :kubeybilly, :verifier, Kubeybilly.VerifierMock
+
+# A short correlation window keeps correlator tests fast.
+config :kubeybilly, :correlation_window_ms, 50
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :kubeybilly, KubeybillyWeb.Endpoint,

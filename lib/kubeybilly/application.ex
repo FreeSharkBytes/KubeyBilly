@@ -13,6 +13,12 @@ defmodule Kubeybilly.Application do
       {Phoenix.PubSub, name: Kubeybilly.PubSub},
       {Kubeybilly.K8sClient.Conn, []},
       {Task.Supervisor, name: Kubeybilly.Soundings.TaskSupervisor},
+      Kubeybilly.Incident.Registry,
+      Kubeybilly.Incident.Monitor,
+      {Kubeybilly.Incident.Supervisor, []},
+      # Closes stale open records before any ingest wiring starts.
+      {Kubeybilly.Incident.Recovery, []},
+      {Kubeybilly.Alerts.Correlator, []},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
     ]
