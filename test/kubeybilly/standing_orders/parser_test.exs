@@ -174,6 +174,63 @@ defmodule Kubeybilly.StandingOrders.ParserTest do
                Parser.parse("scope:\n  namespaces_include: demo\n")
     end
 
+    test "rejects a scope that is not a map" do
+      assert {:error, {:policy, {:invalid_value, ["scope"], "everywhere"}}} =
+               Parser.parse("scope: everywhere\n")
+    end
+
+    test "rejects a scope list with non-string entries" do
+      assert {:error, {:policy, {:invalid_value, ["scope", "namespaces_exclude"], [1, 2]}}} =
+               Parser.parse("scope:\n  namespaces_exclude: [1, 2]\n")
+    end
+
+    test "rejects a tiers section that is not a map" do
+      assert {:error, {:policy, {:invalid_value, ["tiers"], "loose"}}} =
+               Parser.parse("tiers: loose\n")
+    end
+
+    test "rejects a tier that is not a map" do
+      assert {:error, {:policy, {:invalid_value, ["tiers", "read"], "open"}}} =
+               Parser.parse("tiers:\n  read: open\n")
+    end
+
+    test "rejects a non-string action" do
+      assert {:error, {:policy, {:unknown_action, "read", 7}}} =
+               Parser.parse("tiers:\n  read: { actions: [7] }\n")
+    end
+
+    test "rejects a non-boolean tier auto" do
+      assert {:error, {:policy, {:invalid_value, ["tiers", "read", "auto"], "yep"}}} =
+               Parser.parse("tiers:\n  read: { actions: [no_action], auto: yep }\n")
+    end
+
+    test "rejects a non-positive max_delta" do
+      yaml = "tiers:\n  scale: { actions: [scale], max_delta: 0 }\n"
+
+      assert {:error, {:policy, {:invalid_value, ["tiers", "scale", "max_delta"], 0}}} =
+               Parser.parse(yaml)
+    end
+
+    test "rejects deny_kinds that is not a list" do
+      assert {:error, {:policy, {:invalid_value, ["deny_kinds"], "Namespace"}}} =
+               Parser.parse("deny_kinds: Namespace\n")
+    end
+
+    test "rejects deny_kinds with non-string entries" do
+      assert {:error, {:policy, {:invalid_value, ["deny_kinds"], [42]}}} =
+               Parser.parse("deny_kinds: [42]\n")
+    end
+
+    test "rejects a flat section that is not a map" do
+      assert {:error, {:policy, {:invalid_value, ["budgets"], "unlimited"}}} =
+               Parser.parse("budgets: unlimited\n")
+    end
+
+    test "rejects a non-positive budget" do
+      assert {:error, {:policy, {:invalid_value, ["budgets", "actions_per_incident"], 0}}} =
+               Parser.parse("budgets:\n  actions_per_incident: 0\n")
+    end
+
     test "rejects malformed yaml" do
       assert {:error, {:policy, {:invalid_yaml, _reason}}} = Parser.parse(": : :\n\t-")
     end
