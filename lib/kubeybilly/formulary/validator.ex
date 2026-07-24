@@ -99,18 +99,16 @@ defmodule Kubeybilly.Formulary.Validator do
   end
 
   defp check(%Action{name: :cordon_node} = action, client) do
-    with {:ok, false} <- node_unschedulable(client, action.params.name) do
-      {:ok, %{action: action, facts: %{unschedulable: false}}}
-    else
+    case node_unschedulable(client, action.params.name) do
+      {:ok, false} -> {:ok, %{action: action, facts: %{unschedulable: false}}}
       {:ok, true} -> {:error, {:validation, :already_cordoned, %{node: action.params.name}}}
       {:error, _reason} = error -> error
     end
   end
 
   defp check(%Action{name: :uncordon_node} = action, client) do
-    with {:ok, true} <- node_unschedulable(client, action.params.name) do
-      {:ok, %{action: action, facts: %{unschedulable: true}}}
-    else
+    case node_unschedulable(client, action.params.name) do
+      {:ok, true} -> {:ok, %{action: action, facts: %{unschedulable: true}}}
       {:ok, false} -> {:error, {:validation, :not_cordoned, %{node: action.params.name}}}
       {:error, _reason} = error -> error
     end
