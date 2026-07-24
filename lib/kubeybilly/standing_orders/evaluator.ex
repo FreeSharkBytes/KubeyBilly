@@ -64,7 +64,9 @@ defmodule Kubeybilly.StandingOrders.Evaluator do
   """
   @spec evaluate(Policy.t(), intent(), context()) :: Decision.t()
   def evaluate(%Policy{} = policy, intent, context) do
-    decision = decide(policy, intent, context)
+    # Stamped, not re-derived: the executor and the persisted record see
+    # exactly the mode and limits this evaluation ran under.
+    decision = %{decide(policy, intent, context) | mode: context.mode, budgets: policy.budgets}
 
     :telemetry.execute(@decision_event, %{rules_passed: length(decision.chain)}, %{
       verdict: decision.verdict,

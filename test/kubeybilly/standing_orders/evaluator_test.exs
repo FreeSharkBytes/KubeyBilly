@@ -100,6 +100,21 @@ defmodule Kubeybilly.StandingOrders.EvaluatorTest do
       assert %Decision{verdict: :permit_auto} =
                Evaluator.evaluate(policy, anywhere, context())
     end
+
+    test "every decision carries the mode and budgets it was evaluated under", %{
+      policy: policy
+    } do
+      budgets = policy.budgets
+
+      assert %Decision{mode: :dry_run, budgets: ^budgets} =
+               Evaluator.evaluate(policy, intent(), context(%{mode: :dry_run}))
+
+      assert %Decision{verdict: :deny, mode: :auto, budgets: ^budgets} =
+               Evaluator.evaluate(policy, intent(), context(%{kill_switch_engaged: true}))
+
+      assert %Decision{mode: :auto, budgets: ^budgets} =
+               Evaluator.evaluate(policy, intent(%{action: :no_action}), context())
+    end
   end
 
   describe "kill-switch" do
