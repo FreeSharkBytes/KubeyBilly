@@ -16,8 +16,10 @@ defmodule Kubeybilly.Soundings.Collector do
   """
 
   alias Kubeybilly.K8sClient
+  alias Kubeybilly.Soundings.Baseline
   alias Kubeybilly.Soundings.Bundle
   alias Kubeybilly.Soundings.BundleWriter
+  alias Kubeybilly.Soundings.LabelSelector
 
   @task_supervisor Kubeybilly.Soundings.TaskSupervisor
   @pod_capture_timeout :timer.seconds(30)
@@ -54,7 +56,7 @@ defmodule Kubeybilly.Soundings.Collector do
           workload_name: workload_name,
           pods: pods,
           nodes: nodes
-        },
+        } = target,
         opts
       ) do
     bundle = Bundle.new(incident_id, Keyword.take(opts, [:root]))
@@ -66,6 +68,7 @@ defmodule Kubeybilly.Soundings.Collector do
       capture_events(writer, client, namespace)
       capture_owner(writer, client, workload_kind, namespace, workload_name)
       capture_nodes(writer, client, nodes)
+      capture_baseline(writer, client, target)
 
       result = BundleWriter.seal(writer)
       GenServer.stop(writer)
@@ -103,7 +106,8 @@ defmodule Kubeybilly.Soundings.Collector do
       [
         Bundle.events_path(namespace),
         Bundle.owner_path(namespace, workload_name),
-        Bundle.owner_revisions_path(namespace, workload_name)
+        Bundle.owner_revisions_path(namespace, workload_name),
+        Bundle.baseline_path()
       ] ++ node_artifacts
   end
 
@@ -204,28 +208,9 @@ defmodule Kubeybilly.Soundings.Collector do
   end
 
   defp capture_revisions(writer, client, namespace, revisions_path, owner) do
-    case client.list("ReplicaSet", namespace, selector(owner)) do
+    case client.list("ReplicaSet", namespace, LabelSelector.workload_selector(owner)) do
       {:ok, revisions} -> BundleWriter.write_artifact(writer, revisions_path, encode(revisions))
       {:error, reason} -> BundleWriter.record_gap(writer, revisions_path, reason)
-    end
-  end
-
-  @doc """
-  Render a workload's `matchLabels` as a label selector string.
-
-  Sorted for determinism, nil when the workload has no selector, so tests
-  and the API see one canonical form.
-  """
-  @spec selector(map()) :: String.t() | nil
-  def selector(owner) do
-    case get_in(owner, ["spec", "selector", "matchLabels"]) do
-      labels when is_map(labels) and map_size(labels) > 0 ->
-        labels
-        |> Enum.sort()
-        |> Enum.map_join(",", fn {key, value} -> "#{key}=#{value}" end)
-
-      _missing ->
-        nil
     end
   end
 
@@ -240,6 +225,17 @@ defmodule Kubeybilly.Soundings.Collector do
         {:error, reason} -> BundleWriter.record_gap(writer, path, reason)
       end
     end)
+  end
+
+  ## Baseline
+
+  defp capture_baseline(writer, client, target) do
+    path = Bundle.baseline_path()
+
+    case Baseline.build(client, target) do
+      {:ok, baseline} -> BundleWriter.write_artifact(writer, path, encode(baseline))
+      {:error, reason} -> BundleWriter.record_gap(writer, path, reason)
+    end
   end
 
   defp encode(value), do: Jason.encode!(value, pretty: true)

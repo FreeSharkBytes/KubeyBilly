@@ -23,10 +23,21 @@ defmodule Kubeybilly.Soundings.CollectorTest do
     },
     "spec" => %{
       "replicas" => 2,
-      "selector" => %{"matchLabels" => %{"app" => "web"}}
+      "selector" => %{"matchLabels" => %{"app" => "web"}},
+      "template" => %{"metadata" => %{"labels" => %{"app" => "web"}}}
     },
     "status" => %{"replicas" => 2, "readyReplicas" => 1, "availableReplicas" => 1}
   }
+
+  @service %{
+    "kind" => "Service",
+    "metadata" => %{"name" => "web-svc"},
+    "spec" => %{"selector" => %{"app" => "web"}}
+  }
+
+  @endpoint_slices [
+    %{"kind" => "EndpointSlice", "endpoints" => [%{"conditions" => %{"ready" => true}}]}
+  ]
 
   @replicasets [
     %{
@@ -112,6 +123,9 @@ defmodule Kubeybilly.Soundings.CollectorTest do
     stub(Client, :list, fn
       "Event", "demo", nil -> {:ok, @events}
       "ReplicaSet", "demo", "app=web" -> {:ok, @replicasets}
+      "Pod", "demo", "app=web" -> {:ok, [pod_fixture("web-abc")]}
+      "Service", "demo", nil -> {:ok, [@service]}
+      "EndpointSlice", "demo", "kubernetes.io/service-name=web-svc" -> {:ok, @endpoint_slices}
     end)
   end
 
@@ -183,6 +197,16 @@ defmodule Kubeybilly.Soundings.CollectorTest do
         |> Jason.decode!()
 
       assert node["kind"] == "Node"
+
+      baseline =
+        bundle
+        |> Bundle.absolute(Bundle.baseline_path())
+        |> File.read!()
+        |> Jason.decode!()
+
+      assert baseline["desired_replicas"] == 2
+      assert baseline["revision"] == "4"
+      assert baseline["services"] == %{"web-svc" => %{"ready_endpoints" => 1}}
     end
 
     test "requests previous logs before current logs for every pod" do
@@ -272,6 +296,9 @@ defmodule Kubeybilly.Soundings.CollectorTest do
       stub(Client, :list, fn
         "Event", "demo", nil -> {:error, {:transport, :closed}}
         "ReplicaSet", "demo", "app=web" -> {:ok, @replicasets}
+        "Pod", "demo", "app=web" -> {:ok, [pod_fixture("web-abc")]}
+        "Service", "demo", nil -> {:ok, [@service]}
+        "EndpointSlice", "demo", _selector -> {:ok, @endpoint_slices}
       end)
 
       stub(Client, :get, fn
@@ -286,6 +313,26 @@ defmodule Kubeybilly.Soundings.CollectorTest do
       gap_paths = Enum.map(manifest["gaps"], & &1["path"])
       assert Bundle.events_path("demo") in gap_paths
       assert Bundle.node_path("worker-1") in gap_paths
+    end
+
+    test "a failed baseline becomes a gap and breaks completeness" do
+      root = tmp_root()
+      stub_happy_cluster()
+
+      stub(Client, :list, fn
+        "Event", "demo", nil -> {:ok, @events}
+        "ReplicaSet", "demo", "app=web" -> {:ok, @replicasets}
+        "Pod", "demo", "app=web" -> {:error, {:transport, :timeout}}
+        "Service", "demo", nil -> {:ok, [@service]}
+        "EndpointSlice", "demo", _selector -> {:ok, @endpoint_slices}
+      end)
+
+      assert {:ok, manifest} = Collector.collect(target(["web-abc"]), root: root)
+
+      assert manifest["complete"] == false
+      assert [gap] = manifest["gaps"]
+      assert gap["path"] == Bundle.baseline_path()
+      assert gap["reason"] =~ "timeout"
     end
   end
 
