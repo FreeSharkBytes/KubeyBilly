@@ -18,6 +18,7 @@ defmodule Kubeybilly.Application do
       {Kubeybilly.Incident.Supervisor, []},
       # Closes stale open records before any ingest wiring starts.
       {Kubeybilly.Incident.Recovery, []},
+      {Kubeybilly.Alerts.Correlator, []},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
     ]
