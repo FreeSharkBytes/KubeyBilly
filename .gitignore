@@ -50,3 +50,8 @@ npm-debug.log
 Thumbs.db
 .DS_Store
 
+
+# Documentation lives on the GitLab wiki; local copies are the editing source.
+/README.md
+/CHANGELOG.md
+/CONTRIBUTING.md
