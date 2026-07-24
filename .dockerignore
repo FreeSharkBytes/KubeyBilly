@@ -1,0 +1,19 @@
+# Build context hygiene: nothing the release build does not consume.
+_build
+deps
+node_modules
+assets/node_modules
+.git
+incidents
+plan
+test
+.claude
+.elixir_ls
+cover
+doc
+tmp
+erl_crash.dump
+.env
+.env.*
+Dockerfile
+.dockerignore

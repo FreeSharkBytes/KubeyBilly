@@ -23,6 +23,12 @@ end
 config :kubeybilly, KubeybillyWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+# Where incident evidence bundles are written. In the container this points
+# at the writable emptyDir mount (the root filesystem is read-only).
+if incidents_dir = System.get_env("INCIDENTS_DIR") do
+  config :kubeybilly, :incidents_dir, incidents_dir
+end
+
 # The LLM advisor stays on the stub unless switched explicitly at
 # runtime (plan/14). ADVISOR_ADAPTER=openai_compat enables the real
 # provider; ADVISOR_BASE_URL and ADVISOR_MODEL retarget it without a
