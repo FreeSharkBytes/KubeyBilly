@@ -1,0 +1,18 @@
+{
+  "available_replicas": 0,
+  "desired_replicas": 2,
+  "pods": {},
+  "ready_pods": [],
+  "ready_replicas": 0,
+  "revision": "2",
+  "services": {
+    "web": {
+      "ready_endpoints": 2
+    }
+  },
+  "workload": {
+    "kind": "Deployment",
+    "name": "web",
+    "namespace": "demo"
+  }
+}

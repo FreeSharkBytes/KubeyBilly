@@ -1,0 +1,36 @@
+{
+  "conditions": [
+    {
+      "status": "True",
+      "type": "PodScheduled"
+    },
+    {
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "status": "True",
+      "type": "Ready"
+    },
+    {
+      "status": "True",
+      "type": "ContainersReady"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "image": "registry.example.com/web:2.0.0",
+      "lastState": {},
+      "name": "web",
+      "ready": true,
+      "restartCount": 0,
+      "state": {
+        "running": {
+          "startedAt": "2026-07-24T08:00:12Z"
+        }
+      }
+    }
+  ],
+  "phase": "Running",
+  "startTime": "2026-07-24T08:00:10Z"
+}

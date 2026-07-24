@@ -1,0 +1,12 @@
+{
+  "conditions": [
+    {
+      "message": "0/3 nodes are available: 3 Insufficient cpu.",
+      "reason": "Unschedulable",
+      "status": "False",
+      "type": "PodScheduled"
+    }
+  ],
+  "phase": "Pending",
+  "qosClass": "Burstable"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "apiVersion": "v1",
+    "involvedObject": {
+      "kind": "Pod",
+      "name": "web-c3c3c3c3c-eeeee",
+      "namespace": "demo"
+    },
+    "kind": "Event",
+    "message": "Successfully assigned demo/web-c3c3c3c3c-eeeee to worker-1",
+    "reason": "Scheduled",
+    "type": "Normal"
+  }
+]

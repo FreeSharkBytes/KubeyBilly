@@ -1,0 +1,98 @@
+[
+  {
+    "apiVersion": "apps/v1",
+    "kind": "ReplicaSet",
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "2",
+        "deployment.kubernetes.io/revision": "2"
+      },
+      "creationTimestamp": "2026-07-24T08:00:00Z",
+      "labels": {
+        "app": "web",
+        "pod-template-hash": "b2b2b2b2b"
+      },
+      "name": "web-b2b2b2b2b",
+      "namespace": "demo"
+    },
+    "spec": {
+      "replicas": 2,
+      "selector": {
+        "matchLabels": {
+          "app": "web",
+          "pod-template-hash": "b2b2b2b2b"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "web",
+            "pod-template-hash": "b2b2b2b2b"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "image": "registry.example.com/web:2.0.0",
+              "name": "web"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "availableReplicas": 2,
+      "observedGeneration": 2,
+      "readyReplicas": 2,
+      "replicas": 2
+    }
+  },
+  {
+    "apiVersion": "apps/v1",
+    "kind": "ReplicaSet",
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "2",
+        "deployment.kubernetes.io/revision": "3"
+      },
+      "creationTimestamp": "2026-07-24T09:50:00Z",
+      "labels": {
+        "app": "web",
+        "pod-template-hash": "c3c3c3c3c"
+      },
+      "name": "web-c3c3c3c3c",
+      "namespace": "demo"
+    },
+    "spec": {
+      "replicas": 1,
+      "selector": {
+        "matchLabels": {
+          "app": "web",
+          "pod-template-hash": "c3c3c3c3c"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "web",
+            "pod-template-hash": "c3c3c3c3c"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "image": "registry.example.com/web:2.1.0",
+              "name": "web"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "availableReplicas": 0,
+      "observedGeneration": 2,
+      "readyReplicas": 0,
+      "replicas": 1
+    }
+  }
+]
