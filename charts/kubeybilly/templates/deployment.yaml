@@ -62,6 +62,22 @@ spec:
                 secretKeyRef:
                   name: {{ include "kubeybilly.fullname" . }}
                   key: SECRET_KEY_BASE
+            # The webhook and manual trigger bearer token; required by
+            # config/runtime.exs in prod, managed in the chart Secret.
+            - name: WEBHOOK_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "kubeybilly.fullname" . }}
+                  key: WEBHOOK_TOKEN
+            # Dashboard basic auth; the approve button must not be
+            # anonymous (plan/13).
+            - name: DASHBOARD_USER
+              value: {{ .Values.dashboard.user | quote }}
+            - name: DASHBOARD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "kubeybilly.fullname" . }}
+                  key: DASHBOARD_PASSWORD
           volumeMounts:
             # The evidence volume: the one writable mount that matters.
             - name: incidents

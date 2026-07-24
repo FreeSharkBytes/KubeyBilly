@@ -10,6 +10,19 @@ image:
 # upgrades (helm lookup). Set explicitly to rotate or pin it.
 secretKeyBase: ""
 
+# Shared bearer token for the alert webhook and manual trigger (plan/13).
+# Managed like secretKeyBase: leave empty to generate on first install and
+# preserve across upgrades; set explicitly to rotate or pin. Configure the
+# same value on the Alertmanager receiver via http_config.authorization.
+webhookToken: ""
+
+# HTTP basic auth for the dashboard and its approve button (plan/13,
+# demo-grade on purpose; put your SSO proxy in front for real use). The
+# password is managed like secretKeyBase when left empty.
+dashboard:
+  user: billy
+  password: ""
+
 service:
   type: ClusterIP
   port: 4000

@@ -5,12 +5,20 @@ defmodule Kubeybilly.Application do
 
   use Application
 
+  alias KubeybillyWeb.Plugs.WebhookAuth
+
   @impl true
   def start(_type, _args) do
+    # An open ingest door must never be a silent surprise (plan/13).
+    WebhookAuth.warn_if_disabled()
+
     children = [
       KubeybillyWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:kubeybilly, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Kubeybilly.PubSub},
+      # Forwards incident telemetry onto the "incidents" PubSub topic so
+      # the dashboard live-updates; attaches once, leaves no process.
+      {Kubeybilly.Incident.Broadcaster, []},
       {Kubeybilly.K8sClient.Conn, []},
       # Mirrors the kill switch file into :persistent_term before anything
       # that could reach a write path starts.

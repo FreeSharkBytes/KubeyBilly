@@ -35,6 +35,23 @@ if killswitch_path = System.get_env("KILLSWITCH_PATH") do
   config :kubeybilly, :killswitch_path, killswitch_path
 end
 
+# Shared bearer token for the alert webhook and the manual trigger
+# (plan/13). Unset outside prod disables the check with a startup
+# warning; prod refuses to boot without it further below.
+if webhook_token = System.get_env("WEBHOOK_TOKEN") do
+  config :kubeybilly, :webhook_token, webhook_token
+end
+
+# HTTP basic auth for the dashboard, which also guards the approve
+# button (plan/13). Dev defaults live in config/dev.exs; prod refuses
+# to boot without both variables further below.
+dashboard_user = System.get_env("DASHBOARD_USER")
+dashboard_password = System.get_env("DASHBOARD_PASSWORD")
+
+if dashboard_user && dashboard_password do
+  config :kubeybilly, :dashboard_auth, username: dashboard_user, password: dashboard_password
+end
+
 # The LLM advisor stays on the stub unless switched explicitly at
 # runtime (plan/14). ADVISOR_ADAPTER=openai_compat enables the real
 # provider; ADVISOR_BASE_URL and ADVISOR_MODEL retarget it without a
@@ -88,6 +105,22 @@ if config_env() == :prod do
       environment variable SECRET_KEY_BASE is missing.
       You can generate one by calling: mix phx.gen.secret
       """
+
+  # In prod the webhook check is mandatory: an unauthenticated trigger
+  # path on a tool that mutates clusters is not a configuration choice.
+  System.get_env("WEBHOOK_TOKEN") ||
+    raise """
+    environment variable WEBHOOK_TOKEN is missing.
+    The alert webhook and manual trigger require a shared bearer token in production.
+    """
+
+  # Same rule for the dashboard: approving an action is mutation-adjacent
+  # and must not be anonymous (plan/13).
+  (dashboard_user && dashboard_password) ||
+    raise """
+    environment variables DASHBOARD_USER and DASHBOARD_PASSWORD are missing.
+    The dashboard (and its approve button) requires basic auth credentials in production.
+    """
 
   host = System.get_env("PHX_HOST") || "example.com"
 
