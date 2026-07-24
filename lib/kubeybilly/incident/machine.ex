@@ -396,6 +396,10 @@ defmodule Kubeybilly.Incident.Machine do
          {:validate, {:ok, %{action: action, facts: facts}}} <-
            {:validate, Validator.validate(action, data.client)},
          {:inverse, {:ok, action}} <- {:inverse, Inverse.construct(action, facts)} do
+      # The executor receives only these structs; the facts (rollback
+      # patch, current revision) must ride along or be re-read racily.
+      action = %{action | facts: facts}
+
       decision =
         Evaluator.evaluate(
           data.policy,

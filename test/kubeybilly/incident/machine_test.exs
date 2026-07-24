@@ -484,6 +484,8 @@ defmodule Kubeybilly.Incident.MachineTest do
       assert action.name == :rollback_deployment
       assert action.params.to_revision == 1
       assert action.inverse.params.to_revision == "2"
+      assert %{"spec" => %{"template" => _template}} = action.facts.patch
+      assert action.facts.current_revision == "2"
       {:ok, %{}}
     end)
 
