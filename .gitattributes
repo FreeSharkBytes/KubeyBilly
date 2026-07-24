@@ -9,3 +9,6 @@
 # Diagram sources and renders are text.
 *.svg text
 *.puml text
+
+# Evidence fixtures are byte-exact captures; the manifest sha256 must keep matching.
+test/fixtures/incidents/** -text
