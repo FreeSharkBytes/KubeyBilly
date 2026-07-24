@@ -27,11 +27,11 @@ defmodule Kubeybilly.Verifier do
   @doc """
   The configured verifier implementation.
 
-  Resolved through application config so tests substitute the Mox mock;
-  the real verifier arrives in a later build step.
+  Resolved through application config so tests substitute the Mox mock
+  while dev and prod poll the cluster through the real verifier.
   """
-  @spec impl() :: module() | nil
+  @spec impl() :: module()
   def impl do
-    Application.get_env(:kubeybilly, :verifier)
+    Application.get_env(:kubeybilly, :verifier, Kubeybilly.Verification.Real)
   end
 end

@@ -17,6 +17,10 @@ config :kubeybilly, :k8s_client, Kubeybilly.K8sClient.Real
 # Root directory for incident evidence bundles.
 config :kubeybilly, :incidents_dir, "incidents"
 
+# The verification boundary: the polling verifier everywhere except test,
+# where config/test.exs swaps in the Mox mock.
+config :kubeybilly, :verifier, Kubeybilly.Verification.Real
+
 # The LLM advisor boundary (plan/14): the stub is the default in every
 # environment, so nothing depends on a network round trip unless a real
 # adapter is enabled explicitly (see config/runtime.exs). The endpoint
