@@ -1,0 +1,29 @@
+scope:
+  namespaces_include: ["demo", "shop"]
+  namespaces_exclude: ["kube-system", "kubeybilly"]
+
+tiers:
+  read:          { actions: [no_action], auto: true }
+  restart:       { actions: [restart_pod, restart_workload], auto: true, min_confidence: 0.8 }
+  rollback:      { actions: [rollback_deployment], auto: false, min_confidence: 0.9 }
+  scale:         { actions: [scale], auto: false, max_delta: 2 }
+  node:          { actions: [cordon_node], auto: false }
+
+budgets:
+  actions_per_incident: 2   # mutations, reverts included; see semantics below
+  actions_per_hour: 10
+  max_pods_touched: 20
+
+deny_kinds: [PersistentVolumeClaim, PersistentVolume, StatefulSet, Namespace, CustomResourceDefinition]
+
+freeze_when:
+  rollout_in_progress: true   # except the rollout this incident itself caused
+  maintenance_window: false
+
+verification:
+  window_seconds: 90          # demo values file sets 20
+
+approval:
+  timeout_seconds: 300        # timeout escalates, never proceeds
+
+mode: dry_run                 # dry_run | approve | auto
