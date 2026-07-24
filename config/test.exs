@@ -1,5 +1,9 @@
 import Config
 
+# All Kubernetes access in tests goes through the Mox mock; no test may
+# require a live cluster.
+config :kubeybilly, :k8s_client, Kubeybilly.K8sClient.Mock
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :kubeybilly, KubeybillyWeb.Endpoint,

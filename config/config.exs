@@ -10,6 +10,13 @@ import Config
 config :kubeybilly,
   generators: [timestamp_type: :utc_datetime]
 
+# The Kubernetes client boundary: the real client everywhere except test,
+# where config/test.exs swaps in the Mox mock.
+config :kubeybilly, :k8s_client, Kubeybilly.K8sClient.Real
+
+# Root directory for incident evidence bundles.
+config :kubeybilly, :incidents_dir, "incidents"
+
 # Configure the endpoint
 config :kubeybilly, KubeybillyWeb.Endpoint,
   url: [host: "localhost"],
