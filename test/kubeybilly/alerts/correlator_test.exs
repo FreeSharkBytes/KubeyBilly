@@ -205,4 +205,73 @@ defmodule Kubeybilly.Alerts.CorrelatorTest do
     assert_receive {:routed, %{action: :dropped, reason: :malformed}}, 2000
     assert Process.alive?(correlator)
   end
+
+  test "a group with an unknown status is dropped", %{correlator: correlator} do
+    group_key = unique_gk()
+
+    Correlator.ingest(correlator, %{
+      "groupKey" => group_key,
+      "status" => "suppressed",
+      "alerts" => []
+    })
+
+    assert_receive {:routed, %{action: :dropped, reason: :unknown_status}}, 2000
+  end
+
+  test "a refused spawn is reported, not crashed" do
+    supervisor =
+      start_supervised!(
+        {Kubeybilly.Incident.Supervisor,
+         name: :"full_sup_#{System.unique_integer([:positive])}", max_children: 0}
+      )
+
+    correlator =
+      start_supervised!(
+        Supervisor.child_spec(
+          {Correlator,
+           name: :"full_correlator_#{System.unique_integer([:positive])}",
+           window_ms: 40,
+           supervisor: supervisor,
+           machine_opts: [policy: %Policy{tiers: %{"read" => Policy.default_read_tier()}}]},
+          id: :second_correlator
+        )
+      )
+
+    group_key = unique_gk()
+    Correlator.ingest(correlator, firing(group_key, "flooded"))
+
+    assert_receive {:routed, %{action: :spawn_failed, group_key: ^group_key}}, 2000
+    assert Process.alive?(correlator)
+  end
+
+  test "the default policy is loaded from the configured standing orders path" do
+    Application.put_env(
+      :kubeybilly,
+      :standing_orders_path,
+      "test/fixtures/standing_orders/demo.yaml"
+    )
+
+    on_exit(fn -> Application.delete_env(:kubeybilly, :standing_orders_path) end)
+
+    correlator =
+      start_supervised!(
+        Supervisor.child_spec(
+          {Correlator, name: :"policy_correlator_#{System.unique_integer([:positive])}"},
+          id: :policy_correlator
+        )
+      )
+
+    %{machine_opts: machine_opts} = :sys.get_state(correlator)
+    assert %Kubeybilly.StandingOrders.Policy{mode: :dry_run} = machine_opts[:policy]
+  end
+
+  test "a broken standing orders file fails the correlator loudly" do
+    Application.put_env(:kubeybilly, :standing_orders_path, "does/not/exist.yaml")
+    on_exit(fn -> Application.delete_env(:kubeybilly, :standing_orders_path) end)
+
+    Process.flag(:trap_exit, true)
+
+    assert {:error, {%RuntimeError{}, _stacktrace}} =
+             Correlator.start_link(name: :"broken_correlator_#{System.unique_integer()}")
+  end
 end

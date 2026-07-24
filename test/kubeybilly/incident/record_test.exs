@@ -69,8 +69,10 @@ defmodule Kubeybilly.Incident.RecordTest do
     end
 
     test "rejects an unknown outcome" do
+      outcome = String.to_existing_atom("error")
+
       assert_raise FunctionClauseError, fn ->
-        Record.close(new_record(), :vibes)
+        Record.close(new_record(), outcome)
       end
     end
   end
@@ -132,6 +134,58 @@ defmodule Kubeybilly.Incident.RecordTest do
 
     test "from_disk on a missing incident is an error", %{root: root} do
       assert {:error, {:record, :not_found}} = Record.from_disk("nope", root: root)
+    end
+
+    test "from_disk rejects an unknown status", %{root: root} do
+      dir = Path.join(root, "badstatus")
+      File.mkdir_p!(dir)
+
+      File.write!(
+        Path.join(dir, "record.json"),
+        Jason.encode!(%{"id" => "badstatus", "status" => "pondering"})
+      )
+
+      assert {:error, {:record, {:invalid_status, "pondering"}}} =
+               Record.from_disk("badstatus", root: root)
+    end
+
+    test "from_disk rejects an unknown outcome", %{root: root} do
+      dir = Path.join(root, "badoutcome")
+      File.mkdir_p!(dir)
+
+      File.write!(
+        Path.join(dir, "record.json"),
+        Jason.encode!(%{"id" => "badoutcome", "status" => "closed", "outcome" => "vibes"})
+      )
+
+      assert {:error, {:record, {:invalid_outcome, "vibes"}}} =
+               Record.from_disk("badoutcome", root: root)
+    end
+
+    test "from_disk rejects a record without an id", %{root: root} do
+      dir = Path.join(root, "anonymous")
+      File.mkdir_p!(dir)
+      File.write!(Path.join(dir, "record.json"), Jason.encode!(%{"status" => "open"}))
+
+      assert {:error, {:record, {:invalid_record, _decoded}}} =
+               Record.from_disk("anonymous", root: root)
+    end
+
+    test "a foreign timeline event name survives as a string", %{root: root} do
+      dir = Path.join(root, "foreign")
+      File.mkdir_p!(dir)
+
+      File.write!(
+        Path.join(dir, "record.json"),
+        Jason.encode!(%{
+          "id" => "foreign",
+          "status" => "open",
+          "timeline" => [["2026-07-24T03:15:00Z", "not_an_existing_atom_xyzzy", %{}]]
+        })
+      )
+
+      assert {:ok, record} = Record.from_disk("foreign", root: root)
+      assert [{%DateTime{}, "not_an_existing_atom_xyzzy", %{}}] = record.timeline
     end
 
     test "from_disk on corrupt json is an error", %{root: root} do

@@ -1,3 +1,20 @@
+defmodule Kubeybilly.Incident.MachineTest.StubAdvisor do
+  @moduledoc false
+
+  alias Kubeybilly.Signatures.Signature
+
+  def advise(_bundle) do
+    {:match,
+     Signature.new(%{
+       name: :stub_advisor,
+       confidence: 0.5,
+       proposed_action: %{action: :no_action, params: %{}},
+       rationale: "the advisor found nothing safe to do",
+       evidence_refs: []
+     })}
+  end
+end
+
 defmodule Kubeybilly.Incident.MachineTest do
   # async: false: machines register in the shared Registry and the tests
   # use global Mox mode so the machine process sees the expectations.
@@ -325,6 +342,35 @@ defmodule Kubeybilly.Incident.MachineTest do
 
     assert record.outcome == :escalated
     assert :no_signature_match in events(record)
+  end
+
+  test "an unmatched bundle routes to the advisor when enabled",
+       %{root: root} = context do
+    Application.put_env(:kubeybilly, :advisor_enabled, true)
+    Application.put_env(:kubeybilly, :advisor, Kubeybilly.Incident.MachineTest.StubAdvisor)
+
+    on_exit(fn ->
+      Application.put_env(:kubeybilly, :advisor_enabled, false)
+      Application.delete_env(:kubeybilly, :advisor)
+    end)
+
+    collector = fn target, _opts ->
+      destination = Path.join(root, target.incident_id)
+      File.mkdir_p!(destination)
+      manifest = %{"incident_id" => target.incident_id, "complete" => true, "gaps" => []}
+      File.write!(Path.join(destination, "manifest.json"), Jason.encode!(manifest))
+      {:ok, manifest}
+    end
+
+    {_pid, id} = start_machine(context, collector: collector)
+    record = await_closed(root, id)
+
+    # The stub advisor proposes no_action, which escalates with its
+    # rationale instead of closing as an unmatched signature.
+    assert record.outcome == :escalated
+    assert :no_action in events(record)
+    refute :no_signature_match in events(record)
+    assert record.signature["name"] == "stub_advisor"
   end
 
   ## Approval

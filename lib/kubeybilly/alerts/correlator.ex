@@ -54,16 +54,17 @@ defmodule Kubeybilly.Alerts.Correlator do
   defp resolve_policy(machine_opts) do
     Keyword.put_new_lazy(machine_opts, :policy, fn ->
       case Application.get_env(:kubeybilly, :standing_orders_path) do
-        nil ->
-          %Policy{tiers: %{"read" => Policy.default_read_tier()}}
-
-        path ->
-          case Parser.load(path) do
-            {:ok, policy} -> policy
-            {:error, reason} -> raise "standing orders unreadable: #{inspect(reason)}"
-          end
+        nil -> %Policy{tiers: %{"read" => Policy.default_read_tier()}}
+        path -> load_policy!(path)
       end
     end)
+  end
+
+  defp load_policy!(path) do
+    case Parser.load(path) do
+      {:ok, policy} -> policy
+      {:error, reason} -> raise "standing orders unreadable: #{inspect(reason)}"
+    end
   end
 
   @impl true
