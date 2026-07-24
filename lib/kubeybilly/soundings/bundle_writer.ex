@@ -44,6 +44,18 @@ defmodule Kubeybilly.Soundings.BundleWriter do
   end
 
   @doc """
+  Record a structural absence: a gap that also waives the requirement.
+
+  For artifacts that cannot exist given the cluster's state (current logs
+  of a container that never started), the honest manifest records the gap
+  but the bundle stays complete: nothing capturable was missed.
+  """
+  @spec record_absence(GenServer.server(), String.t(), term()) :: :ok | {:error, :sealed}
+  def record_absence(writer, relative_path, reason) do
+    GenServer.call(writer, {:record_absence, relative_path, reason})
+  end
+
+  @doc """
   Finalize the manifest and return it.
 
   Required artifacts that never arrived become gaps and force
@@ -92,6 +104,10 @@ defmodule Kubeybilly.Soundings.BundleWriter do
     {:reply, {:error, :sealed}, state}
   end
 
+  def handle_call({:record_absence, _path, _reason}, _from, %{sealed: true} = state) do
+    {:reply, {:error, :sealed}, state}
+  end
+
   def handle_call(:seal, _from, %{sealed: true} = state) do
     {:reply, {:error, :already_sealed}, state}
   end
@@ -125,6 +141,13 @@ defmodule Kubeybilly.Soundings.BundleWriter do
   end
 
   def handle_call({:record_gap, path, reason}, _from, state) do
+    state = add_gap(state, path, reason)
+    :ok = write_manifest(state)
+    {:reply, :ok, state}
+  end
+
+  def handle_call({:record_absence, path, reason}, _from, state) do
+    state = %{state | required: List.delete(state.required, path)}
     state = add_gap(state, path, reason)
     :ok = write_manifest(state)
     {:reply, :ok, state}

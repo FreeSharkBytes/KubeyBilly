@@ -253,6 +253,47 @@ defmodule Kubeybilly.Soundings.CollectorTest do
       assert gap["reason"] =~ "BadRequest"
     end
 
+    test "current logs of a container that never started are a gap, bundle complete" do
+      root = tmp_root()
+      stub_happy_cluster()
+
+      stub(Client, :pod_logs, fn "demo", pod, nil, opts ->
+        if Keyword.get(opts, :previous, false) do
+          {:error, {:api, "BadRequest", "previous terminated container not found"}}
+        else
+          {:error,
+           {:api, "BadRequest",
+            "container \"web\" in pod \"#{pod}\" is waiting to start: ErrImageNeverPull"}}
+        end
+      end)
+
+      assert {:ok, manifest} = Collector.collect(target(["web-abc"]), root: root)
+
+      assert manifest["complete"] == true
+      gap_paths = Enum.map(manifest["gaps"], & &1["path"])
+      assert Bundle.pod_logs_current_path("demo", "web-abc") in gap_paths
+      assert Bundle.pod_logs_previous_path("demo", "web-abc") in gap_paths
+    end
+
+    test "a current-log fetch failing for other reasons still breaks completeness" do
+      root = tmp_root()
+      stub_happy_cluster()
+
+      stub(Client, :pod_logs, fn "demo", pod, nil, opts ->
+        if Keyword.get(opts, :previous, false) do
+          {:ok, "previous logs of #{pod}"}
+        else
+          {:error, :timeout}
+        end
+      end)
+
+      assert {:ok, manifest} = Collector.collect(target(["web-abc"]), root: root)
+
+      assert manifest["complete"] == false
+      gap_paths = Enum.map(manifest["gaps"], & &1["path"])
+      assert Bundle.pod_logs_current_path("demo", "web-abc") in gap_paths
+    end
+
     test "a failed pod fetch gaps both spec and status and breaks completeness" do
       root = tmp_root()
       stub_happy_cluster()

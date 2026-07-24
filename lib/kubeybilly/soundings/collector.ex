@@ -143,10 +143,27 @@ defmodule Kubeybilly.Soundings.Collector do
         else: Bundle.pod_logs_current_path(namespace, pod)
 
     case client.pod_logs(namespace, pod, nil, previous: previous) do
-      {:ok, logs} -> BundleWriter.write_artifact(writer, path, logs)
-      {:error, reason} -> BundleWriter.record_gap(writer, path, reason)
+      {:ok, logs} ->
+        BundleWriter.write_artifact(writer, path, logs)
+
+      {:error, reason} ->
+        if structural_log_absence?(reason) do
+          BundleWriter.record_absence(writer, path, reason)
+        else
+          BundleWriter.record_gap(writer, path, reason)
+        end
     end
   end
+
+  # Current logs of a container that never started cannot exist, exactly
+  # like previous logs of a container that never restarted: the API's
+  # "waiting to start" BadRequest is a structural absence, not a capture
+  # failure, so it must not flip the bundle incomplete.
+  defp structural_log_absence?({:api, "BadRequest", message}) when is_binary(message) do
+    String.contains?(message, "waiting to start")
+  end
+
+  defp structural_log_absence?(_reason), do: false
 
   defp capture_pod_manifest(writer, client, namespace, pod) do
     status_path = Bundle.pod_status_path(namespace, pod)

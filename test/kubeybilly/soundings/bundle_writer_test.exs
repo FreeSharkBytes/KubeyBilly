@@ -110,6 +110,30 @@ defmodule Kubeybilly.Soundings.BundleWriterTest do
     end
   end
 
+  describe "record_absence/3" do
+    test "records the gap and waives the requirement", %{bundle: bundle} do
+      path = Bundle.pod_logs_current_path("demo", "web-abc")
+
+      writer =
+        start_supervised!({BundleWriter, bundle: bundle, required: [path, "events/demo.json"]})
+
+      :ok = BundleWriter.write_artifact(writer, "events/demo.json", "[]")
+
+      assert :ok =
+               BundleWriter.record_absence(
+                 writer,
+                 path,
+                 {:api, "BadRequest", "container is waiting to start: ErrImageNeverPull"}
+               )
+
+      assert {:ok, manifest} = BundleWriter.seal(writer)
+      assert manifest["complete"] == true
+      assert [gap] = manifest["gaps"]
+      assert gap["path"] == path
+      assert gap["reason"] =~ "waiting to start"
+    end
+  end
+
   describe "seal/1" do
     test "is complete when every required artifact was written", %{bundle: bundle} do
       writer =
