@@ -135,6 +135,11 @@ if config_env() == :prod do
 
   config :kubeybilly, KubeybillyWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
+    # The dashboard is reached through kubectl port-forward, cluster DNS,
+    # or an ingress, so the origin varies by access path. :conn accepts
+    # origins matching the request host, which covers all three without
+    # an allowlist that would break the port-forward workflow.
+    check_origin: :conn,
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
