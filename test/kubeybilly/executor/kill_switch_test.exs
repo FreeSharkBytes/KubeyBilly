@@ -3,6 +3,8 @@ defmodule Kubeybilly.Executor.KillSwitchTest do
   # :persistent_term key, shared with the application-started instance.
   use ExUnit.Case, async: false
 
+  @moduletag :integration
+
   alias Kubeybilly.Executor.KillSwitch
 
   @key {Kubeybilly, :killswitch}

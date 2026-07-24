@@ -1,6 +1,8 @@
 defmodule KubeybillyWeb.ErrorHTMLTest do
   use KubeybillyWeb.ConnCase, async: true
 
+  @moduletag :integration
+
   # Bring render_to_string/4 for testing custom views
   import Phoenix.Template, only: [render_to_string: 4]
 

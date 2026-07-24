@@ -1,6 +1,8 @@
 defmodule Kubeybilly.Executor.BudgetsTest do
   use ExUnit.Case, async: true
 
+  @moduletag :integration
+
   alias Kubeybilly.Executor.Budgets
   alias Kubeybilly.Incident.Record
 

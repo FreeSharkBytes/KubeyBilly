@@ -1,6 +1,13 @@
 image: elixir:1.20-otp-29
 
-stages: [lint, test, build]
+stages: [secrets, lint, deps, test, build, e2e]
+
+# GitLab's managed secret detection (gitleaks under the hood); free tier.
+include:
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+
+secret_detection:
+  stage: secrets
 
 variables:
   MIX_ENV: test
@@ -25,12 +32,25 @@ lint:
     - mix format --check-formatted
     - mix credo --strict
 
-test:
+deps-audit:
+  stage: deps
+  before_script: *mix_setup
+  script:
+    - mix hex.audit
+    - mix deps.audit
+
+unit:
   stage: test
   before_script: *mix_setup
   script:
-    - mix test --cover
+    - mix test --exclude integration --exclude e2e --cover
   coverage: '/\d+\.\d+%\s+\|\s+Total/'
+
+integration:
+  stage: test
+  before_script: *mix_setup
+  script:
+    - mix test --only integration
 
 build:
   stage: build
@@ -41,6 +61,91 @@ build:
   cache: []
   script:
     - docker build -t kubeybilly:$CI_COMMIT_SHORT_SHA .
+    - docker save -o image.tar kubeybilly:$CI_COMMIT_SHORT_SHA
+  artifacts:
+    paths:
+      - image.tar
+    expire_in: 2 hours
   rules:
     - exists:
+        - Dockerfile
+
+# Scans the tar exported by build. CRITICAL blocks; HIGH is reported in the
+# first pass but never fails the job. Unfixed findings are noise on a
+# debian-slim base, so both passes skip them.
+trivy:
+  stage: build
+  needs: ["build"]
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  before_script: []
+  variables:
+    TRIVY_CACHE_DIR: .trivycache/
+  cache:
+    key: trivy-db
+    paths:
+      - .trivycache/
+  script:
+    - trivy image --input image.tar --severity HIGH --ignore-unfixed --exit-code 0 --no-progress
+    - trivy image --input image.tar --severity CRITICAL --ignore-unfixed --exit-code 1 --no-progress
+  rules:
+    - exists:
+        - Dockerfile
+
+# Boots the release image exactly as a cluster would and probes the three
+# auth doors end to end: release boot + runtime config, webhook bearer
+# token (202/401), dashboard basic auth (401). Main only: it burns dind
+# minutes and duplicates nothing the unit/integration jobs cover.
+e2e:
+  stage: e2e
+  needs: ["build"]
+  image: docker:27
+  services:
+    - docker:27-dind
+  before_script: []
+  cache: []
+  script:
+    - apk add --no-cache curl
+    - docker load -i image.tar
+    # Dummy runtime secrets: generated per job, never persisted anywhere.
+    - SECRET_KEY_BASE="$(head -c 48 /dev/urandom | base64 | tr -d '\n')"
+    - docker run -d --name kubeybilly
+      -p 4000:4000
+      -e SECRET_KEY_BASE="$SECRET_KEY_BASE"
+      -e WEBHOOK_TOKEN=test
+      -e DASHBOARD_USER=e2e
+      -e DASHBOARD_PASSWORD=e2e-smoke-only
+      -e PHX_SERVER=true
+      kubeybilly:$CI_COMMIT_SHORT_SHA
+    - |
+      code=000
+      for i in $(seq 1 30); do
+        code=$(curl -s -o /dev/null -w '%{http_code}' http://docker:4000/ || true)
+        if [ "$code" != "000" ]; then break; fi
+        sleep 2
+      done
+      echo "boot probe returned HTTP $code"
+      if [ "$code" = "000" ]; then
+        echo "release did not come up"; docker logs kubeybilly; exit 1
+      fi
+    - |
+      code=$(curl -s -o /dev/null -w '%{http_code}' -X POST http://docker:4000/api/v4/alerts \
+        -H 'authorization: Bearer test' -H 'content-type: application/json' \
+        -d '{"version":"4","groupKey":"e2e-smoke","status":"firing","alerts":[]}')
+      echo "webhook with valid token: HTTP $code"
+      [ "$code" = "202" ] || { docker logs kubeybilly; exit 1; }
+    - |
+      code=$(curl -s -o /dev/null -w '%{http_code}' -X POST http://docker:4000/api/v4/alerts \
+        -H 'authorization: Bearer wrong' -H 'content-type: application/json' \
+        -d '{"version":"4","groupKey":"e2e-smoke","status":"firing","alerts":[]}')
+      echo "webhook with bad token: HTTP $code"
+      [ "$code" = "401" ] || { docker logs kubeybilly; exit 1; }
+    - |
+      code=$(curl -s -o /dev/null -w '%{http_code}' http://docker:4000/)
+      echo "dashboard without basic auth: HTTP $code"
+      [ "$code" = "401" ] || { docker logs kubeybilly; exit 1; }
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      exists:
         - Dockerfile

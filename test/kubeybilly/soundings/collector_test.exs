@@ -2,6 +2,8 @@ defmodule Kubeybilly.Soundings.CollectorTest do
   # Collector fans out under Task.Supervisor, so the mock must be global.
   use ExUnit.Case, async: false
 
+  @moduletag :integration
+
   import Mox
 
   alias Kubeybilly.K8sClient.Mock, as: Client

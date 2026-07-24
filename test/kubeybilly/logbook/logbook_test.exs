@@ -3,6 +3,8 @@ defmodule Kubeybilly.LogbookTest do
   # in the application environment; async would race those globals.
   use ExUnit.Case, async: false
 
+  @moduletag :integration
+
   import Mox
 
   alias Kubeybilly.Advisor.AdapterMock

@@ -1,6 +1,8 @@
 defmodule KubeybillyWeb.EvidenceTest do
   use ExUnit.Case, async: true
 
+  @moduletag :integration
+
   alias KubeybillyWeb.Evidence
 
   @moduletag :tmp_dir

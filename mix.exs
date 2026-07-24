@@ -11,6 +11,7 @@ defmodule Kubeybilly.MixProject do
       releases: releases(),
       aliases: aliases(),
       deps: deps(),
+      test_coverage: test_coverage(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
       listeners: [Phoenix.CodeReloader]
     ]
@@ -35,6 +36,46 @@ defmodule Kubeybilly.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  # Coverage is enforced on the unit subset (mix test --exclude integration).
+  # Ignored modules fall into two groups: modules whose dedicated tests are
+  # tagged :integration (they are exercised by the integration CI job, which
+  # does not measure coverage), and web/OTP wiring with no unit-testable
+  # logic. The threshold is the floor for everything else.
+  defp test_coverage do
+    [
+      summary: [threshold: 90],
+      ignore_modules: [
+        # Exercised by :integration-tagged tests only.
+        Kubeybilly.Executor.Budgets,
+        Kubeybilly.Executor.KillSwitch,
+        Kubeybilly.Logbook,
+        Kubeybilly.Logbook.Sections,
+        Kubeybilly.Soundings.BundleWriter,
+        Kubeybilly.Soundings.Collector,
+        KubeybillyWeb.AlertController,
+        KubeybillyWeb.ApprovalsLive,
+        KubeybillyWeb.ErrorHTML,
+        KubeybillyWeb.ErrorJSON,
+        KubeybillyWeb.Evidence,
+        KubeybillyWeb.IncidentDetailLive,
+        KubeybillyWeb.IncidentListLive,
+        KubeybillyWeb.Plugs.DashboardAuth,
+        KubeybillyWeb.Plugs.WebhookAuth,
+        # Framework/OTP wiring and test support.
+        Kubeybilly.Application,
+        Kubeybilly.Mailer,
+        KubeybillyWeb,
+        KubeybillyWeb.ConnCase,
+        KubeybillyWeb.CoreComponents,
+        KubeybillyWeb.Endpoint,
+        KubeybillyWeb.Gettext,
+        KubeybillyWeb.Layouts,
+        KubeybillyWeb.Router,
+        KubeybillyWeb.Telemetry
+      ]
+    ]
+  end
 
   # The release that ships in the container image. Unix-only executables
   # because the runtime image is debian-slim; config/runtime.exs is read at
@@ -86,7 +127,8 @@ defmodule Kubeybilly.MixProject do
       {:mox, "~> 1.1", only: :test},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
-      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:mix_audit, "~> 2.1", only: [:dev, :test], runtime: false}
     ]
   end
 

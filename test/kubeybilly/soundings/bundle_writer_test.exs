@@ -1,6 +1,8 @@
 defmodule Kubeybilly.Soundings.BundleWriterTest do
   use ExUnit.Case, async: true
 
+  @moduletag :integration
+
   alias Kubeybilly.Soundings.Bundle
   alias Kubeybilly.Soundings.BundleWriter
 

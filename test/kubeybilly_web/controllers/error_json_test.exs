@@ -1,6 +1,8 @@
 defmodule KubeybillyWeb.ErrorJSONTest do
   use KubeybillyWeb.ConnCase, async: true
 
+  @moduletag :integration
+
   test "renders 404" do
     assert KubeybillyWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
   end

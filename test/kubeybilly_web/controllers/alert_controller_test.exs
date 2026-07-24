@@ -1,6 +1,8 @@
 defmodule KubeybillyWeb.AlertControllerTest do
   use KubeybillyWeb.ConnCase, async: false
 
+  @moduletag :integration
+
   @moduledoc """
   The ingest door: Alertmanager v4 webhook payloads and the manual
   trigger both land here. The controller validates shape, checks the

@@ -1,6 +1,8 @@
 defmodule KubeybillyWeb.IncidentDetailLiveTest do
   use KubeybillyWeb.ConnCase, async: false
 
+  @moduletag :integration
+
   import Phoenix.LiveViewTest
 
   alias Kubeybilly.Incident.Record
