@@ -14,6 +14,8 @@ defmodule Kubeybilly.Application do
       {Kubeybilly.K8sClient.Conn, []},
       {Task.Supervisor, name: Kubeybilly.Soundings.TaskSupervisor},
       Kubeybilly.Incident.Registry,
+      Kubeybilly.Incident.Monitor,
+      {Kubeybilly.Incident.Supervisor, []},
       # Start to serve requests, typically the last entry
       KubeybillyWeb.Endpoint
     ]
