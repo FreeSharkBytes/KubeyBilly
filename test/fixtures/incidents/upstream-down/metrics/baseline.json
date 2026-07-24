@@ -1,14 +1,19 @@
 {
   "available_replicas": 0,
   "desired_replicas": 2,
+  "namespace_services": {
+    "backend": {
+      "ready_endpoints": 0
+    },
+    "web": {
+      "ready_endpoints": 2
+    }
+  },
   "pods": {},
   "ready_pods": [],
   "ready_replicas": 0,
   "revision": "2",
   "services": {
-    "backend": {
-      "ready_endpoints": 0
-    },
     "web": {
       "ready_endpoints": 2
     }

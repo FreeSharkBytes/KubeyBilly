@@ -61,6 +61,7 @@ defmodule Kubeybilly.Soundings.Collector do
       ) do
     bundle = Bundle.new(incident_id, Keyword.take(opts, [:root]))
     client = Keyword.get(opts, :client, K8sClient.impl())
+    pods = resolve_pods(client, namespace, workload_kind, workload_name, pods)
     required = required_artifacts(namespace, workload_name, pods, nodes)
 
     with {:ok, writer} <- BundleWriter.start_link(bundle: bundle, required: required) do
@@ -85,6 +86,26 @@ defmodule Kubeybilly.Soundings.Collector do
   end
 
   def collect(_target, _opts), do: {:error, :invalid_target}
+
+  ## Pod resolution
+
+  # Alerts do not always name pods: deployment-level series carry no pod
+  # label, and canned trigger payloads cannot know live pod names. The
+  # workload's own pods are the evidence subjects either way, so an empty
+  # list falls back to the live selector listing. A failed lookup yields
+  # no pods rather than an error; the sealed manifest stays honest about
+  # what was captured.
+  defp resolve_pods(_client, _namespace, _kind, _name, [_ | _] = pods), do: pods
+
+  defp resolve_pods(client, namespace, workload_kind, workload_name, []) do
+    with {:ok, owner} <- client.get(workload_kind, workload_name, namespace),
+         selector = LabelSelector.workload_selector(owner),
+         {:ok, pods} <- client.list("Pod", namespace, selector) do
+      pods |> Enum.map(&get_in(&1, ["metadata", "name"])) |> Enum.reject(&is_nil/1)
+    else
+      _lookup_failed -> []
+    end
+  end
 
   ## Required set
 

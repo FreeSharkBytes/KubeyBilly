@@ -232,6 +232,25 @@ defmodule Kubeybilly.Soundings.CollectorTest do
     end
   end
 
+  describe "collect/2 pod derivation" do
+    test "derives pods from the workload selector when the alerts named none" do
+      root = tmp_root()
+      stub_happy_cluster()
+
+      assert {:ok, manifest} = Collector.collect(target([]), root: root)
+
+      assert manifest["complete"] == true
+
+      bundle = Bundle.new(@incident_id, root: root)
+
+      assert File.read!(Bundle.absolute(bundle, Bundle.pod_logs_current_path("demo", "web-abc"))) ==
+               "current logs of web-abc"
+
+      assert File.exists?(Bundle.absolute(bundle, Bundle.pod_status_path("demo", "web-abc")))
+      assert File.exists?(Bundle.absolute(bundle, Bundle.pod_spec_path("demo", "web-abc")))
+    end
+  end
+
   describe "collect/2 gap recording" do
     test "missing previous logs are a gap but the bundle stays complete" do
       root = tmp_root()

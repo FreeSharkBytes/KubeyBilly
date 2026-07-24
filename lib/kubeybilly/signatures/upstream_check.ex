@@ -12,7 +12,8 @@ defmodule Kubeybilly.Signatures.UpstreamCheck do
   This is deliberately not a matcher: it has no signature of its own and
   no confidence, it is a veto. The heuristic reads pod env values (the
   conventional way in-cluster addresses travel) and flags any value naming
-  a Service the baseline recorded with zero ready endpoints.
+  a Service the baseline's namespace-wide readiness map recorded with
+  zero ready endpoints.
   """
 
   alias Kubeybilly.Signatures.LoadedBundle
@@ -36,7 +37,7 @@ defmodule Kubeybilly.Signatures.UpstreamCheck do
     end
   end
 
-  defp zero_endpoint_services(%{"services" => services}) when is_map(services) do
+  defp zero_endpoint_services(%{"namespace_services" => services}) when is_map(services) do
     for {name, %{"ready_endpoints" => 0}} <- services, into: MapSet.new(), do: name
   end
 

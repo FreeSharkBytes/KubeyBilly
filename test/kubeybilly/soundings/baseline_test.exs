@@ -91,8 +91,11 @@ defmodule Kubeybilly.Soundings.BaselineTest do
         {:ok, [@selecting_service, @unrelated_service, @selectorless_service]}
       end)
 
-      expect(Client, :list, fn "EndpointSlice", "demo", "kubernetes.io/service-name=web-svc" ->
-        {:ok, @endpoint_slices}
+      expect(Client, :list, 2, fn "EndpointSlice", "demo", selector ->
+        case selector do
+          "kubernetes.io/service-name=web-svc" -> {:ok, @endpoint_slices}
+          "kubernetes.io/service-name=other-svc" -> {:ok, []}
+        end
       end)
 
       assert {:ok, baseline} = Baseline.build(Client, @target)
@@ -125,6 +128,14 @@ defmodule Kubeybilly.Soundings.BaselineTest do
 
       assert baseline["ready_pods"] == ["web-abc"]
       assert baseline["services"] == %{"web-svc" => %{"ready_endpoints" => 2}}
+
+      # Every selectored Service in the namespace, for the upstream
+      # dependency check; the selectorless external is excluded because
+      # its zero slices would be a false outage.
+      assert baseline["namespace_services"] == %{
+               "web-svc" => %{"ready_endpoints" => 2},
+               "other-svc" => %{"ready_endpoints" => 0}
+             }
     end
 
     test "defaults missing status counters to zero" do
@@ -145,6 +156,7 @@ defmodule Kubeybilly.Soundings.BaselineTest do
       assert baseline["pods"] == %{}
       assert baseline["ready_pods"] == []
       assert baseline["services"] == %{}
+      assert baseline["namespace_services"] == %{}
     end
   end
 

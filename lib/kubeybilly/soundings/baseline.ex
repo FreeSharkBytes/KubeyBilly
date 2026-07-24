@@ -41,7 +41,7 @@ defmodule Kubeybilly.Soundings.Baseline do
     with {:ok, workload} <- client.get(workload_kind, workload_name, namespace),
          selector = LabelSelector.workload_selector(workload),
          {:ok, pods} <- client.list("Pod", namespace, selector),
-         {:ok, services} <- service_readiness(client, namespace, workload) do
+         {:ok, {services, namespace_services}} <- service_readiness(client, namespace, workload) do
       pod_snapshots = Map.new(pods, &pod_snapshot/1)
 
       {:ok,
@@ -57,7 +57,8 @@ defmodule Kubeybilly.Soundings.Baseline do
          "revision" => get_in(workload, ["metadata", "annotations", @revision_annotation]),
          "pods" => pod_snapshots,
          "ready_pods" => ready_pods(pod_snapshots),
-         "services" => services
+         "services" => services,
+         "namespace_services" => namespace_services
        }}
     end
   end
@@ -96,16 +97,40 @@ defmodule Kubeybilly.Soundings.Baseline do
 
   ## Services
 
-  # A Service belongs in the baseline when its selector matches the
-  # workload's pod template labels: those are the Services whose endpoints
-  # go dark if this workload does.
+  # Two views over one namespace listing. "services" keeps only the
+  # Services selecting the workload's pod template labels: those are the
+  # ones whose endpoints go dark if this workload does, and the ones the
+  # verifier judges recovery against. "namespace_services" keeps every
+  # selectored Service in the namespace, because the upstream dependency
+  # check needs to see a dead dependency (a database with zero ready
+  # endpoints) that does not select this workload at all. Selectorless
+  # Services are excluded from both: their empty slice sets would read
+  # as permanent outages.
   defp service_readiness(client, namespace, workload) do
     template_labels = get_in(workload, ["spec", "template", "metadata", "labels"]) || %{}
 
     with {:ok, services} <- client.list("Service", namespace, nil) do
-      services
-      |> Enum.filter(&LabelSelector.selects?(get_in(&1, ["spec", "selector"]), template_labels))
-      |> Enum.reduce_while({:ok, %{}}, &collect_service_readiness(client, namespace, &1, &2))
+      selectored =
+        Enum.filter(services, fn service ->
+          case get_in(service, ["spec", "selector"]) do
+            selector when is_map(selector) and map_size(selector) > 0 -> true
+            _no_selector -> false
+          end
+        end)
+
+      with {:ok, namespace_services} <-
+             Enum.reduce_while(
+               selectored,
+               {:ok, %{}},
+               &collect_service_readiness(client, namespace, &1, &2)
+             ) do
+        selecting_names =
+          for service <- selectored,
+              LabelSelector.selects?(get_in(service, ["spec", "selector"]), template_labels),
+              do: get_in(service, ["metadata", "name"])
+
+        {:ok, {Map.take(namespace_services, selecting_names), namespace_services}}
+      end
     end
   end
 
