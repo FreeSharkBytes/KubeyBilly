@@ -45,6 +45,10 @@ config :kubeybilly, KubeybillyWeb.Endpoint,
 # Enable dev routes for dashboard and mailbox
 config :kubeybilly, dev_routes: true
 
+# Demo-grade dashboard credentials for development only; production
+# requires DASHBOARD_USER and DASHBOARD_PASSWORD (config/runtime.exs).
+config :kubeybilly, :dashboard_auth, username: "billy", password: "billy"
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :default_formatter, format: "[$level] $message\n"
 

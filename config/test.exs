@@ -12,6 +12,9 @@ config :kubeybilly, :verifier, Kubeybilly.VerifierMock
 # A short correlation window keeps correlator tests fast.
 config :kubeybilly, :correlation_window_ms, 50
 
+# Dashboard basic auth credentials the ConnCase helper signs in with.
+config :kubeybilly, :dashboard_auth, username: "billy", password: "billy"
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :kubeybilly, KubeybillyWeb.Endpoint,

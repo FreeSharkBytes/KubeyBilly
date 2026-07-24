@@ -34,4 +34,16 @@ defmodule KubeybillyWeb.ConnCase do
   setup _tags do
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
+
+  @doc """
+  Sign the connection in with the configured dashboard credentials.
+
+  Every dashboard route sits behind basic auth; tests opt in explicitly
+  so the unauthenticated 401 stays easy to assert.
+  """
+  def with_dashboard_auth(conn) do
+    credentials = Application.fetch_env!(:kubeybilly, :dashboard_auth)
+    encoded = Base.encode64("#{credentials[:username]}:#{credentials[:password]}")
+    Plug.Conn.put_req_header(conn, "authorization", "Basic " <> encoded)
+  end
 end

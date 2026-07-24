@@ -20,10 +20,17 @@ defmodule KubeybillyWeb.Router do
     plug KubeybillyWeb.Plugs.WebhookAuth
   end
 
-  scope "/", KubeybillyWeb do
-    pipe_through :browser
+  # Every dashboard page sits behind basic auth (plan/13): the approve
+  # button is mutation-adjacent and must not be anonymous.
+  pipeline :dashboard_auth do
+    plug KubeybillyWeb.Plugs.DashboardAuth
+  end
 
-    get "/", PageController, :home
+  scope "/", KubeybillyWeb do
+    pipe_through [:browser, :dashboard_auth]
+
+    live "/", IncidentListLive
+    live "/incidents/:id", IncidentDetailLive
   end
 
   scope "/api", KubeybillyWeb do
