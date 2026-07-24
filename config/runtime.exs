@@ -23,6 +23,30 @@ end
 config :kubeybilly, KubeybillyWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+# The LLM advisor stays on the stub unless switched explicitly at
+# runtime (plan/14). ADVISOR_ADAPTER=openai_compat enables the real
+# provider; ADVISOR_BASE_URL and ADVISOR_MODEL retarget it without a
+# rebuild. Unset vars leave the compile-time defaults untouched.
+advisor_adapter =
+  case System.get_env("ADVISOR_ADAPTER") do
+    nil -> nil
+    "stub" -> Kubeybilly.Advisor.Stub
+    "openai_compat" -> Kubeybilly.Advisor.OpenAICompat
+    other -> raise "unknown ADVISOR_ADAPTER #{inspect(other)}, expected stub or openai_compat"
+  end
+
+advisor_overrides =
+  [
+    adapter: advisor_adapter,
+    base_url: System.get_env("ADVISOR_BASE_URL"),
+    model: System.get_env("ADVISOR_MODEL")
+  ]
+  |> Enum.reject(fn {_key, value} -> is_nil(value) end)
+
+if advisor_overrides != [] do
+  config :kubeybilly, :advisor, advisor_overrides
+end
+
 if config_env() == :dev do
   # Reload browser tabs when matching files change.
   config :kubeybilly, KubeybillyWeb.Endpoint,
