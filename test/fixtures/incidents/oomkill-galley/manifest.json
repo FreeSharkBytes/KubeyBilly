@@ -1,0 +1,92 @@
+{
+  "captured_at": "2026-07-24T05:04:31Z",
+  "complete": true,
+  "files": [
+    {
+      "bytes": 203,
+      "path": "pods/demo/galley-d7c6bc75c-fs89f/logs-previous.txt",
+      "sha256": "7278de3b20fa988cbdd7947dadb0afc8c2a3b4beb2223ef4d72f5363de01cb39"
+    },
+    {
+      "bytes": 203,
+      "path": "pods/demo/galley-d7c6bc75c-drbdd/logs-current.txt",
+      "sha256": "759bfd13f896c94b3cd951ab237c642f975f00bccc49473323f718246c5647f4"
+    },
+    {
+      "bytes": 203,
+      "path": "pods/demo/galley-d7c6bc75c-fs89f/logs-current.txt",
+      "sha256": "470d36c4372d6e19af2f450ea33bb38537e0c6405ad4fc9e3b6778a973221988"
+    },
+    {
+      "bytes": 203,
+      "path": "pods/demo/galley-d7c6bc75c-jz99q/logs-current.txt",
+      "sha256": "3fb022236fe4e14b2dbc91c54f36f106e4e39103faf2ff9389c3db02ef7460b1"
+    },
+    {
+      "bytes": 2506,
+      "path": "pods/demo/galley-d7c6bc75c-drbdd/status.json",
+      "sha256": "0731500f726b14c954aa6f03e544bb5bf983daee3e42ad5155cade504457e444"
+    },
+    {
+      "bytes": 2807,
+      "path": "pods/demo/galley-d7c6bc75c-fs89f/status.json",
+      "sha256": "f99192f11457a211fe8161de90d62eea22d993ea6f712bfa79e1cb84693c02da"
+    },
+    {
+      "bytes": 9658,
+      "path": "pods/demo/galley-d7c6bc75c-drbdd/spec.json",
+      "sha256": "aa1c48f4a3714fccc4652a1b23c29fb1d361dfc45a4a04c5b5fbd2e356459375"
+    },
+    {
+      "bytes": 2506,
+      "path": "pods/demo/galley-d7c6bc75c-jz99q/status.json",
+      "sha256": "7e058d7e63b7a948fd188b8909d8cd6e6c7fbc0470e35016feaf9f57fc7d151a"
+    },
+    {
+      "bytes": 9658,
+      "path": "pods/demo/galley-d7c6bc75c-fs89f/spec.json",
+      "sha256": "ad74ebb0d21d6a4686f8bcb86fa39cfde8ac468b0a00d9f23e28bcf5348cd1ad"
+    },
+    {
+      "bytes": 9658,
+      "path": "pods/demo/galley-d7c6bc75c-jz99q/spec.json",
+      "sha256": "856971b83e74ff4dc535c1cf6ca2afb0ca4b3c81164c56b981e409bede691354"
+    },
+    {
+      "bytes": 171460,
+      "path": "events/demo.json",
+      "sha256": "d217e1af4163a913ae3b95f9eaa4c1ee50a6e23ad8b4daf3a56f9e33ec9f2d31"
+    },
+    {
+      "bytes": 10279,
+      "path": "owners/demo/galley.json",
+      "sha256": "5c90d950bbd3563166e7758c63981ceca0ed66bd0c27723ae419f8a33bb1233c"
+    },
+    {
+      "bytes": 32031,
+      "path": "owners/demo/galley-revisions.json",
+      "sha256": "ec1bf8178312929e75d2e1baed5bcdf6747b7947454a10b8f4508a8caa11807a"
+    },
+    {
+      "bytes": 11351,
+      "path": "nodes/kubeybilly-control-plane.json",
+      "sha256": "dc27c40ea1a64c3e1349a6b108e4342c6b1166e850cc78cb0ee11bd842c69056"
+    },
+    {
+      "bytes": 933,
+      "path": "metrics/baseline.json",
+      "sha256": "7df39cc9ddcd3c92466ff4f3936a780b3f92f8edaaa4c3863e88d205ee76a294"
+    }
+  ],
+  "gaps": [
+    {
+      "path": "pods/demo/galley-d7c6bc75c-drbdd/logs-previous.txt",
+      "reason": "{:api, \"BadRequest\", \"previous terminated container \\\"galley\\\" in pod \\\"galley-d7c6bc75c-drbdd\\\" not found\"}"
+    },
+    {
+      "path": "pods/demo/galley-d7c6bc75c-jz99q/logs-previous.txt",
+      "reason": "{:api, \"BadRequest\", \"previous terminated container \\\"galley\\\" in pod \\\"galley-d7c6bc75c-jz99q\\\" not found\"}"
+    }
+  ],
+  "incident_id": "m1-20260724T050431Z"
+}

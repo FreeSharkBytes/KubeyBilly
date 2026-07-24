@@ -1,0 +1,119 @@
+{
+  "allocatedResources": {
+    "memory": "128Mi"
+  },
+  "conditions": [
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:08Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "PodReadyToStartContainers"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:08Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T05:02:03Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "Ready"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T05:02:03Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "ContainersReady"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:08Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "PodScheduled"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "allocatedResources": {
+        "memory": "128Mi"
+      },
+      "containerID": "containerd://1620e30b622896c0627521722d105b970a6fc84ae6b7e9ae46e622915a7c34e9",
+      "image": "localhost/galley:dev",
+      "imageID": "docker.io/library/import-2026-07-24@sha256:8c8e2feedc66e7ef782f2abd9773c57f3188f634f09806b91621b668f742a2cd",
+      "lastState": {
+        "terminated": {
+          "containerID": "containerd://603d86912f0aef416c8dc74c1adf80f8f71e736797fda05995ca426306cfcaec",
+          "exitCode": 137,
+          "finishedAt": "2026-07-24T05:01:49Z",
+          "reason": "OOMKilled",
+          "startedAt": "2026-07-24T04:56:58Z"
+        }
+      },
+      "name": "galley",
+      "ready": true,
+      "resources": {
+        "limits": {
+          "memory": "256Mi"
+        },
+        "requests": {
+          "memory": "128Mi"
+        }
+      },
+      "restartCount": 2,
+      "started": true,
+      "state": {
+        "running": {
+          "startedAt": "2026-07-24T05:02:00Z"
+        }
+      },
+      "user": {
+        "linux": {
+          "gid": 0,
+          "supplementalGroups": [
+            0
+          ],
+          "uid": 0
+        }
+      },
+      "volumeMounts": [
+        {
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+          "name": "kube-api-access-4nm4h",
+          "readOnly": true,
+          "recursiveReadOnly": "Disabled"
+        }
+      ]
+    }
+  ],
+  "hostIP": "10.89.0.2",
+  "hostIPs": [
+    {
+      "ip": "10.89.0.2"
+    }
+  ],
+  "observedGeneration": 1,
+  "phase": "Running",
+  "podIP": "10.244.0.22",
+  "podIPs": [
+    {
+      "ip": "10.244.0.22"
+    }
+  ],
+  "qosClass": "Burstable",
+  "resources": {
+    "limits": {
+      "memory": "256Mi"
+    },
+    "requests": {
+      "memory": "128Mi"
+    }
+  },
+  "startTime": "2026-07-24T04:56:08Z"
+}

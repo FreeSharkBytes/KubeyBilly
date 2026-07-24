@@ -1,0 +1,111 @@
+{
+  "allocatedResources": {
+    "memory": "128Mi"
+  },
+  "conditions": [
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:13Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "PodReadyToStartContainers"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:13Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:15Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "Ready"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:15Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "ContainersReady"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2026-07-24T04:56:13Z",
+      "observedGeneration": 1,
+      "status": "True",
+      "type": "PodScheduled"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "allocatedResources": {
+        "memory": "128Mi"
+      },
+      "containerID": "containerd://105e09e87bfc80d4370684ee4595668bc890566f011dec40dd60e438ccbbcd6d",
+      "image": "localhost/galley:dev",
+      "imageID": "docker.io/library/import-2026-07-24@sha256:8c8e2feedc66e7ef782f2abd9773c57f3188f634f09806b91621b668f742a2cd",
+      "lastState": {},
+      "name": "galley",
+      "ready": true,
+      "resources": {
+        "limits": {
+          "memory": "256Mi"
+        },
+        "requests": {
+          "memory": "128Mi"
+        }
+      },
+      "restartCount": 0,
+      "started": true,
+      "state": {
+        "running": {
+          "startedAt": "2026-07-24T04:56:13Z"
+        }
+      },
+      "user": {
+        "linux": {
+          "gid": 0,
+          "supplementalGroups": [
+            0
+          ],
+          "uid": 0
+        }
+      },
+      "volumeMounts": [
+        {
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+          "name": "kube-api-access-pxc9b",
+          "readOnly": true,
+          "recursiveReadOnly": "Disabled"
+        }
+      ]
+    }
+  ],
+  "hostIP": "10.89.0.2",
+  "hostIPs": [
+    {
+      "ip": "10.89.0.2"
+    }
+  ],
+  "observedGeneration": 1,
+  "phase": "Running",
+  "podIP": "10.244.0.24",
+  "podIPs": [
+    {
+      "ip": "10.244.0.24"
+    }
+  ],
+  "qosClass": "Burstable",
+  "resources": {
+    "limits": {
+      "memory": "256Mi"
+    },
+    "requests": {
+      "memory": "128Mi"
+    }
+  },
+  "startTime": "2026-07-24T04:56:13Z"
+}

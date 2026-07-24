@@ -1,0 +1,4 @@
+=ESOCK WARNING MSG==== 24-Jul-2026::04:56:13.859719 ===
+[UNIX-ESSIO] Failed open sctp dynamic library: libsctp.so.1
+
+04:56:14.572 [info] Running Galley.Router with Bandit 1.12.0 at 0.0.0.0:4000 (http)

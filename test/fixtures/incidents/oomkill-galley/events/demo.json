@@ -1,0 +1,5832 @@
+[
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:49Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3514",
+      "uid": "3b3fcc7b-f82c-476a-b4ff-e2aaa2ca4010"
+    },
+    "lastTimestamp": "2026-07-24T04:56:49Z",
+    "message": "Successfully assigned demo/chew-client to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:49Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:49Z"
+        }
+      ],
+      "name": "chew-client.18c520e837d4f882",
+      "namespace": "demo",
+      "resourceVersion": "3516",
+      "uid": "4074f701-3370-4e0e-9e54-1985e5c1c39b"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:49Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{chew-client}",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3515",
+      "uid": "3b3fcc7b-f82c-476a-b4ff-e2aaa2ca4010"
+    },
+    "lastTimestamp": "2026-07-24T04:56:49Z",
+    "message": "Pulling image \"docker.io/curlimages/curl:8.10.1\"",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:49Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:49Z"
+        }
+      ],
+      "name": "chew-client.18c520e85c897b15",
+      "namespace": "demo",
+      "resourceVersion": "3520",
+      "uid": "9790fdca-6e99-448c-af71-bdd61a539baa"
+    },
+    "reason": "Pulling",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:56Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{chew-client}",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3515",
+      "uid": "3b3fcc7b-f82c-476a-b4ff-e2aaa2ca4010"
+    },
+    "lastTimestamp": "2026-07-24T04:56:56Z",
+    "message": "Successfully pulled image \"docker.io/curlimages/curl:8.10.1\" in 6.623s (6.623s including waiting). Image size: 9414401 bytes.",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:56Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:56Z"
+        }
+      ],
+      "name": "chew-client.18c520e9e7526621",
+      "namespace": "demo",
+      "resourceVersion": "3528",
+      "uid": "f8593466-6e55-4363-a35f-3e6e357cf949"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:56Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{chew-client}",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3515",
+      "uid": "3b3fcc7b-f82c-476a-b4ff-e2aaa2ca4010"
+    },
+    "lastTimestamp": "2026-07-24T04:56:56Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:56Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:56Z"
+        }
+      ],
+      "name": "chew-client.18c520e9ea8b32d2",
+      "namespace": "demo",
+      "resourceVersion": "3529",
+      "uid": "040bcc49-362f-4ed2-b7ae-096d181ff0e3"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:56Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{chew-client}",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3515",
+      "uid": "3b3fcc7b-f82c-476a-b4ff-e2aaa2ca4010"
+    },
+    "lastTimestamp": "2026-07-24T04:56:56Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:56Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:56Z"
+        }
+      ],
+      "name": "chew-client.18c520e9f0a60dfd",
+      "namespace": "demo",
+      "resourceVersion": "3530",
+      "uid": "bf1939ae-87d1-4468-b7dc-078384175a3d"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T05:01:47Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3960",
+      "uid": "c7ccfec5-5508-42f2-bfb3-aee618f55ec5"
+    },
+    "lastTimestamp": "2026-07-24T05:01:47Z",
+    "message": "Successfully assigned demo/chew-client to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T05:01:47Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T05:01:47Z"
+        }
+      ],
+      "name": "chew-client.18c5212da9e2d2e8",
+      "namespace": "demo",
+      "resourceVersion": "3962",
+      "uid": "c4338883-401c-42bd-a772-49bb65c8e657"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T05:01:47Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{chew-client}",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3961",
+      "uid": "c7ccfec5-5508-42f2-bfb3-aee618f55ec5"
+    },
+    "lastTimestamp": "2026-07-24T05:01:47Z",
+    "message": "Container image \"docker.io/curlimages/curl:8.10.1\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T05:01:47Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:01:47Z"
+        }
+      ],
+      "name": "chew-client.18c5212dc760e234",
+      "namespace": "demo",
+      "resourceVersion": "3964",
+      "uid": "b575f962-c5da-43ec-8e58-947b4c0e18e8"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T05:01:47Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{chew-client}",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3961",
+      "uid": "c7ccfec5-5508-42f2-bfb3-aee618f55ec5"
+    },
+    "lastTimestamp": "2026-07-24T05:01:47Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T05:01:47Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:01:47Z"
+        }
+      ],
+      "name": "chew-client.18c5212dca92ebd0",
+      "namespace": "demo",
+      "resourceVersion": "3966",
+      "uid": "9a5d75e7-f9c9-4ae0-8093-f560831da262"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T05:01:47Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{chew-client}",
+      "kind": "Pod",
+      "name": "chew-client",
+      "namespace": "demo",
+      "resourceVersion": "3961",
+      "uid": "c7ccfec5-5508-42f2-bfb3-aee618f55ec5"
+    },
+    "lastTimestamp": "2026-07-24T05:01:47Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T05:01:47Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:01:47Z"
+        }
+      ],
+      "name": "chew-client.18c5212dd01eb0ab",
+      "namespace": "demo",
+      "resourceVersion": "3967",
+      "uid": "184c988b-1155-43d2-8542-e64c916bd649"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:30Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2723",
+      "uid": "899304f1-93f3-4eac-8b90-58d2cdc1f3fb"
+    },
+    "lastTimestamp": "2026-07-24T04:50:30Z",
+    "message": "Successfully assigned demo/envdump to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:30Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:30Z"
+        }
+      ],
+      "name": "envdump.18c5209028034b52",
+      "namespace": "demo",
+      "resourceVersion": "2725",
+      "uid": "5f03de84-ee90-4ace-ba43-d42e37799211"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:31Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2724",
+      "uid": "899304f1-93f3-4eac-8b90-58d2cdc1f3fb"
+    },
+    "lastTimestamp": "2026-07-24T04:50:31Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:31Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:31Z"
+        }
+      ],
+      "name": "envdump.18c520904679d20e",
+      "namespace": "demo",
+      "resourceVersion": "2727",
+      "uid": "e19ab340-6632-4ab8-91ba-502b02072004"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:31Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2724",
+      "uid": "899304f1-93f3-4eac-8b90-58d2cdc1f3fb"
+    },
+    "lastTimestamp": "2026-07-24T04:50:31Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:31Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:31Z"
+        }
+      ],
+      "name": "envdump.18c520904ae72188",
+      "namespace": "demo",
+      "resourceVersion": "2729",
+      "uid": "aee913a9-1d3c-4c16-bdc6-3df91aa6a194"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:31Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2724",
+      "uid": "899304f1-93f3-4eac-8b90-58d2cdc1f3fb"
+    },
+    "lastTimestamp": "2026-07-24T04:50:31Z",
+    "message": "Error: failed to create containerd task: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: \"C:/Program Files/Git/usr/bin/sh\": stat C:/Program Files/Git/usr/bin/sh: no such file or directory",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:31Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:31Z"
+        }
+      ],
+      "name": "envdump.18c520905227e826",
+      "namespace": "demo",
+      "resourceVersion": "2730",
+      "uid": "870c48d6-00ba-416a-bd12-f6ce25a3d9b4"
+    },
+    "reason": "Failed",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:51Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2775",
+      "uid": "44119879-fd1c-4648-8a8a-6cc32a77be27"
+    },
+    "lastTimestamp": "2026-07-24T04:50:51Z",
+    "message": "Successfully assigned demo/envdump to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:51Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:51Z"
+        }
+      ],
+      "name": "envdump.18c52094fa01d758",
+      "namespace": "demo",
+      "resourceVersion": "2777",
+      "uid": "1cdec489-cd7d-4ef7-a7a4-d3a5d1fe2829"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:52Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2776",
+      "uid": "44119879-fd1c-4648-8a8a-6cc32a77be27"
+    },
+    "lastTimestamp": "2026-07-24T04:50:52Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:52Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:52Z"
+        }
+      ],
+      "name": "envdump.18c52095186f9f26",
+      "namespace": "demo",
+      "resourceVersion": "2781",
+      "uid": "016758e7-b815-4a89-a974-050ec9a41c4f"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:52Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2776",
+      "uid": "44119879-fd1c-4648-8a8a-6cc32a77be27"
+    },
+    "lastTimestamp": "2026-07-24T04:50:52Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:52Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:52Z"
+        }
+      ],
+      "name": "envdump.18c520951c24dc2c",
+      "namespace": "demo",
+      "resourceVersion": "2783",
+      "uid": "6b4fe72a-c54f-498c-8022-02681b6f6f56"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:50:52Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2776",
+      "uid": "44119879-fd1c-4648-8a8a-6cc32a77be27"
+    },
+    "lastTimestamp": "2026-07-24T04:50:52Z",
+    "message": "Error: failed to create containerd task: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: \"C:/Program Files/Git/usr/bin/sh\": stat C:/Program Files/Git/usr/bin/sh: no such file or directory",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:50:52Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:50:52Z"
+        }
+      ],
+      "name": "envdump.18c52095238e1b2e",
+      "namespace": "demo",
+      "resourceVersion": "2784",
+      "uid": "a4b0173d-f316-4627-94e4-042539aaa83d"
+    },
+    "reason": "Failed",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:51:39Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2859",
+      "uid": "8c6aa178-4574-45da-a17d-839be63a3bc2"
+    },
+    "lastTimestamp": "2026-07-24T04:51:39Z",
+    "message": "Successfully assigned demo/envdump to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:51:39Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:51:39Z"
+        }
+      ],
+      "name": "envdump.18c520a0127e5e2f",
+      "namespace": "demo",
+      "resourceVersion": "2861",
+      "uid": "37ba7219-70ba-400c-a099-4ebadea73444"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:51:39Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2860",
+      "uid": "8c6aa178-4574-45da-a17d-839be63a3bc2"
+    },
+    "lastTimestamp": "2026-07-24T04:51:39Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:51:39Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:51:39Z"
+        }
+      ],
+      "name": "envdump.18c520a03630bec4",
+      "namespace": "demo",
+      "resourceVersion": "2865",
+      "uid": "1029d8d6-fb0a-48b4-916f-c0aee9fb6205"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:51:39Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2860",
+      "uid": "8c6aa178-4574-45da-a17d-839be63a3bc2"
+    },
+    "lastTimestamp": "2026-07-24T04:51:39Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:51:39Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:51:39Z"
+        }
+      ],
+      "name": "envdump.18c520a03affd162",
+      "namespace": "demo",
+      "resourceVersion": "2867",
+      "uid": "7dc25171-4c40-4e05-954a-48529ae7670d"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:51:39Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2860",
+      "uid": "8c6aa178-4574-45da-a17d-839be63a3bc2"
+    },
+    "lastTimestamp": "2026-07-24T04:51:39Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:51:39Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:51:39Z"
+        }
+      ],
+      "name": "envdump.18c520a0405f09ed",
+      "namespace": "demo",
+      "resourceVersion": "2868",
+      "uid": "23a6141a-fb81-4b48-ae11-73fbde492c99"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:52:08Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{envdump}",
+      "kind": "Pod",
+      "name": "envdump",
+      "namespace": "demo",
+      "resourceVersion": "2860",
+      "uid": "8c6aa178-4574-45da-a17d-839be63a3bc2"
+    },
+    "lastTimestamp": "2026-07-24T04:52:08Z",
+    "message": "Stopping container envdump",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:52:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:52:08Z"
+        }
+      ],
+      "name": "envdump.18c520a6e28a4888",
+      "namespace": "demo",
+      "resourceVersion": "2913",
+      "uid": "4a34ba81-51b8-49f5-b501-196fa1c09e62"
+    },
+    "reason": "Killing",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-5qfnx",
+      "namespace": "demo",
+      "resourceVersion": "1755",
+      "uid": "3a4776bf-bbc5-492e-a94d-65d8b4713926"
+    },
+    "lastTimestamp": "2026-07-24T04:43:40Z",
+    "message": "Successfully assigned demo/galley-765bcdc4b5-5qfnx to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:40Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:40Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-5qfnx.18c52030b90e55cf",
+      "namespace": "demo",
+      "resourceVersion": "1761",
+      "uid": "9d012119-554c-429b-8f67-cc33115395f8"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 6,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-5qfnx",
+      "namespace": "demo",
+      "resourceVersion": "1757",
+      "uid": "3a4776bf-bbc5-492e-a94d-65d8b4713926"
+    },
+    "lastTimestamp": "2026-07-24T04:46:38Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:46:38Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-5qfnx.18c52030daba1a6e",
+      "namespace": "demo",
+      "resourceVersion": "2221",
+      "uid": "5f539295-421a-4053-9728-71e3df512095"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 6,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-5qfnx",
+      "namespace": "demo",
+      "resourceVersion": "1757",
+      "uid": "3a4776bf-bbc5-492e-a94d-65d8b4713926"
+    },
+    "lastTimestamp": "2026-07-24T04:46:38Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:46:38Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-5qfnx.18c52030e4e33d2c",
+      "namespace": "demo",
+      "resourceVersion": "2222",
+      "uid": "402b7764-63df-48ed-a57e-44ef3283d4af"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 6,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-5qfnx",
+      "namespace": "demo",
+      "resourceVersion": "1757",
+      "uid": "3a4776bf-bbc5-492e-a94d-65d8b4713926"
+    },
+    "lastTimestamp": "2026-07-24T04:46:38Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:46:38Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-5qfnx.18c52030ece83f6f",
+      "namespace": "demo",
+      "resourceVersion": "2223",
+      "uid": "a0f0fd40-0ae2-4b30-9f13-0074f7237401"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-5qfnx",
+      "namespace": "demo",
+      "resourceVersion": "1757",
+      "uid": "3a4776bf-bbc5-492e-a94d-65d8b4713926"
+    },
+    "lastTimestamp": "2026-07-24T04:46:38Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.12:4000/healthz\": dial tcp 10.244.0.12:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:46:38Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-5qfnx.18c52030ed2e1cfc",
+      "namespace": "demo",
+      "resourceVersion": "2224",
+      "uid": "197d8ee4-c26a-4cab-82d6-f03ad2d4847d"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 10,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:45Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-5qfnx",
+      "namespace": "demo",
+      "resourceVersion": "1757",
+      "uid": "3a4776bf-bbc5-492e-a94d-65d8b4713926"
+    },
+    "lastTimestamp": "2026-07-24T04:46:39Z",
+    "message": "Back-off restarting failed container galley in pod galley-765bcdc4b5-5qfnx_demo(3a4776bf-bbc5-492e-a94d-65d8b4713926)",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:45Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:46:39Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-5qfnx.18c52031c157a607",
+      "namespace": "demo",
+      "resourceVersion": "2230",
+      "uid": "8ac26e74-a4de-4285-bcb4-88d3d8e1e97a"
+    },
+    "reason": "BackOff",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-6njm9",
+      "namespace": "demo",
+      "resourceVersion": "1760",
+      "uid": "5e43e584-aa7a-44ba-8ca1-e41bc60c3ca6"
+    },
+    "lastTimestamp": "2026-07-24T04:43:40Z",
+    "message": "Successfully assigned demo/galley-765bcdc4b5-6njm9 to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:40Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:40Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-6njm9.18c52030ba9d62f9",
+      "namespace": "demo",
+      "resourceVersion": "1768",
+      "uid": "07e864f1-3c9e-4484-8030-976576b979a2"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-6njm9",
+      "namespace": "demo",
+      "resourceVersion": "1765",
+      "uid": "5e43e584-aa7a-44ba-8ca1-e41bc60c3ca6"
+    },
+    "lastTimestamp": "2026-07-24T04:54:47Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:47Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-6njm9.18c52030de330dc9",
+      "namespace": "demo",
+      "resourceVersion": "3174",
+      "uid": "4e5cfc10-f3f5-44cd-b048-adef4e69df05"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-6njm9",
+      "namespace": "demo",
+      "resourceVersion": "1765",
+      "uid": "5e43e584-aa7a-44ba-8ca1-e41bc60c3ca6"
+    },
+    "lastTimestamp": "2026-07-24T04:54:47Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:47Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-6njm9.18c52030e8c3d58c",
+      "namespace": "demo",
+      "resourceVersion": "3175",
+      "uid": "81e2c478-728d-459e-855d-aeb52db7bd8a"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-6njm9",
+      "namespace": "demo",
+      "resourceVersion": "1765",
+      "uid": "5e43e584-aa7a-44ba-8ca1-e41bc60c3ca6"
+    },
+    "lastTimestamp": "2026-07-24T04:54:47Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:47Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-6njm9.18c52030f355c3b1",
+      "namespace": "demo",
+      "resourceVersion": "3176",
+      "uid": "d3fb7094-4e0e-4656-ba9a-096c2b23dbc2"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 11,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-6njm9",
+      "namespace": "demo",
+      "resourceVersion": "1765",
+      "uid": "5e43e584-aa7a-44ba-8ca1-e41bc60c3ca6"
+    },
+    "lastTimestamp": "2026-07-24T04:54:47Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.14:4000/healthz\": dial tcp 10.244.0.14:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:47Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-6njm9.18c52030f3a412a3",
+      "namespace": "demo",
+      "resourceVersion": "3177",
+      "uid": "0c897e2c-b668-477a-8000-756a0d0110f9"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 16,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:45Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-6njm9",
+      "namespace": "demo",
+      "resourceVersion": "1765",
+      "uid": "5e43e584-aa7a-44ba-8ca1-e41bc60c3ca6"
+    },
+    "lastTimestamp": "2026-07-24T04:53:28Z",
+    "message": "Back-off restarting failed container galley in pod galley-765bcdc4b5-6njm9_demo(5e43e584-aa7a-44ba-8ca1-e41bc60c3ca6)",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:45Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:53:28Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-6njm9.18c52031c1816d0b",
+      "namespace": "demo",
+      "resourceVersion": "3044",
+      "uid": "a4b61d01-1358-4d47-a630-b7ec962ff2c9"
+    },
+    "reason": "BackOff",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-v44qn",
+      "namespace": "demo",
+      "resourceVersion": "1759",
+      "uid": "7b933d4c-6f2a-4325-9726-fb197b874820"
+    },
+    "lastTimestamp": "2026-07-24T04:43:40Z",
+    "message": "Successfully assigned demo/galley-765bcdc4b5-v44qn to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:41Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-v44qn.18c52030ba9ed920",
+      "namespace": "demo",
+      "resourceVersion": "1771",
+      "uid": "15b90d71-7ade-4410-9434-2f2f0369ad5a"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-v44qn",
+      "namespace": "demo",
+      "resourceVersion": "1764",
+      "uid": "7b933d4c-6f2a-4325-9726-fb197b874820"
+    },
+    "lastTimestamp": "2026-07-24T04:54:42Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:42Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-v44qn.18c52030dd71bafa",
+      "namespace": "demo",
+      "resourceVersion": "3160",
+      "uid": "437a37ec-00e6-4d89-b68e-e46d54f6e817"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-v44qn",
+      "namespace": "demo",
+      "resourceVersion": "1764",
+      "uid": "7b933d4c-6f2a-4325-9726-fb197b874820"
+    },
+    "lastTimestamp": "2026-07-24T04:54:42Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:42Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-v44qn.18c52030e72eede0",
+      "namespace": "demo",
+      "resourceVersion": "3161",
+      "uid": "4990c4e5-065d-4544-8e33-57908584b399"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-v44qn",
+      "namespace": "demo",
+      "resourceVersion": "1764",
+      "uid": "7b933d4c-6f2a-4325-9726-fb197b874820"
+    },
+    "lastTimestamp": "2026-07-24T04:54:42Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:42Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-v44qn.18c52030ece89059",
+      "namespace": "demo",
+      "resourceVersion": "3162",
+      "uid": "84991b6a-cf31-4621-86f0-43c381891d50"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 10,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-v44qn",
+      "namespace": "demo",
+      "resourceVersion": "1764",
+      "uid": "7b933d4c-6f2a-4325-9726-fb197b874820"
+    },
+    "lastTimestamp": "2026-07-24T04:49:34Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.13:4000/healthz\": dial tcp 10.244.0.13:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:41Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:49:34Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-v44qn.18c52030ed5444e7",
+      "namespace": "demo",
+      "resourceVersion": "2625",
+      "uid": "302959e9-d67c-4868-9217-d80585e02ba9"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 18,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:45Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-765bcdc4b5-v44qn",
+      "namespace": "demo",
+      "resourceVersion": "1764",
+      "uid": "7b933d4c-6f2a-4325-9726-fb197b874820"
+    },
+    "lastTimestamp": "2026-07-24T04:54:17Z",
+    "message": "Back-off restarting failed container galley in pod galley-765bcdc4b5-v44qn_demo(7b933d4c-6f2a-4325-9726-fb197b874820)",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:45Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:17Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5-v44qn.18c52031c1a906e4",
+      "namespace": "demo",
+      "resourceVersion": "3122",
+      "uid": "b75ec6b1-ecb6-4c43-b7df-aba28d78ce00"
+    },
+    "reason": "BackOff",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:40Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-765bcdc4b5",
+      "namespace": "demo",
+      "resourceVersion": "1753",
+      "uid": "1b9b3d5d-4c2b-4420-8ed7-ccb061962991"
+    },
+    "lastTimestamp": "2026-07-24T04:43:40Z",
+    "message": "Created pod: galley-765bcdc4b5-5qfnx",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:40Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:40Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5.18c52030b8b22bca",
+      "namespace": "demo",
+      "resourceVersion": "1758",
+      "uid": "e5bd7ea6-864a-4f0f-b932-1370fa123d72"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:40Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-765bcdc4b5",
+      "namespace": "demo",
+      "resourceVersion": "1753",
+      "uid": "1b9b3d5d-4c2b-4420-8ed7-ccb061962991"
+    },
+    "lastTimestamp": "2026-07-24T04:43:40Z",
+    "message": "Created pod: galley-765bcdc4b5-6njm9",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:40Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:40Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5.18c52030b96881e4",
+      "namespace": "demo",
+      "resourceVersion": "1763",
+      "uid": "755be9eb-e6b3-4c28-bbb0-06dd4530c613"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:40Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-765bcdc4b5",
+      "namespace": "demo",
+      "resourceVersion": "1753",
+      "uid": "1b9b3d5d-4c2b-4420-8ed7-ccb061962991"
+    },
+    "lastTimestamp": "2026-07-24T04:43:40Z",
+    "message": "Created pod: galley-765bcdc4b5-v44qn",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:40Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:40Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5.18c52030b968d0af",
+      "namespace": "demo",
+      "resourceVersion": "1769",
+      "uid": "c7af95ac-7105-4810-9ee1-6fc07570e43d"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:57Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-765bcdc4b5",
+      "namespace": "demo",
+      "resourceVersion": "2371",
+      "uid": "1b9b3d5d-4c2b-4420-8ed7-ccb061962991"
+    },
+    "lastTimestamp": "2026-07-24T04:47:57Z",
+    "message": "Deleted pod: galley-765bcdc4b5-5qfnx",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:57Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:47:57Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5.18c5206c7cd15a76",
+      "namespace": "demo",
+      "resourceVersion": "2375",
+      "uid": "b74b7a8d-a8e3-4fe9-b605-3001941ca1fe"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:08Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-765bcdc4b5",
+      "namespace": "demo",
+      "resourceVersion": "3315",
+      "uid": "1b9b3d5d-4c2b-4420-8ed7-ccb061962991"
+    },
+    "lastTimestamp": "2026-07-24T04:56:08Z",
+    "message": "Deleted pod: galley-765bcdc4b5-v44qn",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:08Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5.18c520deb77eedea",
+      "namespace": "demo",
+      "resourceVersion": "3319",
+      "uid": "231e01cd-114f-4a64-87b3-3e90451479f6"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-765bcdc4b5",
+      "namespace": "demo",
+      "resourceVersion": "3359",
+      "uid": "1b9b3d5d-4c2b-4420-8ed7-ccb061962991"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Deleted pod: galley-765bcdc4b5-6njm9",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5.18c520df1fcedf4c",
+      "namespace": "demo",
+      "resourceVersion": "3363",
+      "uid": "f86e5fba-a84e-436e-932d-6c6181b509ad"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-84db7b7754-vvrh5",
+      "namespace": "demo",
+      "resourceVersion": "2048",
+      "uid": "70418c0f-80c2-47d9-b1aa-2c7ff329afee"
+    },
+    "lastTimestamp": "2026-07-24T04:45:13Z",
+    "message": "Successfully assigned demo/galley-84db7b7754-vvrh5 to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:45:13Z"
+        }
+      ],
+      "name": "galley-84db7b7754-vvrh5.18c5204639d49747",
+      "namespace": "demo",
+      "resourceVersion": "2053",
+      "uid": "9aaa5983-620e-4001-a4b3-bced98126fbc"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-84db7b7754-vvrh5",
+      "namespace": "demo",
+      "resourceVersion": "2049",
+      "uid": "70418c0f-80c2-47d9-b1aa-2c7ff329afee"
+    },
+    "lastTimestamp": "2026-07-24T04:55:50Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:55:50Z"
+        }
+      ],
+      "name": "galley-84db7b7754-vvrh5.18c52046593c460e",
+      "namespace": "demo",
+      "resourceVersion": "3276",
+      "uid": "249fdc01-e1fd-45f7-a86e-d4e38bc046ea"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-84db7b7754-vvrh5",
+      "namespace": "demo",
+      "resourceVersion": "2049",
+      "uid": "70418c0f-80c2-47d9-b1aa-2c7ff329afee"
+    },
+    "lastTimestamp": "2026-07-24T04:55:50Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:55:50Z"
+        }
+      ],
+      "name": "galley-84db7b7754-vvrh5.18c520465df7949e",
+      "namespace": "demo",
+      "resourceVersion": "3277",
+      "uid": "b2b8749e-ee9c-4a8b-97af-ab7b7e0c92b4"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 8,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:14Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-84db7b7754-vvrh5",
+      "namespace": "demo",
+      "resourceVersion": "2049",
+      "uid": "70418c0f-80c2-47d9-b1aa-2c7ff329afee"
+    },
+    "lastTimestamp": "2026-07-24T04:55:50Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:14Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:55:50Z"
+        }
+      ],
+      "name": "galley-84db7b7754-vvrh5.18c5204663559009",
+      "namespace": "demo",
+      "resourceVersion": "3278",
+      "uid": "c6598099-dca6-49b8-bf76-6276d1ca9795"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 13,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:14Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-84db7b7754-vvrh5",
+      "namespace": "demo",
+      "resourceVersion": "2049",
+      "uid": "70418c0f-80c2-47d9-b1aa-2c7ff329afee"
+    },
+    "lastTimestamp": "2026-07-24T04:55:50Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.15:4000/healthz\": dial tcp 10.244.0.15:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:14Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:55:50Z"
+        }
+      ],
+      "name": "galley-84db7b7754-vvrh5.18c520466397ebee",
+      "namespace": "demo",
+      "resourceVersion": "3281",
+      "uid": "09441c7d-a044-4307-b95f-d36117305f9c"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 14,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:15Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-84db7b7754-vvrh5",
+      "namespace": "demo",
+      "resourceVersion": "2049",
+      "uid": "70418c0f-80c2-47d9-b1aa-2c7ff329afee"
+    },
+    "lastTimestamp": "2026-07-24T04:54:26Z",
+    "message": "Back-off restarting failed container galley in pod galley-84db7b7754-vvrh5_demo(70418c0f-80c2-47d9-b1aa-2c7ff329afee)",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:15Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:54:26Z"
+        }
+      ],
+      "name": "galley-84db7b7754-vvrh5.18c52046c9a58b9c",
+      "namespace": "demo",
+      "resourceVersion": "3137",
+      "uid": "c881167e-8382-4e3b-bbcb-844ccbd206bb"
+    },
+    "reason": "BackOff",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:13Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-84db7b7754",
+      "namespace": "demo",
+      "resourceVersion": "2045",
+      "uid": "8aa140d6-7c01-489d-b9fb-7c800b828441"
+    },
+    "lastTimestamp": "2026-07-24T04:45:13Z",
+    "message": "Created pod: galley-84db7b7754-vvrh5",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:45:13Z"
+        }
+      ],
+      "name": "galley-84db7b7754.18c5204639692fea",
+      "namespace": "demo",
+      "resourceVersion": "2050",
+      "uid": "8ca91f36-9b06-4e8c-8682-672234c6dc84"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-84db7b7754",
+      "namespace": "demo",
+      "resourceVersion": "3404",
+      "uid": "8aa140d6-7c01-489d-b9fb-7c800b828441"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Deleted pod: galley-84db7b7754-vvrh5",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-84db7b7754.18c520dfd3109259",
+      "namespace": "demo",
+      "resourceVersion": "3409",
+      "uid": "53179699-b58a-4c5c-bfde-3dbd18067a41"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:57Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-85c59d6b58-n42rd",
+      "namespace": "demo",
+      "resourceVersion": "2382",
+      "uid": "5b8bd440-bdbb-4519-bdeb-e9786fd84693"
+    },
+    "lastTimestamp": "2026-07-24T04:47:57Z",
+    "message": "Successfully assigned demo/galley-85c59d6b58-n42rd to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:57Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:47:57Z"
+        }
+      ],
+      "name": "galley-85c59d6b58-n42rd.18c5206c7f4000f5",
+      "namespace": "demo",
+      "resourceVersion": "2388",
+      "uid": "a91fe653-2f23-4ae2-bdb2-23e4037e5d4a"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 7,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:58Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-85c59d6b58-n42rd",
+      "namespace": "demo",
+      "resourceVersion": "2387",
+      "uid": "5b8bd440-bdbb-4519-bdeb-e9786fd84693"
+    },
+    "lastTimestamp": "2026-07-24T04:53:34Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:58Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:53:34Z"
+        }
+      ],
+      "name": "galley-85c59d6b58-n42rd.18c5206c9fe24a4f",
+      "namespace": "demo",
+      "resourceVersion": "3055",
+      "uid": "ae727ca0-a65f-4a71-b10f-b4ae8e1d4117"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 7,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:58Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-85c59d6b58-n42rd",
+      "namespace": "demo",
+      "resourceVersion": "2387",
+      "uid": "5b8bd440-bdbb-4519-bdeb-e9786fd84693"
+    },
+    "lastTimestamp": "2026-07-24T04:53:34Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:58Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:53:34Z"
+        }
+      ],
+      "name": "galley-85c59d6b58-n42rd.18c5206ca4e2602b",
+      "namespace": "demo",
+      "resourceVersion": "3056",
+      "uid": "251d0dfa-e12c-466a-82df-f2106a2e785f"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 7,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:58Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-85c59d6b58-n42rd",
+      "namespace": "demo",
+      "resourceVersion": "2387",
+      "uid": "5b8bd440-bdbb-4519-bdeb-e9786fd84693"
+    },
+    "lastTimestamp": "2026-07-24T04:53:34Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:58Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:53:34Z"
+        }
+      ],
+      "name": "galley-85c59d6b58-n42rd.18c5206cabe372a8",
+      "namespace": "demo",
+      "resourceVersion": "3057",
+      "uid": "ff534213-e955-44ac-b7f5-a910144a0857"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 10,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:58Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-85c59d6b58-n42rd",
+      "namespace": "demo",
+      "resourceVersion": "2387",
+      "uid": "5b8bd440-bdbb-4519-bdeb-e9786fd84693"
+    },
+    "lastTimestamp": "2026-07-24T04:53:35Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.16:4000/healthz\": dial tcp 10.244.0.16:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:58Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:53:35Z"
+        }
+      ],
+      "name": "galley-85c59d6b58-n42rd.18c5206cac21bc55",
+      "namespace": "demo",
+      "resourceVersion": "3062",
+      "uid": "ec2f99b9-5dbd-432d-84f7-d8859223d02e"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 14,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:48:00Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-85c59d6b58-n42rd",
+      "namespace": "demo",
+      "resourceVersion": "2387",
+      "uid": "5b8bd440-bdbb-4519-bdeb-e9786fd84693"
+    },
+    "lastTimestamp": "2026-07-24T04:55:49Z",
+    "message": "Back-off restarting failed container galley in pod galley-85c59d6b58-n42rd_demo(5b8bd440-bdbb-4519-bdeb-e9786fd84693)",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:48:00Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:55:49Z"
+        }
+      ],
+      "name": "galley-85c59d6b58-n42rd.18c5206d17e7a3fd",
+      "namespace": "demo",
+      "resourceVersion": "3271",
+      "uid": "dbaf26be-a264-4a5d-b2b1-bf80f50a0e43"
+    },
+    "reason": "BackOff",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:57Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-85c59d6b58",
+      "namespace": "demo",
+      "resourceVersion": "2374",
+      "uid": "23217c6f-0647-429c-b4da-64e0ffd976bf"
+    },
+    "lastTimestamp": "2026-07-24T04:47:57Z",
+    "message": "Created pod: galley-85c59d6b58-n42rd",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:57Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:47:57Z"
+        }
+      ],
+      "name": "galley-85c59d6b58.18c5206c7e6f6634",
+      "namespace": "demo",
+      "resourceVersion": "2385",
+      "uid": "df384f0c-bcf4-434e-bb5a-15f6508d946b"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:16Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-85c59d6b58",
+      "namespace": "demo",
+      "resourceVersion": "3446",
+      "uid": "23217c6f-0647-429c-b4da-64e0ffd976bf"
+    },
+    "lastTimestamp": "2026-07-24T04:56:16Z",
+    "message": "Deleted pod: galley-85c59d6b58-n42rd",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:16Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:16Z"
+        }
+      ],
+      "name": "galley-85c59d6b58.18c520e088471b6a",
+      "namespace": "demo",
+      "resourceVersion": "3450",
+      "uid": "35fce021-7113-456a-a2e9-62d8a8fa4873"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:52:08Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-ctl",
+      "namespace": "demo",
+      "resourceVersion": "2917",
+      "uid": "1bfb268e-6143-4da4-936a-fbcba049d4b7"
+    },
+    "lastTimestamp": "2026-07-24T04:52:08Z",
+    "message": "Successfully assigned demo/galley-ctl to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:52:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:52:08Z"
+        }
+      ],
+      "name": "galley-ctl.18c520a6ee720ce1",
+      "namespace": "demo",
+      "resourceVersion": "2919",
+      "uid": "e156a0d0-0911-491a-9bbd-2b7f0a18acc0"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:52:09Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-ctl}",
+      "kind": "Pod",
+      "name": "galley-ctl",
+      "namespace": "demo",
+      "resourceVersion": "2918",
+      "uid": "1bfb268e-6143-4da4-936a-fbcba049d4b7"
+    },
+    "lastTimestamp": "2026-07-24T04:52:09Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:52:09Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:52:09Z"
+        }
+      ],
+      "name": "galley-ctl.18c520a70de9129d",
+      "namespace": "demo",
+      "resourceVersion": "2921",
+      "uid": "57d91f87-6c68-4142-ab61-11d4cba9868d"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:52:09Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-ctl}",
+      "kind": "Pod",
+      "name": "galley-ctl",
+      "namespace": "demo",
+      "resourceVersion": "2918",
+      "uid": "1bfb268e-6143-4da4-936a-fbcba049d4b7"
+    },
+    "lastTimestamp": "2026-07-24T04:52:09Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:52:09Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:52:09Z"
+        }
+      ],
+      "name": "galley-ctl.18c520a714c1413b",
+      "namespace": "demo",
+      "resourceVersion": "2923",
+      "uid": "9f633acb-ab80-4bcd-8a47-3c162eecb123"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:52:09Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-ctl}",
+      "kind": "Pod",
+      "name": "galley-ctl",
+      "namespace": "demo",
+      "resourceVersion": "2918",
+      "uid": "1bfb268e-6143-4da4-936a-fbcba049d4b7"
+    },
+    "lastTimestamp": "2026-07-24T04:52:09Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:52:09Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:52:09Z"
+        }
+      ],
+      "name": "galley-ctl.18c520a71adf3c02",
+      "namespace": "demo",
+      "resourceVersion": "2924",
+      "uid": "359371ee-2a41-411a-807f-75d67bb22eb8"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:55:49Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-ctl}",
+      "kind": "Pod",
+      "name": "galley-ctl",
+      "namespace": "demo",
+      "resourceVersion": "2918",
+      "uid": "1bfb268e-6143-4da4-936a-fbcba049d4b7"
+    },
+    "lastTimestamp": "2026-07-24T04:55:49Z",
+    "message": "Stopping container galley-ctl",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:55:49Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:55:49Z"
+        }
+      ],
+      "name": "galley-ctl.18c520da3ee4e74e",
+      "namespace": "demo",
+      "resourceVersion": "3268",
+      "uid": "d8f553b6-5d09-40df-8f67-502915d3ae4a"
+    },
+    "reason": "Killing",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-drbdd",
+      "namespace": "demo",
+      "resourceVersion": "3414",
+      "uid": "c8cd187d-d8f2-4991-a9c1-94f509c240af"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Successfully assigned demo/galley-d7c6bc75c-drbdd to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-drbdd.18c520dfd5332b77",
+      "namespace": "demo",
+      "resourceVersion": "3421",
+      "uid": "df16dd55-c684-4cc3-9995-1f349f1fd61c"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-drbdd",
+      "namespace": "demo",
+      "resourceVersion": "3418",
+      "uid": "c8cd187d-d8f2-4991-a9c1-94f509c240af"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-drbdd.18c520dff75a56e3",
+      "namespace": "demo",
+      "resourceVersion": "3429",
+      "uid": "988860c4-59ee-402f-8cc8-70445f702a7b"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-drbdd",
+      "namespace": "demo",
+      "resourceVersion": "3418",
+      "uid": "c8cd187d-d8f2-4991-a9c1-94f509c240af"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-drbdd.18c520dffbcb5e88",
+      "namespace": "demo",
+      "resourceVersion": "3431",
+      "uid": "3fd30a05-4727-48ba-9afb-e2d3361e6915"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-drbdd",
+      "namespace": "demo",
+      "resourceVersion": "3418",
+      "uid": "c8cd187d-d8f2-4991-a9c1-94f509c240af"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-drbdd.18c520e000f64374",
+      "namespace": "demo",
+      "resourceVersion": "3432",
+      "uid": "bc7585b0-8c69-407c-8f97-85fede67c759"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 2,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-drbdd",
+      "namespace": "demo",
+      "resourceVersion": "3418",
+      "uid": "c8cd187d-d8f2-4991-a9c1-94f509c240af"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.24:4000/healthz\": dial tcp 10.244.0.24:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-drbdd.18c520e00139e222",
+      "namespace": "demo",
+      "resourceVersion": "3437",
+      "uid": "8660b9a3-1abe-493b-9636-208605a835b0"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:08Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-fs89f",
+      "namespace": "demo",
+      "resourceVersion": "3326",
+      "uid": "0333d450-2c28-4313-942a-085e6878cd46"
+    },
+    "lastTimestamp": "2026-07-24T04:56:08Z",
+    "message": "Successfully assigned demo/galley-d7c6bc75c-fs89f to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:08Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-fs89f.18c520debb62827f",
+      "namespace": "demo",
+      "resourceVersion": "3333",
+      "uid": "fbcef221-dd0d-4e41-b6c7-78ff34d047e7"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 3,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:08Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-fs89f",
+      "namespace": "demo",
+      "resourceVersion": "3330",
+      "uid": "0333d450-2c28-4313-942a-085e6878cd46"
+    },
+    "lastTimestamp": "2026-07-24T05:02:00Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:02:00Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-fs89f.18c520dedbb9c0d8",
+      "namespace": "demo",
+      "resourceVersion": "4000",
+      "uid": "7fef505a-48df-4d4f-a74b-879bab680e50"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 3,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:08Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-fs89f",
+      "namespace": "demo",
+      "resourceVersion": "3330",
+      "uid": "0333d450-2c28-4313-942a-085e6878cd46"
+    },
+    "lastTimestamp": "2026-07-24T05:02:00Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:02:00Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-fs89f.18c520dee01850c1",
+      "namespace": "demo",
+      "resourceVersion": "4001",
+      "uid": "3460e9c9-ddf7-453c-91c6-f8b16576c89a"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 3,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:09Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-fs89f",
+      "namespace": "demo",
+      "resourceVersion": "3330",
+      "uid": "0333d450-2c28-4313-942a-085e6878cd46"
+    },
+    "lastTimestamp": "2026-07-24T05:02:00Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:09Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:02:00Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-fs89f.18c520dee9d92068",
+      "namespace": "demo",
+      "resourceVersion": "4004",
+      "uid": "ab221992-ca3c-4351-bbe9-35caac62ad56"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 6,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:09Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-fs89f",
+      "namespace": "demo",
+      "resourceVersion": "3330",
+      "uid": "0333d450-2c28-4313-942a-085e6878cd46"
+    },
+    "lastTimestamp": "2026-07-24T05:02:01Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.22:4000/healthz\": dial tcp 10.244.0.22:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:09Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:02:01Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-fs89f.18c520deea2510a2",
+      "namespace": "demo",
+      "resourceVersion": "4007",
+      "uid": "235492b9-719c-4bc7-8885-9dd5d6427e33"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 2,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T05:01:50Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-fs89f",
+      "namespace": "demo",
+      "resourceVersion": "3330",
+      "uid": "0333d450-2c28-4313-942a-085e6878cd46"
+    },
+    "lastTimestamp": "2026-07-24T05:01:51Z",
+    "message": "Back-off restarting failed container galley in pod galley-d7c6bc75c-fs89f_demo(0333d450-2c28-4313-942a-085e6878cd46)",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T05:01:50Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T05:01:51Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-fs89f.18c5212e4be59501",
+      "namespace": "demo",
+      "resourceVersion": "3983",
+      "uid": "72b027da-6a1a-4ff7-9541-097f3d93f316"
+    },
+    "reason": "BackOff",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-jz99q",
+      "namespace": "demo",
+      "resourceVersion": "3370",
+      "uid": "5165b493-e182-4746-89cb-243e7a51e641"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Successfully assigned demo/galley-d7c6bc75c-jz99q to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-jz99q.18c520df21f6a592",
+      "namespace": "demo",
+      "resourceVersion": "3376",
+      "uid": "f068cc22-d08c-4f3a-a5d3-6e83b44625ef"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-jz99q",
+      "namespace": "demo",
+      "resourceVersion": "3374",
+      "uid": "5165b493-e182-4746-89cb-243e7a51e641"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-jz99q.18c520df43fb2f1c",
+      "namespace": "demo",
+      "resourceVersion": "3386",
+      "uid": "11eaf5bd-b7c5-4f56-bf5e-4d0f7447e72a"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-jz99q",
+      "namespace": "demo",
+      "resourceVersion": "3374",
+      "uid": "5165b493-e182-4746-89cb-243e7a51e641"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-jz99q.18c520df4747f575",
+      "namespace": "demo",
+      "resourceVersion": "3388",
+      "uid": "70e1e384-3cb9-4895-a2c0-d2f573634dd0"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-jz99q",
+      "namespace": "demo",
+      "resourceVersion": "3374",
+      "uid": "5165b493-e182-4746-89cb-243e7a51e641"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-jz99q.18c520df4ed94db1",
+      "namespace": "demo",
+      "resourceVersion": "3389",
+      "uid": "96508188-785f-4ac8-a35f-0511d0bd1675"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 2,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley}",
+      "kind": "Pod",
+      "name": "galley-d7c6bc75c-jz99q",
+      "namespace": "demo",
+      "resourceVersion": "3374",
+      "uid": "5165b493-e182-4746-89cb-243e7a51e641"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Readiness probe failed: Get \"http://10.244.0.23:4000/healthz\": dial tcp 10.244.0.23:4000: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c-jz99q.18c520df4f142458",
+      "namespace": "demo",
+      "resourceVersion": "3394",
+      "uid": "bd87dae8-5d4f-4260-be3f-684a751a9bc4"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:08Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-d7c6bc75c",
+      "namespace": "demo",
+      "resourceVersion": "3318",
+      "uid": "59db6cdc-39c0-4678-8e65-40b5697d256b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:08Z",
+    "message": "Created pod: galley-d7c6bc75c-fs89f",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:08Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c.18c520debaa465dd",
+      "namespace": "demo",
+      "resourceVersion": "3329",
+      "uid": "1fdecca8-797a-4ba8-8c95-de3b7808175e"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-d7c6bc75c",
+      "namespace": "demo",
+      "resourceVersion": "3367",
+      "uid": "59db6cdc-39c0-4678-8e65-40b5697d256b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Created pod: galley-d7c6bc75c-jz99q",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c.18c520df213bf033",
+      "namespace": "demo",
+      "resourceVersion": "3372",
+      "uid": "cd1c91b9-1ed6-4ec1-9831-9d56261be39e"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "galley-d7c6bc75c",
+      "namespace": "demo",
+      "resourceVersion": "3412",
+      "uid": "59db6cdc-39c0-4678-8e65-40b5697d256b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Created pod: galley-d7c6bc75c-drbdd",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c.18c520dfd4a275e5",
+      "namespace": "demo",
+      "resourceVersion": "3417",
+      "uid": "3b1eefdd-7f61-458a-99fe-0a3ea2db7617"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:49:17Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "galley-nolimit",
+      "namespace": "demo",
+      "resourceVersion": "2561",
+      "uid": "bad0c8f6-2c06-44b0-85a2-80cb814a1b39"
+    },
+    "lastTimestamp": "2026-07-24T04:49:17Z",
+    "message": "Successfully assigned demo/galley-nolimit to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:49:17Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:49:17Z"
+        }
+      ],
+      "name": "galley-nolimit.18c5207f0550694d",
+      "namespace": "demo",
+      "resourceVersion": "2563",
+      "uid": "52b0f6c8-d090-4f3b-9d4d-125618484efa"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 3,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:49:17Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-nolimit}",
+      "kind": "Pod",
+      "name": "galley-nolimit",
+      "namespace": "demo",
+      "resourceVersion": "2562",
+      "uid": "bad0c8f6-2c06-44b0-85a2-80cb814a1b39"
+    },
+    "lastTimestamp": "2026-07-24T04:49:37Z",
+    "message": "Container image \"localhost/galley:dev\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:49:17Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:49:37Z"
+        }
+      ],
+      "name": "galley-nolimit.18c5207f2697c236",
+      "namespace": "demo",
+      "resourceVersion": "2635",
+      "uid": "0d45bffa-0746-43b5-9a9a-6e756fe37c55"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 3,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:49:17Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-nolimit}",
+      "kind": "Pod",
+      "name": "galley-nolimit",
+      "namespace": "demo",
+      "resourceVersion": "2562",
+      "uid": "bad0c8f6-2c06-44b0-85a2-80cb814a1b39"
+    },
+    "lastTimestamp": "2026-07-24T04:49:37Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:49:17Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:49:37Z"
+        }
+      ],
+      "name": "galley-nolimit.18c5207f2a9db3d9",
+      "namespace": "demo",
+      "resourceVersion": "2637",
+      "uid": "1dad77a8-5616-431a-988e-22a2ada5f99e"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 3,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:49:17Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-nolimit}",
+      "kind": "Pod",
+      "name": "galley-nolimit",
+      "namespace": "demo",
+      "resourceVersion": "2562",
+      "uid": "bad0c8f6-2c06-44b0-85a2-80cb814a1b39"
+    },
+    "lastTimestamp": "2026-07-24T04:49:37Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:49:17Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:49:37Z"
+        }
+      ],
+      "name": "galley-nolimit.18c5207f30bb280b",
+      "namespace": "demo",
+      "resourceVersion": "2638",
+      "uid": "071e4cbf-9493-40b8-bcbf-2ee3850b80be"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 2,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:49:25Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{galley-nolimit}",
+      "kind": "Pod",
+      "name": "galley-nolimit",
+      "namespace": "demo",
+      "resourceVersion": "2562",
+      "uid": "bad0c8f6-2c06-44b0-85a2-80cb814a1b39"
+    },
+    "lastTimestamp": "2026-07-24T04:49:41Z",
+    "message": "Back-off restarting failed container galley-nolimit in pod galley-nolimit_demo(bad0c8f6-2c06-44b0-85a2-80cb814a1b39)",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:49:25Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:49:41Z"
+        }
+      ],
+      "name": "galley-nolimit.18c52080f35333d5",
+      "namespace": "demo",
+      "resourceVersion": "2648",
+      "uid": "bab2f3ba-aa28-4b37-b712-4e280cb31678"
+    },
+    "reason": "BackOff",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:40Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "1752",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:43:40Z",
+    "message": "Scaled up replica set galley-765bcdc4b5 from 0 to 3",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:40Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:40Z"
+        }
+      ],
+      "name": "galley.18c52030b7e43c88",
+      "namespace": "demo",
+      "resourceVersion": "1754",
+      "uid": "312c16eb-9540-46c4-8a17-cc25a18e4596"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:45:13Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "2044",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:45:13Z",
+    "message": "Scaled up replica set galley-84db7b7754 from 0 to 1",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:45:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:45:13Z"
+        }
+      ],
+      "name": "galley.18c52046384cadb2",
+      "namespace": "demo",
+      "resourceVersion": "2046",
+      "uid": "e8326eaf-fef1-4b53-a245-0ec392a49d81"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:57Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "2367",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:47:57Z",
+    "message": "Scaled down replica set galley-765bcdc4b5 from 3 to 2",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:57Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:47:57Z"
+        }
+      ],
+      "name": "galley.18c5206c7bf9842f",
+      "namespace": "demo",
+      "resourceVersion": "2373",
+      "uid": "70552b6a-1250-48a9-8ffd-4fe3373ac3f7"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:47:57Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "2370",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:47:57Z",
+    "message": "Scaled up replica set galley-85c59d6b58 from 0 to 1",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:47:57Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:47:57Z"
+        }
+      ],
+      "name": "galley.18c5206c7d2b26df",
+      "namespace": "demo",
+      "resourceVersion": "2379",
+      "uid": "3d116310-83eb-4a2b-a644-6cc0068a5e7c"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:08Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "3311",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:08Z",
+    "message": "Scaled down replica set galley-765bcdc4b5 from 2 to 1",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:08Z"
+        }
+      ],
+      "name": "galley.18c520deb649c35e",
+      "namespace": "demo",
+      "resourceVersion": "3316",
+      "uid": "fdcfb587-b10a-4e56-a9d2-fe8f6c77e849"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:08Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "3314",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:08Z",
+    "message": "Scaled up replica set galley-d7c6bc75c from 0 to 1",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:08Z"
+        }
+      ],
+      "name": "galley.18c520deb7960b0c",
+      "namespace": "demo",
+      "resourceVersion": "3320",
+      "uid": "6e71519b-df17-45d8-894a-d4d336dca268"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:09Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "3342",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:09Z",
+    "message": "Scaled down replica set galley-765bcdc4b5 from 1 to 0",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:09Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:09Z"
+        }
+      ],
+      "name": "galley.18c520df1f1e391c",
+      "namespace": "demo",
+      "resourceVersion": "3360",
+      "uid": "6fa3668e-2d27-4e99-b214-db4981a90513"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:10Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "3342",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:10Z",
+    "message": "Scaled up replica set galley-d7c6bc75c from 1 to 2",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:10Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley.18c520df207e949f",
+      "namespace": "demo",
+      "resourceVersion": "3369",
+      "uid": "259759f8-b572-42c3-96ac-df52ccb6aec7"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "3383",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:13Z",
+    "message": "Scaled down replica set galley-84db7b7754 from 1 to 0",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley.18c520dfd265d44a",
+      "namespace": "demo",
+      "resourceVersion": "3405",
+      "uid": "7f26b5dd-3318-48ac-8037-caf2b75d5486"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 2,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:56:13Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "galley",
+      "namespace": "demo",
+      "resourceVersion": "3383",
+      "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+    },
+    "lastTimestamp": "2026-07-24T04:56:16Z",
+    "message": "(combined from similar events): Scaled down replica set galley-85c59d6b58 from 1 to 0",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:56:13Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:16Z"
+        }
+      ],
+      "name": "galley.18c520dfd3f2c933",
+      "namespace": "demo",
+      "resourceVersion": "3449",
+      "uid": "02e4e334-bc94-4aea-b3c9-bc6a7ba043e6"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:25Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "stores-bd94c4556-flbm5",
+      "namespace": "demo",
+      "resourceVersion": "1707",
+      "uid": "6cc42e14-8292-45c3-b3c6-b7498bd85e23"
+    },
+    "lastTimestamp": "2026-07-24T04:43:25Z",
+    "message": "Successfully assigned demo/stores-bd94c4556-flbm5 to kubeybilly-control-plane",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:25Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-scheduler",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:25Z"
+        }
+      ],
+      "name": "stores-bd94c4556-flbm5.18c5202d1f2baa8f",
+      "namespace": "demo",
+      "resourceVersion": "1712",
+      "uid": "5fc636f9-babf-4699-ae16-e2157d7d47f0"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:26Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{stores}",
+      "kind": "Pod",
+      "name": "stores-bd94c4556-flbm5",
+      "namespace": "demo",
+      "resourceVersion": "1709",
+      "uid": "6cc42e14-8292-45c3-b3c6-b7498bd85e23"
+    },
+    "lastTimestamp": "2026-07-24T04:43:26Z",
+    "message": "Pulling image \"docker.io/library/postgres:17\"",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:26Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:26Z"
+        }
+      ],
+      "name": "stores-bd94c4556-flbm5.18c5202d44ab140e",
+      "namespace": "demo",
+      "resourceVersion": "1720",
+      "uid": "2ce72019-65d0-4abb-a282-07cf3c0581d4"
+    },
+    "reason": "Pulling",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:38Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{stores}",
+      "kind": "Pod",
+      "name": "stores-bd94c4556-flbm5",
+      "namespace": "demo",
+      "resourceVersion": "1709",
+      "uid": "6cc42e14-8292-45c3-b3c6-b7498bd85e23"
+    },
+    "lastTimestamp": "2026-07-24T04:43:38Z",
+    "message": "Successfully pulled image \"docker.io/library/postgres:17\" in 12.33s (12.33s including waiting). Image size: 161234888 bytes.",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:38Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:38Z"
+        }
+      ],
+      "name": "stores-bd94c4556-flbm5.18c5203023a59a1b",
+      "namespace": "demo",
+      "resourceVersion": "1739",
+      "uid": "11545de7-dc91-4011-9167-dbf65fef93a0"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:38Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{stores}",
+      "kind": "Pod",
+      "name": "stores-bd94c4556-flbm5",
+      "namespace": "demo",
+      "resourceVersion": "1709",
+      "uid": "6cc42e14-8292-45c3-b3c6-b7498bd85e23"
+    },
+    "lastTimestamp": "2026-07-24T04:43:38Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:38Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:38Z"
+        }
+      ],
+      "name": "stores-bd94c4556-flbm5.18c52030271a60eb",
+      "namespace": "demo",
+      "resourceVersion": "1740",
+      "uid": "4987602d-4f8f-4c65-8f8d-6ab3f74f8b3c"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:38Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{stores}",
+      "kind": "Pod",
+      "name": "stores-bd94c4556-flbm5",
+      "namespace": "demo",
+      "resourceVersion": "1709",
+      "uid": "6cc42e14-8292-45c3-b3c6-b7498bd85e23"
+    },
+    "lastTimestamp": "2026-07-24T04:43:38Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:38Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:38Z"
+        }
+      ],
+      "name": "stores-bd94c4556-flbm5.18c520302df7afad",
+      "namespace": "demo",
+      "resourceVersion": "1741",
+      "uid": "5354998f-90f4-437e-8946-0598072c24bc"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 2,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:38Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{stores}",
+      "kind": "Pod",
+      "name": "stores-bd94c4556-flbm5",
+      "namespace": "demo",
+      "resourceVersion": "1709",
+      "uid": "6cc42e14-8292-45c3-b3c6-b7498bd85e23"
+    },
+    "lastTimestamp": "2026-07-24T04:43:39Z",
+    "message": "Readiness probe failed: /var/run/postgresql:5432 - no response\n",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:38Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:reportingInstance": {},
+            "f:source": {
+              "f:component": {},
+              "f:host": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kubelet",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:39Z"
+        }
+      ],
+      "name": "stores-bd94c4556-flbm5.18c5203031f3bc4e",
+      "namespace": "demo",
+      "resourceVersion": "1746",
+      "uid": "36207784-95ab-4c42-a28a-96bc0aaff896"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "kubeybilly-control-plane",
+    "source": {
+      "component": "kubelet",
+      "host": "kubeybilly-control-plane"
+    },
+    "type": "Warning"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:25Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "stores-bd94c4556",
+      "namespace": "demo",
+      "resourceVersion": "1704",
+      "uid": "d4c0886d-5f66-48fc-baf0-4c011e2b6b85"
+    },
+    "lastTimestamp": "2026-07-24T04:43:25Z",
+    "message": "Created pod: stores-bd94c4556-flbm5",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:25Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:25Z"
+        }
+      ],
+      "name": "stores-bd94c4556.18c5202d1e231846",
+      "namespace": "demo",
+      "resourceVersion": "1708",
+      "uid": "7106c9db-e2aa-4aba-a158-e45ca1dca64e"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-07-24T04:43:25Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "stores",
+      "namespace": "demo",
+      "resourceVersion": "1703",
+      "uid": "e96eeca6-4a2d-460f-95a9-5100ce85ecaa"
+    },
+    "lastTimestamp": "2026-07-24T04:43:25Z",
+    "message": "Scaled up replica set stores-bd94c4556 from 0 to 1",
+    "metadata": {
+      "creationTimestamp": "2026-07-24T04:43:25Z",
+      "managedFields": [
+        {
+          "apiVersion": "v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:count": {},
+            "f:firstTimestamp": {},
+            "f:involvedObject": {},
+            "f:lastTimestamp": {},
+            "f:message": {},
+            "f:reason": {},
+            "f:reportingComponent": {},
+            "f:source": {
+              "f:component": {}
+            },
+            "f:type": {}
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:43:25Z"
+        }
+      ],
+      "name": "stores.18c5202d1d43ed88",
+      "namespace": "demo",
+      "resourceVersion": "1706",
+      "uid": "f23e91e0-f489-4abd-a4d3-799b378da0b8"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  }
+]

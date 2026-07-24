@@ -1,0 +1,1013 @@
+[
+  {
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "3",
+        "deployment.kubernetes.io/max-replicas": "4",
+        "deployment.kubernetes.io/revision": "1"
+      },
+      "creationTimestamp": "2026-07-24T04:43:40Z",
+      "generation": 4,
+      "labels": {
+        "app": "galley",
+        "pod-template-hash": "765bcdc4b5"
+      },
+      "managedFields": [
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:metadata": {
+              "f:annotations": {
+                ".": {},
+                "f:deployment.kubernetes.io/desired-replicas": {},
+                "f:deployment.kubernetes.io/max-replicas": {},
+                "f:deployment.kubernetes.io/revision": {}
+              },
+              "f:labels": {
+                ".": {},
+                "f:app": {},
+                "f:pod-template-hash": {}
+              },
+              "f:ownerReferences": {
+                ".": {},
+                "k:{\"uid\":\"2afe4fce-0024-421f-8bd3-8a8afc01953b\"}": {}
+              }
+            },
+            "f:spec": {
+              "f:replicas": {},
+              "f:selector": {},
+              "f:template": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app": {},
+                    "f:pod-template-hash": {}
+                  }
+                },
+                "f:spec": {
+                  "f:containers": {
+                    "k:{\"name\":\"galley\"}": {
+                      ".": {},
+                      "f:env": {
+                        ".": {},
+                        "k:{\"name\":\"STORES_DB\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_HOST\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PASSWORD\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PORT\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_USER\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        }
+                      },
+                      "f:image": {},
+                      "f:imagePullPolicy": {},
+                      "f:name": {},
+                      "f:ports": {
+                        ".": {},
+                        "k:{\"containerPort\":4000,\"protocol\":\"TCP\"}": {
+                          ".": {},
+                          "f:containerPort": {},
+                          "f:name": {},
+                          "f:protocol": {}
+                        }
+                      },
+                      "f:readinessProbe": {
+                        ".": {},
+                        "f:failureThreshold": {},
+                        "f:httpGet": {
+                          ".": {},
+                          "f:path": {},
+                          "f:port": {},
+                          "f:scheme": {}
+                        },
+                        "f:periodSeconds": {},
+                        "f:successThreshold": {},
+                        "f:timeoutSeconds": {}
+                      },
+                      "f:resources": {
+                        ".": {},
+                        "f:limits": {
+                          ".": {},
+                          "f:memory": {}
+                        },
+                        "f:requests": {
+                          ".": {},
+                          "f:memory": {}
+                        }
+                      },
+                      "f:terminationMessagePath": {},
+                      "f:terminationMessagePolicy": {}
+                    }
+                  },
+                  "f:dnsPolicy": {},
+                  "f:restartPolicy": {},
+                  "f:schedulerName": {},
+                  "f:securityContext": {},
+                  "f:terminationGracePeriodSeconds": {}
+                }
+              }
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:09Z"
+        },
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:status": {
+              "f:observedGeneration": {},
+              "f:replicas": {},
+              "f:terminatingReplicas": {}
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "subresource": "status",
+          "time": "2026-07-24T04:56:10Z"
+        }
+      ],
+      "name": "galley-765bcdc4b5",
+      "namespace": "demo",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "Deployment",
+          "name": "galley",
+          "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+        }
+      ],
+      "resourceVersion": "3382",
+      "uid": "1b9b3d5d-4c2b-4420-8ed7-ccb061962991"
+    },
+    "spec": {
+      "replicas": 0,
+      "selector": {
+        "matchLabels": {
+          "app": "galley",
+          "pod-template-hash": "765bcdc4b5"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "galley",
+            "pod-template-hash": "765bcdc4b5"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "env": [
+                {
+                  "name": "STORES_HOST",
+                  "value": "stores"
+                },
+                {
+                  "name": "STORES_PORT",
+                  "value": "5432"
+                },
+                {
+                  "name": "STORES_USER",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_PASSWORD",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_DB",
+                  "value": "galley"
+                }
+              ],
+              "image": "localhost/galley:dev",
+              "imagePullPolicy": "Never",
+              "name": "galley",
+              "ports": [
+                {
+                  "containerPort": 4000,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": {
+                "failureThreshold": 2,
+                "httpGet": {
+                  "path": "/healthz",
+                  "port": "http",
+                  "scheme": "HTTP"
+                },
+                "periodSeconds": 2,
+                "successThreshold": 1,
+                "timeoutSeconds": 1
+              },
+              "resources": {
+                "limits": {
+                  "memory": "128Mi"
+                },
+                "requests": {
+                  "memory": "64Mi"
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File"
+            }
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "restartPolicy": "Always",
+          "schedulerName": "default-scheduler",
+          "securityContext": {},
+          "terminationGracePeriodSeconds": 30
+        }
+      }
+    },
+    "status": {
+      "observedGeneration": 4,
+      "replicas": 0,
+      "terminatingReplicas": 0
+    }
+  },
+  {
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "3",
+        "deployment.kubernetes.io/max-replicas": "4",
+        "deployment.kubernetes.io/revision": "4",
+        "deployment.kubernetes.io/revision-history": "2"
+      },
+      "creationTimestamp": "2026-07-24T04:45:13Z",
+      "generation": 2,
+      "labels": {
+        "app": "galley",
+        "pod-template-hash": "84db7b7754"
+      },
+      "managedFields": [
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:metadata": {
+              "f:annotations": {
+                ".": {},
+                "f:deployment.kubernetes.io/desired-replicas": {},
+                "f:deployment.kubernetes.io/max-replicas": {},
+                "f:deployment.kubernetes.io/revision": {},
+                "f:deployment.kubernetes.io/revision-history": {}
+              },
+              "f:labels": {
+                ".": {},
+                "f:app": {},
+                "f:pod-template-hash": {}
+              },
+              "f:ownerReferences": {
+                ".": {},
+                "k:{\"uid\":\"2afe4fce-0024-421f-8bd3-8a8afc01953b\"}": {}
+              }
+            },
+            "f:spec": {
+              "f:replicas": {},
+              "f:selector": {},
+              "f:template": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app": {},
+                    "f:pod-template-hash": {}
+                  }
+                },
+                "f:spec": {
+                  "f:containers": {
+                    "k:{\"name\":\"galley\"}": {
+                      ".": {},
+                      "f:env": {
+                        ".": {},
+                        "k:{\"name\":\"STORES_DB\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_HOST\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PASSWORD\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PORT\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_USER\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        }
+                      },
+                      "f:image": {},
+                      "f:imagePullPolicy": {},
+                      "f:name": {},
+                      "f:ports": {
+                        ".": {},
+                        "k:{\"containerPort\":4000,\"protocol\":\"TCP\"}": {
+                          ".": {},
+                          "f:containerPort": {},
+                          "f:name": {},
+                          "f:protocol": {}
+                        }
+                      },
+                      "f:readinessProbe": {
+                        ".": {},
+                        "f:failureThreshold": {},
+                        "f:httpGet": {
+                          ".": {},
+                          "f:path": {},
+                          "f:port": {},
+                          "f:scheme": {}
+                        },
+                        "f:periodSeconds": {},
+                        "f:successThreshold": {},
+                        "f:timeoutSeconds": {}
+                      },
+                      "f:resources": {
+                        ".": {},
+                        "f:limits": {
+                          ".": {},
+                          "f:memory": {}
+                        },
+                        "f:requests": {
+                          ".": {},
+                          "f:memory": {}
+                        }
+                      },
+                      "f:terminationMessagePath": {},
+                      "f:terminationMessagePolicy": {}
+                    }
+                  },
+                  "f:dnsPolicy": {},
+                  "f:restartPolicy": {},
+                  "f:schedulerName": {},
+                  "f:securityContext": {},
+                  "f:terminationGracePeriodSeconds": {}
+                }
+              }
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:12Z"
+        },
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:status": {
+              "f:observedGeneration": {},
+              "f:replicas": {},
+              "f:terminatingReplicas": {}
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "subresource": "status",
+          "time": "2026-07-24T04:56:13Z"
+        }
+      ],
+      "name": "galley-84db7b7754",
+      "namespace": "demo",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "Deployment",
+          "name": "galley",
+          "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+        }
+      ],
+      "resourceVersion": "3427",
+      "uid": "8aa140d6-7c01-489d-b9fb-7c800b828441"
+    },
+    "spec": {
+      "replicas": 0,
+      "selector": {
+        "matchLabels": {
+          "app": "galley",
+          "pod-template-hash": "84db7b7754"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "galley",
+            "pod-template-hash": "84db7b7754"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "env": [
+                {
+                  "name": "STORES_HOST",
+                  "value": "stores"
+                },
+                {
+                  "name": "STORES_PORT",
+                  "value": "5432"
+                },
+                {
+                  "name": "STORES_USER",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_PASSWORD",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_DB",
+                  "value": "galley"
+                }
+              ],
+              "image": "localhost/galley:dev",
+              "imagePullPolicy": "Never",
+              "name": "galley",
+              "ports": [
+                {
+                  "containerPort": 4000,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": {
+                "failureThreshold": 2,
+                "httpGet": {
+                  "path": "/healthz",
+                  "port": "http",
+                  "scheme": "HTTP"
+                },
+                "periodSeconds": 2,
+                "successThreshold": 1,
+                "timeoutSeconds": 1
+              },
+              "resources": {
+                "limits": {
+                  "memory": "256Mi"
+                },
+                "requests": {
+                  "memory": "128Mi"
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File"
+            }
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "restartPolicy": "Always",
+          "schedulerName": "default-scheduler",
+          "securityContext": {},
+          "terminationGracePeriodSeconds": 30
+        }
+      }
+    },
+    "status": {
+      "observedGeneration": 2,
+      "replicas": 0,
+      "terminatingReplicas": 0
+    }
+  },
+  {
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "3",
+        "deployment.kubernetes.io/max-replicas": "4",
+        "deployment.kubernetes.io/revision": "3"
+      },
+      "creationTimestamp": "2026-07-24T04:47:57Z",
+      "generation": 3,
+      "labels": {
+        "app": "galley",
+        "pod-template-hash": "85c59d6b58"
+      },
+      "managedFields": [
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:metadata": {
+              "f:annotations": {
+                ".": {},
+                "f:deployment.kubernetes.io/desired-replicas": {},
+                "f:deployment.kubernetes.io/max-replicas": {},
+                "f:deployment.kubernetes.io/revision": {}
+              },
+              "f:labels": {
+                ".": {},
+                "f:app": {},
+                "f:pod-template-hash": {}
+              },
+              "f:ownerReferences": {
+                ".": {},
+                "k:{\"uid\":\"2afe4fce-0024-421f-8bd3-8a8afc01953b\"}": {}
+              }
+            },
+            "f:spec": {
+              "f:replicas": {},
+              "f:selector": {},
+              "f:template": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app": {},
+                    "f:pod-template-hash": {}
+                  }
+                },
+                "f:spec": {
+                  "f:containers": {
+                    "k:{\"name\":\"galley\"}": {
+                      ".": {},
+                      "f:env": {
+                        ".": {},
+                        "k:{\"name\":\"STORES_DB\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_HOST\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PASSWORD\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PORT\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_USER\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        }
+                      },
+                      "f:image": {},
+                      "f:imagePullPolicy": {},
+                      "f:name": {},
+                      "f:ports": {
+                        ".": {},
+                        "k:{\"containerPort\":4000,\"protocol\":\"TCP\"}": {
+                          ".": {},
+                          "f:containerPort": {},
+                          "f:name": {},
+                          "f:protocol": {}
+                        }
+                      },
+                      "f:readinessProbe": {
+                        ".": {},
+                        "f:failureThreshold": {},
+                        "f:httpGet": {
+                          ".": {},
+                          "f:path": {},
+                          "f:port": {},
+                          "f:scheme": {}
+                        },
+                        "f:periodSeconds": {},
+                        "f:successThreshold": {},
+                        "f:timeoutSeconds": {}
+                      },
+                      "f:resources": {
+                        ".": {},
+                        "f:limits": {
+                          ".": {},
+                          "f:memory": {}
+                        },
+                        "f:requests": {
+                          ".": {},
+                          "f:memory": {}
+                        }
+                      },
+                      "f:terminationMessagePath": {},
+                      "f:terminationMessagePolicy": {}
+                    }
+                  },
+                  "f:dnsPolicy": {},
+                  "f:restartPolicy": {},
+                  "f:schedulerName": {},
+                  "f:securityContext": {},
+                  "f:terminationGracePeriodSeconds": {}
+                }
+              }
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:16Z"
+        },
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:status": {
+              "f:observedGeneration": {},
+              "f:replicas": {},
+              "f:terminatingReplicas": {}
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "subresource": "status",
+          "time": "2026-07-24T04:56:16Z"
+        }
+      ],
+      "name": "galley-85c59d6b58",
+      "namespace": "demo",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "Deployment",
+          "name": "galley",
+          "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+        }
+      ],
+      "resourceVersion": "3460",
+      "uid": "23217c6f-0647-429c-b4da-64e0ffd976bf"
+    },
+    "spec": {
+      "replicas": 0,
+      "selector": {
+        "matchLabels": {
+          "app": "galley",
+          "pod-template-hash": "85c59d6b58"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "galley",
+            "pod-template-hash": "85c59d6b58"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "env": [
+                {
+                  "name": "STORES_HOST",
+                  "value": "stores"
+                },
+                {
+                  "name": "STORES_PORT",
+                  "value": "5432"
+                },
+                {
+                  "name": "STORES_USER",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_PASSWORD",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_DB",
+                  "value": "galley"
+                }
+              ],
+              "image": "localhost/galley:dev",
+              "imagePullPolicy": "Never",
+              "name": "galley",
+              "ports": [
+                {
+                  "containerPort": 4000,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": {
+                "failureThreshold": 2,
+                "httpGet": {
+                  "path": "/healthz",
+                  "port": "http",
+                  "scheme": "HTTP"
+                },
+                "periodSeconds": 2,
+                "successThreshold": 1,
+                "timeoutSeconds": 1
+              },
+              "resources": {
+                "limits": {
+                  "memory": "512Mi"
+                },
+                "requests": {
+                  "memory": "128Mi"
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File"
+            }
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "restartPolicy": "Always",
+          "schedulerName": "default-scheduler",
+          "securityContext": {},
+          "terminationGracePeriodSeconds": 30
+        }
+      }
+    },
+    "status": {
+      "observedGeneration": 3,
+      "replicas": 0,
+      "terminatingReplicas": 0
+    }
+  },
+  {
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "3",
+        "deployment.kubernetes.io/max-replicas": "4",
+        "deployment.kubernetes.io/revision": "5"
+      },
+      "creationTimestamp": "2026-07-24T04:56:08Z",
+      "generation": 4,
+      "labels": {
+        "app": "galley",
+        "pod-template-hash": "d7c6bc75c"
+      },
+      "managedFields": [
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:metadata": {
+              "f:annotations": {
+                ".": {},
+                "f:deployment.kubernetes.io/desired-replicas": {},
+                "f:deployment.kubernetes.io/max-replicas": {},
+                "f:deployment.kubernetes.io/revision": {}
+              },
+              "f:labels": {
+                ".": {},
+                "f:app": {},
+                "f:pod-template-hash": {}
+              },
+              "f:ownerReferences": {
+                ".": {},
+                "k:{\"uid\":\"2afe4fce-0024-421f-8bd3-8a8afc01953b\"}": {}
+              }
+            },
+            "f:spec": {
+              "f:replicas": {},
+              "f:selector": {},
+              "f:template": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/restartedAt": {}
+                  },
+                  "f:labels": {
+                    ".": {},
+                    "f:app": {},
+                    "f:pod-template-hash": {}
+                  }
+                },
+                "f:spec": {
+                  "f:containers": {
+                    "k:{\"name\":\"galley\"}": {
+                      ".": {},
+                      "f:env": {
+                        ".": {},
+                        "k:{\"name\":\"STORES_DB\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_HOST\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PASSWORD\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_PORT\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        },
+                        "k:{\"name\":\"STORES_USER\"}": {
+                          ".": {},
+                          "f:name": {},
+                          "f:value": {}
+                        }
+                      },
+                      "f:image": {},
+                      "f:imagePullPolicy": {},
+                      "f:name": {},
+                      "f:ports": {
+                        ".": {},
+                        "k:{\"containerPort\":4000,\"protocol\":\"TCP\"}": {
+                          ".": {},
+                          "f:containerPort": {},
+                          "f:name": {},
+                          "f:protocol": {}
+                        }
+                      },
+                      "f:readinessProbe": {
+                        ".": {},
+                        "f:failureThreshold": {},
+                        "f:httpGet": {
+                          ".": {},
+                          "f:path": {},
+                          "f:port": {},
+                          "f:scheme": {}
+                        },
+                        "f:periodSeconds": {},
+                        "f:successThreshold": {},
+                        "f:timeoutSeconds": {}
+                      },
+                      "f:resources": {
+                        ".": {},
+                        "f:limits": {
+                          ".": {},
+                          "f:memory": {}
+                        },
+                        "f:requests": {
+                          ".": {},
+                          "f:memory": {}
+                        }
+                      },
+                      "f:terminationMessagePath": {},
+                      "f:terminationMessagePolicy": {}
+                    }
+                  },
+                  "f:dnsPolicy": {},
+                  "f:restartPolicy": {},
+                  "f:schedulerName": {},
+                  "f:securityContext": {},
+                  "f:terminationGracePeriodSeconds": {}
+                }
+              }
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-07-24T04:56:13Z"
+        },
+        {
+          "apiVersion": "apps/v1",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:status": {
+              "f:availableReplicas": {},
+              "f:fullyLabeledReplicas": {},
+              "f:observedGeneration": {},
+              "f:readyReplicas": {},
+              "f:replicas": {},
+              "f:terminatingReplicas": {}
+            }
+          },
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "subresource": "status",
+          "time": "2026-07-24T05:02:03Z"
+        }
+      ],
+      "name": "galley-d7c6bc75c",
+      "namespace": "demo",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "Deployment",
+          "name": "galley",
+          "uid": "2afe4fce-0024-421f-8bd3-8a8afc01953b"
+        }
+      ],
+      "resourceVersion": "4013",
+      "uid": "59db6cdc-39c0-4678-8e65-40b5697d256b"
+    },
+    "spec": {
+      "replicas": 3,
+      "selector": {
+        "matchLabels": {
+          "app": "galley",
+          "pod-template-hash": "d7c6bc75c"
+        }
+      },
+      "template": {
+        "metadata": {
+          "annotations": {
+            "kubectl.kubernetes.io/restartedAt": "2026-07-24T12:56:08+08:00"
+          },
+          "labels": {
+            "app": "galley",
+            "pod-template-hash": "d7c6bc75c"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "env": [
+                {
+                  "name": "STORES_HOST",
+                  "value": "stores"
+                },
+                {
+                  "name": "STORES_PORT",
+                  "value": "5432"
+                },
+                {
+                  "name": "STORES_USER",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_PASSWORD",
+                  "value": "galley"
+                },
+                {
+                  "name": "STORES_DB",
+                  "value": "galley"
+                }
+              ],
+              "image": "localhost/galley:dev",
+              "imagePullPolicy": "Never",
+              "name": "galley",
+              "ports": [
+                {
+                  "containerPort": 4000,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": {
+                "failureThreshold": 2,
+                "httpGet": {
+                  "path": "/healthz",
+                  "port": "http",
+                  "scheme": "HTTP"
+                },
+                "periodSeconds": 2,
+                "successThreshold": 1,
+                "timeoutSeconds": 1
+              },
+              "resources": {
+                "limits": {
+                  "memory": "256Mi"
+                },
+                "requests": {
+                  "memory": "128Mi"
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File"
+            }
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "restartPolicy": "Always",
+          "schedulerName": "default-scheduler",
+          "securityContext": {},
+          "terminationGracePeriodSeconds": 30
+        }
+      }
+    },
+    "status": {
+      "availableReplicas": 3,
+      "fullyLabeledReplicas": 3,
+      "observedGeneration": 4,
+      "readyReplicas": 3,
+      "replicas": 3,
+      "terminatingReplicas": 0
+    }
+  }
+]

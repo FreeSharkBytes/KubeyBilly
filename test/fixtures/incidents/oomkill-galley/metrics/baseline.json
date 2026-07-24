@@ -1,0 +1,47 @@
+{
+  "available_replicas": 3,
+  "desired_replicas": 3,
+  "pods": {
+    "galley-d7c6bc75c-drbdd": {
+      "node": "kubeybilly-control-plane",
+      "phase": "Running",
+      "ready": true,
+      "restart_counts": {
+        "galley": 0
+      }
+    },
+    "galley-d7c6bc75c-fs89f": {
+      "node": "kubeybilly-control-plane",
+      "phase": "Running",
+      "ready": true,
+      "restart_counts": {
+        "galley": 2
+      }
+    },
+    "galley-d7c6bc75c-jz99q": {
+      "node": "kubeybilly-control-plane",
+      "phase": "Running",
+      "ready": true,
+      "restart_counts": {
+        "galley": 0
+      }
+    }
+  },
+  "ready_pods": [
+    "galley-d7c6bc75c-drbdd",
+    "galley-d7c6bc75c-fs89f",
+    "galley-d7c6bc75c-jz99q"
+  ],
+  "ready_replicas": 3,
+  "revision": "5",
+  "services": {
+    "galley": {
+      "ready_endpoints": 3
+    }
+  },
+  "workload": {
+    "kind": "Deployment",
+    "name": "galley",
+    "namespace": "demo"
+  }
+}
