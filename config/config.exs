@@ -17,6 +17,18 @@ config :kubeybilly, :k8s_client, Kubeybilly.K8sClient.Real
 # Root directory for incident evidence bundles.
 config :kubeybilly, :incidents_dir, "incidents"
 
+# The LLM advisor boundary (plan/14): the stub is the default in every
+# environment, so nothing depends on a network round trip unless a real
+# adapter is enabled explicitly (see config/runtime.exs). The endpoint
+# defaults target Scaleway Generative APIs; the model is picked from the
+# live catalog at deploy time. The key is named by env var, never stored.
+config :kubeybilly, :advisor,
+  adapter: Kubeybilly.Advisor.Stub,
+  base_url: "https://api.scaleway.ai/v1",
+  model: "PICK_AT_DEPLOY",
+  api_key_env: "ADVISOR_API_KEY",
+  timeout_ms: 10_000
+
 # Configure the endpoint
 config :kubeybilly, KubeybillyWeb.Endpoint,
   url: [host: "localhost"],
