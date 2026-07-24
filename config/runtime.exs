@@ -29,6 +29,13 @@ if incidents_dir = System.get_env("INCIDENTS_DIR") do
   config :kubeybilly, :incidents_dir, incidents_dir
 end
 
+# Where the standing orders policy file is mounted (the standing-orders
+# ConfigMap key, plan/04). Unset means no orders: the correlator falls
+# back to the read-only default tier and nothing mutates.
+if standing_orders_path = System.get_env("STANDING_ORDERS_PATH") do
+  config :kubeybilly, :standing_orders_path, standing_orders_path
+end
+
 # Where the kill switch file is mounted (the killswitch ConfigMap key
 # "engaged", plan/04). Unset means no switch is mounted: disengaged.
 if killswitch_path = System.get_env("KILLSWITCH_PATH") do

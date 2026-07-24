@@ -52,6 +52,12 @@ spec:
             # Evidence bundles land on the only writable mount besides /tmp.
             - name: INCIDENTS_DIR
               value: /app/incidents
+            # Policy and kill switch paths, matching the ConfigMap mounts
+            # below; config/runtime.exs turns these into app config.
+            - name: STANDING_ORDERS_PATH
+              value: /etc/kubeybilly/standing-orders/standing-orders.yaml
+            - name: KILLSWITCH_PATH
+              value: /etc/kubeybilly/killswitch/engaged
             # The release writes its boot-time runtime config under
             # RELEASE_TMP; point it at the /tmp emptyDir because the root
             # filesystem is read-only.
@@ -84,9 +90,8 @@ spec:
               mountPath: /app/incidents
             - name: tmp
               mountPath: /tmp
-            # Policy and kill switch, mounted read-only. The env vars that
-            # point the app at these paths arrive with the watcher wiring in
-            # a later build step; the mounts are laid down now.
+            # Policy and kill switch, mounted read-only; the env vars above
+            # point the app at these files.
             - name: standing-orders
               mountPath: /etc/kubeybilly/standing-orders
               readOnly: true
