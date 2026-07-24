@@ -336,6 +336,34 @@ defmodule Kubeybilly.Soundings.CollectorTest do
     end
   end
 
+  test "a crashed pod capture task gaps all four pod artifacts" do
+    root = tmp_root()
+    stub_happy_cluster()
+
+    stub(Client, :pod_logs, fn "demo", _pod, nil, _opts ->
+      raise "kubelet exploded"
+    end)
+
+    {result, _log} =
+      ExUnit.CaptureLog.with_log(fn -> Collector.collect(target(["web-abc"]), root: root) end)
+
+    assert {:ok, manifest} = result
+
+    assert manifest["complete"] == false
+    gap_paths = Enum.map(manifest["gaps"], & &1["path"])
+
+    for path <- [
+          Bundle.pod_logs_previous_path("demo", "web-abc"),
+          Bundle.pod_logs_current_path("demo", "web-abc"),
+          Bundle.pod_status_path("demo", "web-abc"),
+          Bundle.pod_spec_path("demo", "web-abc")
+        ] do
+      assert path in gap_paths
+    end
+
+    assert Enum.all?(manifest["gaps"], &(&1["reason"] =~ "task_exit"))
+  end
+
   test "collect/2 rejects a malformed target" do
     assert {:error, :invalid_target} = Collector.collect(%{namespace: "demo"})
   end

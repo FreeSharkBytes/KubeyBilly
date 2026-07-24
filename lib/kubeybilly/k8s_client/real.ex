@@ -33,20 +33,12 @@ defmodule Kubeybilly.K8sClient.Real do
 
   @impl true
   def list(kind, namespace, label_selector) do
-    case kind |> build_list(namespace, label_selector) |> run() do
-      {:ok, %{"items" => items}} -> {:ok, items}
-      {:ok, other} -> {:ok, List.wrap(other)}
-      {:error, reason} -> {:error, reason}
-    end
+    kind |> build_list(namespace, label_selector) |> run() |> unwrap_list()
   end
 
   @impl true
   def pod_logs(namespace, pod, container, opts) do
-    case namespace |> build_pod_logs(pod, container, opts) |> run() do
-      {:ok, logs} when is_binary(logs) -> {:ok, logs}
-      {:ok, other} -> {:ok, to_string(other)}
-      {:error, reason} -> {:error, reason}
-    end
+    namespace |> build_pod_logs(pod, container, opts) |> run() |> unwrap_logs()
   end
 
   @impl true
@@ -145,9 +137,12 @@ defmodule Kubeybilly.K8sClient.Real do
   The only function in this module that performs IO. Errors from the k8s
   library are normalized through `map_error/1`.
   """
+  @spec run(K8s.Operation.t()) :: {:ok, term()} | {:error, Kubeybilly.K8sClient.error()}
+  def run(operation), do: run(operation, conn_server())
+
   @spec run(K8s.Operation.t(), GenServer.server()) ::
           {:ok, term()} | {:error, Kubeybilly.K8sClient.error()}
-  def run(operation, conn_server \\ Conn) do
+  def run(operation, conn_server) do
     with {:ok, conn} <- Conn.get(conn_server) do
       case K8s.Client.run(conn, operation) do
         {:ok, result} -> {:ok, result}
@@ -168,7 +163,25 @@ defmodule Kubeybilly.K8sClient.Real do
 
   def map_error(reason), do: {:transport, reason}
 
+  @doc "Unwrap a list result: the API returns a wrapper object, callers want the items."
+  @spec unwrap_list({:ok, term()} | {:error, term()}) :: {:ok, [map()]} | {:error, term()}
+  def unwrap_list({:ok, %{"items" => items}}), do: {:ok, items}
+  def unwrap_list({:ok, other}), do: {:ok, List.wrap(other)}
+  def unwrap_list({:error, reason}), do: {:error, reason}
+
+  @doc "Unwrap a log result to a binary regardless of how the transport decoded it."
+  @spec unwrap_logs({:ok, term()} | {:error, term()}) :: {:ok, binary()} | {:error, term()}
+  def unwrap_logs({:ok, logs}) when is_binary(logs), do: {:ok, logs}
+  def unwrap_logs({:ok, other}), do: {:ok, to_string(other)}
+  def unwrap_logs({:error, reason}), do: {:error, reason}
+
   ## Helpers
+
+  # Resolved through config so tests point the real client at a connection
+  # holder they control instead of the application's.
+  defp conn_server do
+    Application.get_env(:kubeybilly, :k8s_conn_server, Conn)
+  end
 
   defp api_version(kind), do: Map.get(@api_versions, kind, "v1")
 

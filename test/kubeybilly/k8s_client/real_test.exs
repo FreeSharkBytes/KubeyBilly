@@ -106,6 +106,26 @@ defmodule Kubeybilly.K8sClient.RealTest do
     end
   end
 
+  describe "result unwrapping" do
+    test "unwrap_list extracts the items of a list response" do
+      assert Real.unwrap_list({:ok, %{"items" => [%{"kind" => "Pod"}]}}) ==
+               {:ok, [%{"kind" => "Pod"}]}
+    end
+
+    test "unwrap_list wraps a bare resource and passes errors through" do
+      assert Real.unwrap_list({:ok, %{"kind" => "Pod"}}) == {:ok, [%{"kind" => "Pod"}]}
+      assert Real.unwrap_list({:error, {:transport, :closed}}) == {:error, {:transport, :closed}}
+    end
+
+    test "unwrap_logs keeps binaries, stringifies others, passes errors through" do
+      assert Real.unwrap_logs({:ok, "log line"}) == {:ok, "log line"}
+      assert Real.unwrap_logs({:ok, 42}) == {:ok, "42"}
+
+      assert Real.unwrap_logs({:error, {:api, "NotFound", "gone"}}) ==
+               {:error, {:api, "NotFound", "gone"}}
+    end
+  end
+
   describe "run plumbing" do
     test "a missing connection surfaces as a conn error" do
       pid =

@@ -50,6 +50,20 @@ defmodule Kubeybilly.K8sClient.ConnTest do
       assert {:error, {:conn, _reason}} = Conn.get(pid)
     end
 
+    test "attempts the service account path when the token file exists" do
+      dir = Path.join(System.tmp_dir!(), "kubeybilly-conn-#{System.unique_integer([:positive])}")
+      File.mkdir_p!(dir)
+      File.write!(Path.join(dir, "token"), "sa-token")
+      on_exit(fn -> File.rm_rf!(dir) end)
+
+      pid =
+        start_supervised!({Conn, name: :conn_sa_test, service_account_dir: dir})
+
+      # Outside a cluster the in-cluster env is absent, so building the conn
+      # fails, but through the service account branch rather than kubeconfig.
+      assert {:error, {:conn, _reason}} = Conn.get(pid)
+    end
+
     test "does not cache a resolution failure" do
       dir = Path.join(System.tmp_dir!(), "kubeybilly-conn-#{System.unique_integer([:positive])}")
       File.mkdir_p!(dir)

@@ -73,6 +73,30 @@ defmodule Kubeybilly.Soundings.BundleWriterTest do
     end
   end
 
+  describe "failure branches" do
+    test "an unwritable bundle directory refuses to start", %{root: root} do
+      File.mkdir_p!(root)
+      blocking_file = Path.join(root, "not-a-dir")
+      File.write!(blocking_file, "in the way")
+
+      bundle = Bundle.new("blocked/incident", root: blocking_file)
+
+      Process.flag(:trap_exit, true)
+      assert {:error, {:mkdir, _reason}} = BundleWriter.start_link(bundle: bundle)
+    end
+
+    test "a failed artifact write is reported and recorded as a gap", %{bundle: bundle} do
+      writer = start_supervised!({BundleWriter, bundle: bundle})
+
+      # manifest.json exists as a file, so a path beneath it cannot be created.
+      bad_path = "manifest.json/child.json"
+
+      assert {:error, _reason} = BundleWriter.write_artifact(writer, bad_path, "{}")
+
+      assert [%{"path" => ^bad_path}] = read_manifest(bundle)["gaps"]
+    end
+  end
+
   describe "record_gap/3" do
     test "records the failure without crashing the writer", %{bundle: bundle} do
       writer = start_supervised!({BundleWriter, bundle: bundle})
