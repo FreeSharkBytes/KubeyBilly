@@ -14,16 +14,23 @@ defmodule KubeybillyWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # The webhook and manual trigger share one door and one token check
+  # (plan/13): bearer token, never the dashboard's basic auth.
+  pipeline :webhook_auth do
+    plug KubeybillyWeb.Plugs.WebhookAuth
+  end
+
   scope "/", KubeybillyWeb do
     pipe_through :browser
 
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", KubeybillyWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", KubeybillyWeb do
+    pipe_through [:api, :webhook_auth]
+
+    post "/v4/alerts", AlertController, :create
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:kubeybilly, :dev_routes) do

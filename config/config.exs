@@ -45,6 +45,11 @@ config :kubeybilly, :advisor_enabled, false
 # How long the correlator buffers alert groups before routing them.
 config :kubeybilly, :correlation_window_ms, 3000
 
+# Shared bearer token for the alert webhook and manual trigger (plan/13).
+# nil disables the check with a startup warning; config/runtime.exs fills
+# it from WEBHOOK_TOKEN and requires it in prod.
+config :kubeybilly, :webhook_token, nil
+
 # Configure the endpoint
 config :kubeybilly, KubeybillyWeb.Endpoint,
   url: [host: "localhost"],

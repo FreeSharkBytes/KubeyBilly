@@ -7,6 +7,9 @@ defmodule Kubeybilly.Application do
 
   @impl true
   def start(_type, _args) do
+    # An open ingest door must never be a silent surprise (plan/13).
+    KubeybillyWeb.Plugs.WebhookAuth.warn_if_disabled()
+
     children = [
       KubeybillyWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:kubeybilly, :dns_cluster_query) || :ignore},
