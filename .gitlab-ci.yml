@@ -1,0 +1,46 @@
+image: elixir:1.20-otp-29
+
+stages: [lint, test, build]
+
+variables:
+  MIX_ENV: test
+
+cache:
+  key:
+    files:
+      - mix.lock
+  paths:
+    - deps/
+    - _build/
+
+.mix_setup: &mix_setup
+  - mix local.hex --force
+  - mix local.rebar --force
+  - mix deps.get
+
+lint:
+  stage: lint
+  before_script: *mix_setup
+  script:
+    - mix format --check-formatted
+    - mix credo --strict
+
+test:
+  stage: test
+  before_script: *mix_setup
+  script:
+    - mix test --cover
+  coverage: '/\d+\.\d+%\s+\|\s+Total/'
+
+build:
+  stage: build
+  image: docker:27
+  services:
+    - docker:27-dind
+  before_script: []
+  cache: []
+  script:
+    - docker build -t kubeybilly:$CI_COMMIT_SHORT_SHA .
+  rules:
+    - exists:
+        - Dockerfile
