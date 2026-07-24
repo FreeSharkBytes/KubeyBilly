@@ -29,6 +29,12 @@ if incidents_dir = System.get_env("INCIDENTS_DIR") do
   config :kubeybilly, :incidents_dir, incidents_dir
 end
 
+# Where the kill switch file is mounted (the killswitch ConfigMap key
+# "engaged", plan/04). Unset means no switch is mounted: disengaged.
+if killswitch_path = System.get_env("KILLSWITCH_PATH") do
+  config :kubeybilly, :killswitch_path, killswitch_path
+end
+
 # The LLM advisor stays on the stub unless switched explicitly at
 # runtime (plan/14). ADVISOR_ADAPTER=openai_compat enables the real
 # provider; ADVISOR_BASE_URL and ADVISOR_MODEL retarget it without a

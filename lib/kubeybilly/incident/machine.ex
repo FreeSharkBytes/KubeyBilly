@@ -19,6 +19,7 @@ defmodule Kubeybilly.Incident.Machine do
   @behaviour :gen_statem
 
   alias Kubeybilly.Executor
+  alias Kubeybilly.Executor.KillSwitch
   alias Kubeybilly.Formulary.Inverse
   alias Kubeybilly.Formulary.Validator
   alias Kubeybilly.Incident.Intent
@@ -35,7 +36,6 @@ defmodule Kubeybilly.Incident.Machine do
 
   @transition_event [:kubeybilly, :incident, :transition]
   @task_supervisor Kubeybilly.Soundings.TaskSupervisor
-  @kill_switch_key {:kubeybilly, :kill_switch}
 
   ## Client API
 
@@ -447,7 +447,7 @@ defmodule Kubeybilly.Incident.Machine do
   # tests override via :context.
   defp evaluator_context(data) do
     defaults = %{
-      kill_switch_engaged: :persistent_term.get(@kill_switch_key, false),
+      kill_switch_engaged: KillSwitch.engaged?(),
       rollout_in_progress: false,
       expected_rollout: false,
       maintenance_window: false,

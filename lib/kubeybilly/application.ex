@@ -12,6 +12,9 @@ defmodule Kubeybilly.Application do
       {DNSCluster, query: Application.get_env(:kubeybilly, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Kubeybilly.PubSub},
       {Kubeybilly.K8sClient.Conn, []},
+      # Mirrors the kill switch file into :persistent_term before anything
+      # that could reach a write path starts.
+      {Kubeybilly.Executor.KillSwitch, []},
       {Task.Supervisor, name: Kubeybilly.Soundings.TaskSupervisor},
       Kubeybilly.Incident.Registry,
       Kubeybilly.Incident.Monitor,
