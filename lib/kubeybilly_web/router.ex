@@ -31,6 +31,7 @@ defmodule KubeybillyWeb.Router do
 
     live "/", IncidentListLive
     live "/incidents/:id", IncidentDetailLive
+    live "/approvals", ApprovalsLive
   end
 
   scope "/api", KubeybillyWeb do

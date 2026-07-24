@@ -48,6 +48,9 @@ defmodule KubeybillyWeb.Layouts do
             <.link navigate={~p"/"} class="btn btn-ghost">The Log</.link>
           </li>
           <li>
+            <.link navigate={~p"/approvals"} class="btn btn-ghost">Approvals</.link>
+          </li>
+          <li>
             <.theme_toggle />
           </li>
         </ul>
