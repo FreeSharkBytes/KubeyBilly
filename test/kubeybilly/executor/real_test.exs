@@ -222,6 +222,14 @@ defmodule Kubeybilly.Executor.RealTest do
       assert Budgets.actions_this_incident(budgets, rec.id) == 0
     end
 
+    test "an unsealed manifest refuses execution", %{root: root} do
+      rec = record(root, manifest: false)
+      File.mkdir_p!(Path.join(root, rec.id))
+      File.write!(Path.join([root, rec.id, "manifest.json"]), ~s({"complete": false}))
+
+      assert {:error, :evidence_missing} = Real.execute(restart_pod_action(), decision(), rec)
+    end
+
     test "a missing bundle manifest refuses after the budget is spent", %{
       root: root,
       budgets: budgets

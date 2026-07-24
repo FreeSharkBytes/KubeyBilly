@@ -87,7 +87,15 @@ defmodule Kubeybilly.Executor.Real do
       |> Bundle.new()
       |> Bundle.absolute(Bundle.manifest_path())
 
-    if File.exists?(manifest), do: :ok, else: {:error, :evidence_missing}
+    # Defense in depth: the machine already escalates incomplete evidence
+    # before gating, but the executor is the last gate before a mutation
+    # and plan/03 requires the manifest to exist AND be sealed complete.
+    with {:ok, raw} <- File.read(manifest),
+         {:ok, %{"complete" => true}} <- Jason.decode(raw) do
+      :ok
+    else
+      _missing_or_unsealed -> {:error, :evidence_missing}
+    end
   end
 
   # An invertible action must carry its recorded inverse, with one
