@@ -69,6 +69,7 @@ defmodule Kubeybilly.MixProject do
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:k8s, "~> 2.8"},
+      {:yaml_elixir, "~> 2.11"},
       {:mox, "~> 1.1", only: :test},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
