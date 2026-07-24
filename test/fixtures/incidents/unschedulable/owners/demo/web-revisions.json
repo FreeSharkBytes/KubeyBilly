@@ -1,0 +1,96 @@
+[
+  {
+    "apiVersion": "apps/v1",
+    "kind": "ReplicaSet",
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "2",
+        "deployment.kubernetes.io/revision": "1"
+      },
+      "creationTimestamp": "2026-07-24T05:00:00Z",
+      "labels": {
+        "app": "web",
+        "pod-template-hash": "1a2b3c4d5"
+      },
+      "name": "web-1a2b3c4d5",
+      "namespace": "demo"
+    },
+    "spec": {
+      "replicas": 0,
+      "selector": {
+        "matchLabels": {
+          "app": "web",
+          "pod-template-hash": "1a2b3c4d5"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "web",
+            "pod-template-hash": "1a2b3c4d5"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "image": "registry.example.com/web:2.0.0",
+              "name": "web"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "observedGeneration": 2,
+      "replicas": 0
+    }
+  },
+  {
+    "apiVersion": "apps/v1",
+    "kind": "ReplicaSet",
+    "metadata": {
+      "annotations": {
+        "deployment.kubernetes.io/desired-replicas": "2",
+        "deployment.kubernetes.io/revision": "2"
+      },
+      "creationTimestamp": "2026-07-24T06:00:00Z",
+      "labels": {
+        "app": "web",
+        "pod-template-hash": "9f8d7c6b5"
+      },
+      "name": "web-9f8d7c6b5",
+      "namespace": "demo"
+    },
+    "spec": {
+      "replicas": 2,
+      "selector": {
+        "matchLabels": {
+          "app": "web",
+          "pod-template-hash": "9f8d7c6b5"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "web",
+            "pod-template-hash": "9f8d7c6b5"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "image": "registry.example.com/web:2.0.0",
+              "name": "web"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "availableReplicas": 1,
+      "observedGeneration": 2,
+      "readyReplicas": 1,
+      "replicas": 2
+    }
+  }
+]

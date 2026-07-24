@@ -1,0 +1,38 @@
+{
+  "conditions": [
+    {
+      "status": "True",
+      "type": "PodScheduled"
+    },
+    {
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "Ready"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "ContainersReady"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "image": "registry.example.com/web:2.1.0",
+      "lastState": {},
+      "name": "web",
+      "ready": false,
+      "restartCount": 0,
+      "state": {
+        "running": {
+          "startedAt": "2026-07-24T09:50:12Z"
+        }
+      }
+    }
+  ],
+  "phase": "Running",
+  "startTime": "2026-07-24T09:50:10Z"
+}

@@ -1,0 +1,39 @@
+{
+  "conditions": [
+    {
+      "status": "True",
+      "type": "PodScheduled"
+    },
+    {
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "Ready"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "ContainersReady"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "image": "registry.example.com/web:2.0.1",
+      "lastState": {},
+      "name": "web",
+      "ready": false,
+      "restartCount": 0,
+      "state": {
+        "waiting": {
+          "message": "Back-off pulling image \"registry.example.com/web:2.0.1\"",
+          "reason": "ImagePullBackOff"
+        }
+      }
+    }
+  ],
+  "phase": "Running",
+  "startTime": "2026-07-24T09:55:03Z"
+}

@@ -1,0 +1,46 @@
+{
+  "conditions": [
+    {
+      "status": "True",
+      "type": "PodScheduled"
+    },
+    {
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "Ready"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "ContainersReady"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "image": "registry.example.com/web:2.0.1",
+      "lastState": {
+        "terminated": {
+          "exitCode": 137,
+          "finishedAt": "2026-07-24T09:58:00Z",
+          "reason": "OOMKilled",
+          "startedAt": "2026-07-24T09:56:00Z"
+        }
+      },
+      "name": "web",
+      "ready": false,
+      "restartCount": 3,
+      "state": {
+        "waiting": {
+          "message": "back-off 2m40s restarting failed container web",
+          "reason": "CrashLoopBackOff"
+        }
+      }
+    }
+  ],
+  "phase": "Running",
+  "startTime": "2026-07-24T09:55:03Z"
+}

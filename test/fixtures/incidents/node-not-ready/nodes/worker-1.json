@@ -1,0 +1,30 @@
+{
+  "apiVersion": "v1",
+  "kind": "Node",
+  "metadata": {
+    "name": "worker-1"
+  },
+  "spec": {},
+  "status": {
+    "conditions": [
+      {
+        "status": "False",
+        "type": "MemoryPressure"
+      },
+      {
+        "status": "False",
+        "type": "DiskPressure"
+      },
+      {
+        "status": "False",
+        "type": "PIDPressure"
+      },
+      {
+        "message": "container runtime is down",
+        "reason": "KubeletNotReady",
+        "status": "False",
+        "type": "Ready"
+      }
+    ]
+  }
+}
