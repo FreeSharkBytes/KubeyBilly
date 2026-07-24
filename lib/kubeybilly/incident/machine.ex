@@ -18,6 +18,8 @@ defmodule Kubeybilly.Incident.Machine do
 
   @behaviour :gen_statem
 
+  require Logger
+
   alias Kubeybilly.Executor
   alias Kubeybilly.Executor.Budgets
   alias Kubeybilly.Executor.KillSwitch
@@ -28,6 +30,7 @@ defmodule Kubeybilly.Incident.Machine do
   alias Kubeybilly.Incident.Record
   alias Kubeybilly.Incident.Registry, as: IncidentRegistry
   alias Kubeybilly.K8sClient
+  alias Kubeybilly.Logbook
   alias Kubeybilly.Signatures.LoadedBundle
   alias Kubeybilly.Signatures.Triage
   alias Kubeybilly.Soundings.Bundle
@@ -373,10 +376,12 @@ defmodule Kubeybilly.Incident.Machine do
     end
   end
 
-  # The advisor arrives in a later build step (plan/14); until enabled,
-  # an unmatched bundle escalates to a human, which is the safe default.
+  # The advisor consults a model behind the facade's guardrails
+  # (plan/14); until enabled, an unmatched bundle escalates to a human,
+  # which is the safe default. The module is config so tests can seam it.
   defp advise(loaded) do
-    advisor = Application.get_env(:kubeybilly, :advisor)
+    advisor =
+      Application.get_env(:kubeybilly, :advisor_module, Kubeybilly.Advisor.TriageAdapter)
 
     if advisor_enabled?() and is_atom(advisor) and not is_nil(advisor) do
       advisor.advise(loaded)
@@ -514,8 +519,25 @@ defmodule Kubeybilly.Incident.Machine do
         end)
       )
 
+    write_logbook(data.record)
     emit(data.record, from, :closed, event)
     {:next_state, :closed, data, [{:next_event, :internal, :halt}]}
+  end
+
+  # The logbook is the handoff, not the incident: after the final record
+  # write it is generated best-effort, because a failure to render prose
+  # must never crash a close whose facts are already persisted.
+  defp write_logbook(record) do
+    case Logbook.generate(record) do
+      {:ok, _markdown} ->
+        :ok
+
+      {:error, reason} ->
+        Logger.warning("logbook generation failed for #{record.id}: #{inspect(reason)}")
+    end
+  rescue
+    error ->
+      Logger.warning("logbook generation crashed for #{record.id}: #{Exception.message(error)}")
   end
 
   defp update_record(data, fun), do: %{data | record: fun.(data.record)}

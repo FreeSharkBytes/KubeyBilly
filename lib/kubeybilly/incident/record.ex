@@ -148,6 +148,16 @@ defmodule Kubeybilly.Incident.Record do
     end
   end
 
+  @doc """
+  The record as a JSON-safe, string-keyed map.
+
+  This is exactly what `to_disk/1` persists; the logbook hands it to the
+  advisor's narrate call so the model sees the same lossless-on-disk
+  shape a human would read from `record.json`.
+  """
+  @spec to_map(t()) :: map()
+  def to_map(%__MODULE__{} = record), do: serialize(record)
+
   @doc "The on-disk path of an incident's record file."
   @spec record_path(String.t(), keyword()) :: Path.t()
   def record_path(id, opts \\ []) do

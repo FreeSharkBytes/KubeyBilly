@@ -43,8 +43,11 @@ config :kubeybilly, :advisor,
   timeout_ms: 10_000
 
 # The LLM advisor fallback for unmatched signatures is off by default:
-# a no_match escalates to a human instead (plan/02, plan/14).
+# a no_match escalates to a human instead (plan/02, plan/14). When
+# enabled, the machine consults :advisor_module, which bridges the
+# bundle onto the facade above and its guardrails.
 config :kubeybilly, :advisor_enabled, false
+config :kubeybilly, :advisor_module, Kubeybilly.Advisor.TriageAdapter
 
 # How long the correlator buffers alert groups before routing them.
 config :kubeybilly, :correlation_window_ms, 3000
