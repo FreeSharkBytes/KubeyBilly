@@ -1,0 +1,39 @@
+{
+  "conditions": [
+    {
+      "status": "True",
+      "type": "PodScheduled"
+    },
+    {
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "Ready"
+    },
+    {
+      "reason": "ContainersNotReady",
+      "status": "False",
+      "type": "ContainersReady"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "image": "registry.example.com/web:2.0.1",
+      "lastState": {},
+      "name": "web",
+      "ready": false,
+      "restartCount": 0,
+      "state": {
+        "waiting": {
+          "message": "Container image \"registry.example.com/web:2.0.1\" is not present with pull policy of Never",
+          "reason": "ErrImageNeverPull"
+        }
+      }
+    }
+  ],
+  "phase": "Running",
+  "startTime": "2026-07-24T09:55:03Z"
+}

@@ -23,6 +23,20 @@ defmodule Kubeybilly.Signatures.ImagepullPostRolloutTest do
     assert "owners/demo/web-revisions.json" in signature.evidence_refs
   end
 
+  test "matches ErrImageNeverPull, the shape kind and imagePullPolicy Never produce" do
+    bundle = FixtureBundles.load!("imagepull-never-pull")
+
+    assert {:match, %Signature{} = signature} = ImagepullPostRollout.match(bundle)
+    assert signature.name == :imagepull_post_rollout
+
+    assert signature.proposed_action == %{
+             action: :rollback_deployment,
+             params: %{namespace: "demo", name: "web", revision: 1}
+           }
+
+    assert signature.rationale =~ "ErrImageNeverPull"
+  end
+
   test "does not match when the image is unchanged across revisions" do
     bundle = FixtureBundles.load!("imagepull-no-rollout")
 

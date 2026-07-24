@@ -17,7 +17,10 @@ defmodule Kubeybilly.Signatures.ImagepullNoRollout do
   alias Kubeybilly.Signatures.Signature
   alias Kubeybilly.Soundings.Bundle
 
-  @waiting_reasons ["ImagePullBackOff", "ErrImagePull"]
+  # ErrImageNeverPull is the imagePullPolicy Never shape of the same
+  # failure: kind and other side-loaded-image environments produce it
+  # instead of a pull back-off.
+  @waiting_reasons ["ImagePullBackOff", "ErrImagePull", "ErrImageNeverPull"]
 
   @impl true
   def match(%LoadedBundle{} = bundle) do
