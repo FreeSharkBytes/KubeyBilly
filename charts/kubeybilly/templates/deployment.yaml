@@ -84,6 +84,35 @@ spec:
                 secretKeyRef:
                   name: {{ include "kubeybilly.fullname" . }}
                   key: DASHBOARD_PASSWORD
+            {{- if .Values.advisor.enabled }}
+            # The LLM advisor (plan/14), rendered only when it is switched on
+            # so a default install keeps the app's compile-time stub instead
+            # of inheriting chart opinions it never asked for. ADVISOR_ENABLED
+            # opens the unmatched-signature path; the other three retarget the
+            # provider without a rebuild.
+            - name: ADVISOR_ENABLED
+              value: "true"
+            - name: ADVISOR_ADAPTER
+              value: {{ .Values.advisor.adapter | quote }}
+            - name: ADVISOR_BASE_URL
+              value: {{ .Values.advisor.baseUrl | quote }}
+            - name: ADVISOR_MODEL
+              value: {{ .Values.advisor.model | quote }}
+            {{- if .Values.advisor.existingSecret }}
+            # The adapter reads ADVISOR_API_KEY from the environment at call
+            # time, so the variable only has to exist in the container. It is
+            # sourced from a Secret the operator owns: the key never appears
+            # in values.yaml or in this manifest, which is the difference
+            # between a rotatable credential and one baked into release state.
+            - name: ADVISOR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.advisor.existingSecret | quote }}
+                  key: {{ required "advisor.secretKey is required when advisor.existingSecret is set" .Values.advisor.secretKey | quote }}
+            {{- else if eq .Values.advisor.adapter "openai_compat" }}
+            {{- fail "advisor.existingSecret must name a Secret holding the provider API key when advisor.adapter is openai_compat" }}
+            {{- end }}
+            {{- end }}
           volumeMounts:
             # The evidence volume: the one writable mount that matters.
             - name: incidents

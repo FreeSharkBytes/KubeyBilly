@@ -37,6 +37,34 @@ resources:
   limits:
     memory: 512Mi
 
+# The LLM advisor (plan/14). Disabled and pinned to the stub by default,
+# which mirrors the app's own compile-time default: a fresh install must not
+# depend on a network round trip to a paid endpoint, and an unmatched
+# incident escalates to a human instead of asking a model. Every field below
+# maps to an env var config/runtime.exs reads, and none of them is rendered
+# while enabled is false.
+#
+# enabled:        renders the ADVISOR_* env vars and sets ADVISOR_ENABLED,
+#                 which opens the unmatched-signature advisor path.
+# adapter:        stub or openai_compat. Any other value and the app refuses
+#                 to boot rather than guess which provider was meant.
+# baseUrl, model: retarget the provider without rebuilding the image.
+# existingSecret: name of a Secret you create out of band that holds the
+#                 provider API key. It is referenced by name so the key
+#                 never lands in values.yaml, in the rendered manifest, or
+#                 in `helm get values` output. Empty means no key is wired
+#                 in, which is fine for the stub.
+# secretKey:      the key within that Secret; its value becomes
+#                 ADVISOR_API_KEY, which is the variable config/config.exs
+#                 names and the adapter reads at call time.
+advisor:
+  enabled: false
+  adapter: stub
+  baseUrl: https://api.scaleway.ai/v1
+  model: mistral-small-3.2-24b-instruct-2506
+  existingSecret: ""
+  secretKey: ADVISOR_API_KEY
+
 # Kill switch, mirrored into the killswitch ConfigMap (key "engaged").
 # Flip to "true" to stop every write path before it mutates.
 killswitch:
