@@ -380,6 +380,68 @@ defmodule Kubeybilly.LogbookTest do
                "from here"
   end
 
+  ## Declined incidents
+
+  defp declined_record do
+    reason = "the rollback tier needs confidence 0.8 and the signature offered 0.55"
+
+    %{
+      recovered_rollback_record()
+      | decision: %Decision{
+          verdict: :deny,
+          rule_id: "tier-min-confidence",
+          chain: ["kill-switch", "mode", "scope", "deny-kinds", "budgets", "tier-min-confidence"],
+          reason: reason
+        },
+        verification_outcome: nil,
+        outcome: :declined,
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:02]), :evidence_sealed, %{}},
+          {at(~T[10:00:03]), :policy_denied,
+           %{verdict: :deny, rule_id: "tier-min-confidence", reason: reason}}
+        ]
+    }
+  end
+
+  test "a declined incident hands the decision back to a human", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(declined_record(), root: root)
+
+    assert markdown =~
+             "- Rule tier-min-confidence refused the proposed rollback_deployment, so " <>
+               "nothing on the cluster was touched: the rollback tier needs confidence " <>
+               "0.8 and the signature offered 0.55. A human decides whether to proceed " <>
+               "by hand; nothing here will act on this incident again."
+  end
+
+  test "a declined incident's open questions are not only capture gaps", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(declined_record(), root: root)
+
+    refute markdown =~ "None. Nothing here is waiting on a human decision."
+    assert markdown =~ "tier-min-confidence"
+  end
+
+  test "an approval denial is already a human decision, so it asks nothing",
+       %{root: root} do
+    record = %{
+      declined_record()
+      | decision: %Decision{
+          verdict: :needs_approval,
+          rule_id: "tier-approval",
+          chain: ["tier-approval"],
+          reason: "the rollback tier asks a human at confidence 0.9"
+        },
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:03]), :approval_requested, %{verdict: :needs_approval}},
+          {at(~T[10:00:40]), :approval_denied, %{}}
+        ]
+    }
+
+    assert {:ok, markdown} = Logbook.generate(record, root: root)
+    refute markdown =~ "A human decides whether to proceed by hand"
+  end
+
   ## The narrative section
 
   describe "narrative" do

@@ -302,6 +302,7 @@ defmodule Kubeybilly.Logbook.Sections do
     questions =
       gap_question(manifest) ++
         escalation_question(record) ++
+        declined_question(record) ++
         upstream_question(record) ++
         budget_question(record)
 
@@ -368,6 +369,40 @@ defmodule Kubeybilly.Logbook.Sections do
       0 -> ""
       1 -> ", with 1 recovery condition still unmet (listed under Verification)"
       count -> ", with #{count} recovery conditions still unmet (listed under Verification)"
+    end
+  end
+
+  # Declining safely is the point of the project, which makes a rule
+  # refusal the outcome that most needs a handoff line: the workload is
+  # still broken and nothing further is coming. An approval denial is
+  # excluded because a human already decided that one.
+  defp declined_question(record) do
+    decision = Fields.get(record, :decision)
+
+    if Fields.text(Fields.get(record, :outcome)) == "declined" and
+         Fields.text(Fields.get(decision, :verdict)) == "deny" do
+      [
+        "Rule #{Fields.text(Fields.get(decision, :rule_id))} refused " <>
+          "#{refused_action(record)}, so nothing on the cluster was " <>
+          "touched#{refusal_reason(decision)}. A human decides whether to proceed by " <>
+          "hand; nothing here will act on this incident again."
+      ]
+    else
+      []
+    end
+  end
+
+  defp refused_action(record) do
+    case Fields.text(Fields.get(Fields.get(record, :action), :name)) do
+      "" -> "the proposed action"
+      name -> "the proposed #{name}"
+    end
+  end
+
+  defp refusal_reason(decision) do
+    case Fields.text(Fields.get(decision, :reason)) do
+      "" -> ""
+      reason -> ": " <> reason
     end
   end
 
