@@ -83,6 +83,21 @@ if advisor_overrides != [] do
   config :kubeybilly, :advisor, advisor_overrides
 end
 
+# The unmatched-signature advisor fallback is off in config/config.exs, so a
+# deployed install needs its own switch or the path can only be reached by
+# rebuilding the image (plan/14). Unset leaves the compile-time default
+# alone, matching the ADVISOR_ vars above.
+#
+# Unlike ADVISOR_ADAPTER an unrecognised value does not raise here. This flag
+# only decides whether one optional escalation path runs, and refusing to boot
+# the incident responder over a typo in a feature toggle is the worse failure,
+# so anything that is not a truthy spelling reads as off.
+if advisor_enabled = System.get_env("ADVISOR_ENABLED") do
+  normalised = advisor_enabled |> String.trim() |> String.downcase()
+
+  config :kubeybilly, :advisor_enabled, normalised in ["true", "1"]
+end
+
 if config_env() == :dev do
   # Reload browser tabs when matching files change.
   config :kubeybilly, KubeybillyWeb.Endpoint,
