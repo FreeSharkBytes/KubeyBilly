@@ -10,6 +10,7 @@ defmodule Kubeybilly.Logbook.Sections do
   which is what makes the golden-file tests meaningful.
   """
 
+  alias Kubeybilly.Logbook.Diagnosis
   alias Kubeybilly.Logbook.Fields
   alias Kubeybilly.Logbook.Undo
 
@@ -234,13 +235,49 @@ defmodule Kubeybilly.Logbook.Sections do
         Outcome: #{Fields.text(outcome)}.\
         """
 
-      {outcome, {opened, closed}} ->
-        """
-        ## Verification
+      {outcome, {opened, closed, detail}} ->
+        Enum.join(
+          [
+            "## Verification",
+            "",
+            "Outcome: #{Fields.text(outcome)}. The verification window opened at",
+            "#{stamp(opened)} and closed at #{stamp(closed)} (UTC)#{polls_clause(detail)}."
+          ] ++ diagnosis(detail),
+          "\n"
+        )
+    end
+  end
 
-        Outcome: #{Fields.text(outcome)}. The verification window opened at
-        #{stamp(opened)} and closed at #{stamp(closed)} (UTC).\
-        """
+  # An outcome is a verdict, not an explanation. The reason and the unmet
+  # conditions are the verifier's own words, carried on the event that
+  # closed the window, so printing them costs nothing and saves the
+  # reader from opening the verifier's logs.
+  defp diagnosis(detail) do
+    reason_line(detail) ++ unmet_block(detail)
+  end
+
+  defp polls_clause(detail) do
+    case Diagnosis.poll_count(Fields.get(detail, :polls)) do
+      nil -> ""
+      count -> ", after #{count}"
+    end
+  end
+
+  defp reason_line(detail) do
+    case Diagnosis.reason_sentence(Fields.get(detail, :reason)) do
+      nil -> []
+      sentence -> ["", "Why: #{sentence}."]
+    end
+  end
+
+  defp unmet_block(detail) do
+    case Diagnosis.unmet_lines(Fields.get(detail, :unmet)) do
+      [] ->
+        []
+
+      lines ->
+        ["", "Recovery conditions still unmet when the window closed:", ""] ++
+          Enum.map(lines, &("- " <> &1))
     end
   end
 
@@ -249,11 +286,11 @@ defmodule Kubeybilly.Logbook.Sections do
 
     with {opened, :executed, _detail} <-
            Enum.find(timeline, :none, fn {_at, event, _detail} -> event == :executed end),
-         {closed, _event, _detail} <-
+         {closed, _event, detail} <-
            Enum.find(timeline, :none, fn {_at, event, _detail} ->
              event in @verification_closers
            end) do
-      {opened, closed}
+      {opened, closed, detail}
     else
       :none -> nil
     end
@@ -301,7 +338,7 @@ defmodule Kubeybilly.Logbook.Sections do
       case record |> Fields.get(:timeline) |> List.wrap() |> List.last() do
         {_at, event, detail} ->
           [
-            "The incident escalated on \"#{humanize(event)}\" (#{detail_text(detail)}). " <>
+            "The incident escalated on \"#{humanize(event)}\"#{because(detail)}. " <>
               "A human needs to take it from here; the evidence above is the handoff."
           ]
 
@@ -310,6 +347,27 @@ defmodule Kubeybilly.Logbook.Sections do
       end
     else
       []
+    end
+  end
+
+  # A closing event that carries a verifier diagnosis gets the sentence;
+  # anything else falls back to its raw detail, and an event with no
+  # detail at all says nothing rather than rendering empty parentheses.
+  defp because(detail) do
+    case Diagnosis.reason_sentence(Fields.get(detail, :reason)) do
+      nil -> parenthetical(detail_text(detail))
+      sentence -> ": " <> sentence <> unmet_clause(detail)
+    end
+  end
+
+  defp parenthetical(""), do: ""
+  defp parenthetical(text), do: " (" <> text <> ")"
+
+  defp unmet_clause(detail) do
+    case length(Diagnosis.unmet_lines(Fields.get(detail, :unmet))) do
+      0 -> ""
+      1 -> ", with 1 recovery condition still unmet (listed under Verification)"
+      count -> ", with #{count} recovery conditions still unmet (listed under Verification)"
     end
   end
 
@@ -372,6 +430,10 @@ defmodule Kubeybilly.Logbook.Sections do
 
     "{" <> inner <> "}"
   end
+
+  # An empty list is a fact worth naming: "unmet: none" reads as an
+  # answer, while a bare "unmet:" reads as a truncated log.
+  defp value_text([]), do: "none"
 
   defp value_text(value) when is_list(value), do: Enum.map_join(value, ", ", &value_text/1)
   defp value_text(value), do: Fields.text(value)

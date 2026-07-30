@@ -94,7 +94,8 @@ defmodule Kubeybilly.LogbookTest do
            reason: "the rollback tier permits automatic action at confidence 0.9"
          }},
         {at(~T[10:00:04]), :executed, %{result: %{dry_run: false}}},
-        {at(~T[10:01:34]), :verified_recovered, %{}}
+        {at(~T[10:01:34]), :verified_recovered,
+         %{reason: :recovered_sustained, unmet: [], polls: 3}}
       ],
       signature: signature,
       decision: decision,
@@ -286,6 +287,97 @@ defmodule Kubeybilly.LogbookTest do
     assert {:ok, markdown} = Logbook.generate(record, root: root)
     assert markdown =~ "Rule budget-actions-per-incident refused the action"
     assert markdown =~ "No verification ran"
+  end
+
+  ## The verification diagnosis
+
+  defp unchanged_record do
+    %{
+      recovered_rollback_record()
+      | verification_outcome: :unchanged,
+        outcome: :escalated,
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:02]), :evidence_sealed, %{}},
+          {at(~T[10:00:04]), :executed, %{result: %{dry_run: false}}},
+          {at(~T[10:01:34]), :verified_unchanged,
+           %{
+             reason: :window_expired,
+             unmet: [:no_restarts_since_settle, :rolled_to_available],
+             polls: 7
+           }}
+        ]
+    }
+  end
+
+  test "the verification section states the reason in prose", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(unchanged_record(), root: root)
+
+    assert markdown =~ "closed at 2026-07-24 10:01:34 (UTC), after 7 polls."
+    assert markdown =~ "Why: the window expired before recovery was reached."
+  end
+
+  test "the verification section lists the unmet conditions by name", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(unchanged_record(), root: root)
+
+    assert markdown =~ "Recovery conditions still unmet when the window closed:"
+
+    assert markdown =~
+             "- no_restarts_since_settle: containers kept restarting after the action's " <>
+               "own rollout had settled"
+
+    assert markdown =~
+             "- rolled_to_available: the ReplicaSet the rollback moved to never became " <>
+               "fully available"
+  end
+
+  test "a recovered verification says why it was believed", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(recovered_rollback_record(), root: root)
+
+    assert markdown =~ "closed at 2026-07-24 10:01:34 (UTC), after 3 polls."
+    assert markdown =~ "Why: recovery held for two consecutive polls."
+    refute markdown =~ "Recovery conditions still unmet"
+  end
+
+  test "the timeline names an empty diagnosis list rather than trailing off",
+       %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(recovered_rollback_record(), root: root)
+
+    assert markdown =~
+             "| verified recovered | polls: 3; reason: recovered_sustained; unmet: none |"
+  end
+
+  test "the escalation open question explains the verdict, not an empty parenthetical",
+       %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(unchanged_record(), root: root)
+
+    refute markdown =~ "()"
+
+    assert markdown =~
+             "The incident escalated on \"verified unchanged\": the window expired " <>
+               "before recovery was reached, with 2 recovery conditions still unmet " <>
+               "(listed under Verification). A human needs to take it from here; the " <>
+               "evidence above is the handoff."
+  end
+
+  test "an escalation whose closing event carries no detail drops the parenthetical",
+       %{root: root} do
+    record = %{
+      recovered_rollback_record()
+      | verification_outcome: nil,
+        outcome: :escalated,
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:03]), :no_signature_match, %{}}
+        ]
+    }
+
+    assert {:ok, markdown} = Logbook.generate(record, root: root)
+    refute markdown =~ "()"
+
+    assert markdown =~
+             "The incident escalated on \"no signature match\". A human needs to take it " <>
+               "from here"
   end
 
   ## The narrative section

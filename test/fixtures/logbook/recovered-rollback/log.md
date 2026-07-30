@@ -11,7 +11,7 @@ generated from the structured incident record; no model wrote any of it.
 | 2026-07-24 10:00:02 | evidence sealed |  |
 | 2026-07-24 10:00:03 | permitted | reason: the rollback tier permits automatic action at confidence 0.9; rule_id: tier-auto; verdict: permit_auto |
 | 2026-07-24 10:00:04 | executed | result: {dry_run: false} |
-| 2026-07-24 10:01:34 | verified recovered |  |
+| 2026-07-24 10:01:34 | verified recovered | polls: 3; reason: recovered_sustained; unmet: none |
 
 ## Soundings
 
@@ -54,7 +54,9 @@ No gaps were recorded; the capture is complete.
 ## Verification
 
 Outcome: recovered. The verification window opened at
-2026-07-24 10:00:04 and closed at 2026-07-24 10:01:34 (UTC).
+2026-07-24 10:00:04 and closed at 2026-07-24 10:01:34 (UTC), after 3 polls.
+
+Why: recovery held for two consecutive polls.
 
 ## Open questions
 
