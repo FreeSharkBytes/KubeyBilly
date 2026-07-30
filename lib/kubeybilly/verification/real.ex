@@ -11,12 +11,13 @@ defmodule Kubeybilly.Verification.Real do
   more than three in a row concede `unchanged` (reason `polls_failed`)
   rather than guessing.
 
-  The behaviour's return is deliberately just `{:ok, outcome}`, so the
-  richer story (which recovery conditions were unmet, why a poll was
-  worse, how many polls ran) travels through the
+  The outcome never travels alone: the same reason, unmet conditions and
+  poll count that go to the
   `[:kubeybilly, :verification, :poll]` and
-  `[:kubeybilly, :verification, :outcome]` telemetry events and the log,
-  where the escalation path already listens.
+  `[:kubeybilly, :verification, :outcome]` telemetry events are returned
+  to the caller, so the incident record and `log.md` cannot disagree with
+  the emitted diagnosis. Per-poll detail stays telemetry-only; only the
+  concluding story crosses the behaviour boundary.
   """
 
   @behaviour Kubeybilly.Verifier
@@ -164,7 +165,7 @@ defmodule Kubeybilly.Verification.Real do
         emit_poll(env.record, poll, :recovered_candidate, %{stable_polls: stable})
 
         if stable >= @stability_polls do
-          {:halt, {:recovered, %{reason: :sustained, unmet: []}}}
+          {:halt, {:recovered, %{reason: :recovered_sustained, unmet: []}}}
         else
           {:cont, %{state | stable: stable, unmet: []}}
         end
@@ -177,22 +178,34 @@ defmodule Kubeybilly.Verification.Real do
 
   ## Outcome plumbing
 
+  # One diagnosis, three readers: telemetry, the log line, and the caller.
+  # Building it once is what keeps them from ever telling different
+  # stories about the same window.
   defp conclude(record, outcome, detail) do
-    reason = Map.get(detail, :reason)
-    unmet = Map.get(detail, :unmet, [])
+    diagnosis = %{
+      reason: Map.get(detail, :reason),
+      unmet: Map.get(detail, :unmet, []),
+      polls: Map.get(detail, :polls, 0)
+    }
 
     :telemetry.execute(
       @outcome_event,
-      %{system_time: System.system_time(), polls: detail.polls},
-      %{incident_id: record.id, outcome: outcome, reason: reason, unmet: unmet}
+      %{system_time: System.system_time(), polls: diagnosis.polls},
+      %{
+        incident_id: record.id,
+        outcome: outcome,
+        reason: diagnosis.reason,
+        unmet: diagnosis.unmet
+      }
     )
 
     Logger.info(
       "verification of incident #{record.id} landed on #{outcome} " <>
-        "(reason: #{inspect(reason)}, unmet: #{inspect(unmet)}, polls: #{detail.polls})"
+        "(reason: #{inspect(diagnosis.reason)}, unmet: #{inspect(diagnosis.unmet)}, " <>
+        "polls: #{diagnosis.polls})"
     )
 
-    {:ok, outcome}
+    {:ok, outcome, diagnosis}
   end
 
   defp emit_poll(record, poll, status, metadata) do

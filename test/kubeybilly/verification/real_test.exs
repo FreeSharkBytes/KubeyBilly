@@ -179,7 +179,8 @@ defmodule Kubeybilly.Verification.RealTest do
 
       record = record(restart_pod_action("galley-d7c6bc75c-fs89f"))
 
-      assert {:ok, :recovered} = Real.verify(record, nil, opts())
+      assert {:ok, :recovered, %{reason: :recovered_sustained, unmet: [], polls: 2}} =
+               Real.verify(record, nil, opts())
 
       assert_receive {:telemetry, @outcome_event, %{polls: 2},
                       %{
@@ -197,7 +198,9 @@ defmodule Kubeybilly.Verification.RealTest do
 
       record = record(restart_pod_action("galley-d7c6bc75c-fs89f"))
 
-      assert {:ok, :recovered} = Real.verify(record, fixture_baseline(), opts())
+      assert {:ok, :recovered, %{reason: :recovered_sustained, unmet: [], polls: 4}} =
+               Real.verify(record, fixture_baseline(), opts())
+
       assert_receive {:telemetry, @outcome_event, %{polls: 4}, %{outcome: :recovered}}
     end
   end
@@ -208,7 +211,8 @@ defmodule Kubeybilly.Verification.RealTest do
 
       record = record(restart_pod_action("galley-d7c6bc75c-fs89f"))
 
-      assert {:ok, :worse} = Real.verify(record, fixture_baseline(), opts())
+      assert {:ok, :worse, %{reason: :ready_replicas_dropped, unmet: [], polls: 1}} =
+               Real.verify(record, fixture_baseline(), opts())
 
       assert_receive {:telemetry, @outcome_event, %{polls: 1},
                       %{
@@ -228,7 +232,8 @@ defmodule Kubeybilly.Verification.RealTest do
 
       record = record(restart_pod_action("galley-d7c6bc75c-fs89f"))
 
-      assert {:ok, :worse} = Real.verify(record, fixture_baseline(), opts())
+      assert {:ok, :worse, %{reason: :blast_radius_spread, unmet: []}} =
+               Real.verify(record, fixture_baseline(), opts())
 
       assert_receive {:telemetry, @outcome_event, _measurements,
                       %{
@@ -251,8 +256,10 @@ defmodule Kubeybilly.Verification.RealTest do
 
       record = record(restart_pod_action("galley-d7c6bc75c-fs89f"))
 
-      assert {:ok, :unchanged} =
+      assert {:ok, :unchanged, %{reason: :window_expired, unmet: returned_unmet}} =
                Real.verify(record, fixture_baseline(), opts(window_ms: 30, poll_interval_ms: 5))
+
+      assert :service_endpoints in returned_unmet
 
       assert_receive {:telemetry, @outcome_event, _measurements,
                       %{
@@ -262,6 +269,10 @@ defmodule Kubeybilly.Verification.RealTest do
                       }}
 
       assert :service_endpoints in unmet
+
+      # The caller and the telemetry consumer must read the same story;
+      # a second computation could disagree with the logged one.
+      assert returned_unmet == unmet
     end
 
     test "more than three consecutive failed polls give up as unchanged" do
@@ -271,7 +282,7 @@ defmodule Kubeybilly.Verification.RealTest do
 
       record = record(restart_pod_action("galley-d7c6bc75c-fs89f"))
 
-      assert {:ok, :unchanged} =
+      assert {:ok, :unchanged, %{reason: :polls_failed, polls: 4}} =
                Real.verify(record, fixture_baseline(), opts(window_ms: 60_000))
 
       assert_receive {:telemetry, @outcome_event, %{polls: 4},
@@ -288,7 +299,8 @@ defmodule Kubeybilly.Verification.RealTest do
 
       log =
         ExUnit.CaptureLog.capture_log(fn ->
-          assert {:ok, :unchanged} = Real.verify(record, nil, opts())
+          assert {:ok, :unchanged, %{reason: :no_baseline, unmet: [], polls: 0}} =
+                   Real.verify(record, nil, opts())
         end)
 
       assert log =~ "no readable baseline"
@@ -381,7 +393,9 @@ defmodule Kubeybilly.Verification.RealTest do
 
       record = record(rollback_action("4"), "rollback-incident")
 
-      assert {:ok, :recovered} = Real.verify(record, baseline, opts())
+      assert {:ok, :recovered, %{reason: :recovered_sustained, unmet: [], polls: 3}} =
+               Real.verify(record, baseline, opts())
+
       assert_receive {:telemetry, @outcome_event, %{polls: 3}, %{outcome: :recovered}}
     end
   end

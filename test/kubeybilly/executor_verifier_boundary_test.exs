@@ -50,10 +50,31 @@ defmodule Kubeybilly.ExecutorVerifierBoundaryTest do
         workload: %{kind: "Deployment", name: "web", uid: "u2"}
       })
 
+    detail = %{reason: :recovered_sustained, unmet: [], polls: 2}
+
     expect(Kubeybilly.VerifierMock, :verify, fn ^record, nil, window_seconds: 20 ->
-      {:ok, :recovered}
+      {:ok, :recovered, detail}
     end)
 
-    assert {:ok, :recovered} = Verifier.impl().verify(record, nil, window_seconds: 20)
+    assert {:ok, :recovered, ^detail} = Verifier.impl().verify(record, nil, window_seconds: 20)
+  end
+
+  test "the verifier contract carries a diagnosis alongside the outcome" do
+    record =
+      Record.new(%{
+        id: "20260724T000000Z-f00df00d",
+        group_key: "gk",
+        namespace: "demo",
+        workload: %{kind: "Deployment", name: "web", uid: "u3"}
+      })
+
+    expect(Kubeybilly.VerifierMock, :verify, fn _record, _baseline, _opts ->
+      {:ok, :unchanged, %{reason: :window_expired, unmet: [:rolled_to_available], polls: 7}}
+    end)
+
+    assert {:ok, :unchanged, detail} = Verifier.impl().verify(record, nil, [])
+    assert detail.reason == :window_expired
+    assert detail.unmet == [:rolled_to_available]
+    assert detail.polls == 7
   end
 end

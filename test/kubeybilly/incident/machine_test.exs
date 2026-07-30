@@ -142,6 +142,14 @@ defmodule Kubeybilly.Incident.MachineTest do
     Enum.map(record.timeline, fn {_at, event, _detail} -> event end)
   end
 
+  # Records come back through disk, so details arrive string-keyed.
+  defp detail(record, event) do
+    case Enum.find(record.timeline, fn {_at, name, _detail} -> name == event end) do
+      {_at, ^event, detail} -> detail
+      nil -> flunk("no #{event} event in #{inspect(events(record))}")
+    end
+  end
+
   defp tier(policy, name, overrides) do
     %{policy | tiers: Map.update!(policy.tiers, name, &Map.merge(&1, overrides))}
   end
@@ -192,7 +200,7 @@ defmodule Kubeybilly.Incident.MachineTest do
 
     expect(Kubeybilly.VerifierMock, :verify, fn _record, _baseline, opts ->
       assert opts[:window_seconds] == policy.verification.window_seconds
-      {:ok, :recovered}
+      {:ok, :recovered, %{reason: :recovered_sustained, unmet: [], polls: 2}}
     end)
 
     {_pid, id} =
@@ -213,13 +221,22 @@ defmodule Kubeybilly.Incident.MachineTest do
              :executed,
              :verified_recovered
            ] = events(record)
+
+    assert detail(record, :verified_recovered) == %{
+             "reason" => "recovered_sustained",
+             "unmet" => [],
+             "polls" => 2
+           }
   end
 
   test "emits telemetry on every transition", %{root: root, policy: policy} = context do
     policy = tier(policy, "node", %{auto: true})
     stub_healthy_node()
     expect(Kubeybilly.ExecutorMock, :execute, fn _a, _d, _r -> {:ok, %{}} end)
-    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o -> {:ok, :recovered} end)
+
+    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o ->
+      {:ok, :recovered, %{reason: :recovered_sustained, unmet: [], polls: 2}}
+    end)
 
     parent = self()
     handler_id = "machine-telemetry-#{System.unique_integer([:positive])}"
@@ -452,7 +469,9 @@ defmodule Kubeybilly.Incident.MachineTest do
       {:ok, %{}}
     end)
 
-    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o -> {:ok, :recovered} end)
+    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o ->
+      {:ok, :recovered, %{reason: :recovered_sustained, unmet: [], polls: 2}}
+    end)
 
     {pid, id} =
       start_machine(context, collector: fixture_collector(root, "node-not-ready"))
@@ -485,7 +504,15 @@ defmodule Kubeybilly.Incident.MachineTest do
     policy = tier(policy, "node", %{auto: true})
     stub_healthy_node()
     expect(Kubeybilly.ExecutorMock, :execute, fn _a, _d, _r -> {:ok, %{}} end)
-    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o -> {:ok, :unchanged} end)
+
+    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o ->
+      {:ok, :unchanged,
+       %{
+         reason: :window_expired,
+         unmet: [:no_restarts_since_settle, :rolled_to_available],
+         polls: 7
+       }}
+    end)
 
     {_pid, id} =
       start_machine(context, policy: policy, collector: fixture_collector(root, "node-not-ready"))
@@ -495,6 +522,12 @@ defmodule Kubeybilly.Incident.MachineTest do
     assert record.outcome == :escalated
     assert record.verification_outcome == :unchanged
     assert :verified_unchanged in events(record)
+
+    assert detail(record, :verified_unchanged) == %{
+             "reason" => "window_expired",
+             "unmet" => ["no_restarts_since_settle", "rolled_to_available"],
+             "polls" => 7
+           }
   end
 
   test "worse with a recorded inverse reverts, then hard-stops as escalated",
@@ -507,7 +540,9 @@ defmodule Kubeybilly.Incident.MachineTest do
       {:ok, %{}}
     end)
 
-    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o -> {:ok, :worse} end)
+    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o ->
+      {:ok, :worse, %{reason: :restart_rate_exceeded, unmet: [], polls: 3}}
+    end)
 
     expect(Kubeybilly.ExecutorMock, :execute, fn action, _d, _r ->
       assert action.name == :uncordon_node
@@ -524,6 +559,13 @@ defmodule Kubeybilly.Incident.MachineTest do
     assert record.verification_outcome == :worse
     assert :worse_reverting in events(record)
     assert :reverted_hard_stop in events(record)
+
+    assert detail(record, :worse_reverting) == %{
+             "reason" => "restart_rate_exceeded",
+             "unmet" => [],
+             "polls" => 3,
+             "inverse" => "uncordon_node"
+           }
   end
 
   test "worse after a rollback freezes instead of reverting",
@@ -540,7 +582,9 @@ defmodule Kubeybilly.Incident.MachineTest do
       {:ok, %{}}
     end)
 
-    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o -> {:ok, :worse} end)
+    expect(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o ->
+      {:ok, :worse, %{reason: :restart_rate_exceeded, unmet: [], polls: 3}}
+    end)
 
     {_pid, id} =
       start_machine(context,
@@ -554,6 +598,14 @@ defmodule Kubeybilly.Incident.MachineTest do
     assert record.verification_outcome == :worse
     assert :frozen_after_worse in events(record)
     refute :worse_reverting in events(record)
+
+    assert detail(record, :frozen_after_worse) == %{
+             "reason" => "restart_rate_exceeded",
+             "unmet" => [],
+             "polls" => 3,
+             "action" => "rollback_deployment",
+             "inverse_class" => "invertible"
+           }
   end
 
   test "an executor error escalates as execution_failed",
@@ -580,7 +632,7 @@ defmodule Kubeybilly.Incident.MachineTest do
 
     stub(Kubeybilly.VerifierMock, :verify, fn _r, _b, _o ->
       Process.sleep(2_000)
-      {:ok, :recovered}
+      {:ok, :recovered, %{reason: :recovered_sustained, unmet: [], polls: 2}}
     end)
 
     {_pid, id} =
