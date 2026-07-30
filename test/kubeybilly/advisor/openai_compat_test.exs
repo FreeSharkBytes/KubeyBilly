@@ -5,6 +5,7 @@ defmodule Kubeybilly.Advisor.OpenAICompatTest do
 
   alias Kubeybilly.Advisor.OpenAICompat
   alias Kubeybilly.Advisor.Proposal
+  alias Kubeybilly.Formulary.Action
 
   @req_test OpenAICompat
   @api_key_env "ADVISOR_TEST_API_KEY"
@@ -90,7 +91,36 @@ defmodule Kubeybilly.Advisor.OpenAICompatTest do
 
       assert system =~ "ONLY"
       assert system =~ "confidence"
+
+      # Without the required parameter names, a model answers with plausible
+      # invented keys ("deployment": "checkout") that the formulary rejects,
+      # so the only proposal it can get past validation is no_action.
+      assert system =~ "namespace, name, to_revision"
+      assert system =~ "namespace, kind, name"
+      assert system =~ "reason"
+
       assert user =~ "galley"
+    end
+
+    test "the prompt names the parameters the formulary actually requires" do
+      parent = self()
+
+      Req.Test.stub(@req_test, fn conn ->
+        send(parent, {:body, decoded_body(conn)})
+        completion(conn, Jason.encode!(@valid_content))
+      end)
+
+      {:ok, _proposal} = OpenAICompat.propose(@summary)
+
+      assert_receive {:body, body}
+      [%{"content" => system} | _rest] = body["messages"]
+
+      for {action, params} <- Action.required_params() do
+        rendered = Enum.map_join(params, ", ", &Atom.to_string/1)
+
+        assert system =~ "#{action} (params: #{rendered})",
+               "prompt must state the required params for #{action}"
+      end
     end
   end
 

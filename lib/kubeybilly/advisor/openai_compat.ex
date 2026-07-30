@@ -20,8 +20,17 @@ defmodule Kubeybilly.Advisor.OpenAICompat do
   @behaviour Kubeybilly.Advisor
 
   alias Kubeybilly.Advisor.Proposal
+  alias Kubeybilly.Formulary.Action
 
   @completions_path "/chat/completions"
+
+  # Rendered from the formulary itself so the prompt cannot drift from
+  # what Action.new/2 will accept. Probing real models showed that
+  # without these names they invent plausible ones ("deployment") and
+  # every mitigation proposal dies in validation.
+  @formulary_lines Enum.map_join(Action.required_params(), "\n", fn {action, params} ->
+                     "- #{action} (params: #{Enum.map_join(params, ", ", &Atom.to_string/1)})"
+                   end)
 
   @propose_prompt """
   You are KubeyBilly's fallback classifier for Kubernetes incidents that \
@@ -29,7 +38,10 @@ defmodule Kubeybilly.Advisor.OpenAICompat do
   propose at most one recovery action. You may ONLY choose an action from \
   this closed formulary; no other action exists:
 
-  #{Enum.map_join(Proposal.formulary(), "\n", &"- #{&1}")}
+  #{@formulary_lines}
+
+  Use exactly the parameter names listed for the action you choose. Any \
+  other key is rejected and the proposal is discarded.
 
   Respond with ONLY a JSON object conforming to this schema, no prose \
   around it:

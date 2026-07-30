@@ -38,7 +38,13 @@ config :kubeybilly, :killswitch_path, nil
 config :kubeybilly, :advisor,
   adapter: Kubeybilly.Advisor.Stub,
   base_url: "https://api.scaleway.ai/v1",
-  model: "PICK_AT_DEPLOY",
+  # Picked by probing the live Scaleway catalog with the real propose
+  # prompt: it returns schema-valid JSON with correct formulary parameter
+  # names, answers in under two seconds, and declines when the evidence is
+  # ambiguous, which is the behaviour this project wants. Reasoning models
+  # such as qwen3.6-35b-a3b spend their token budget on a reasoning field
+  # and can return null content, which degrades to no_action here.
+  model: "mistral-small-3.2-24b-instruct-2506",
   api_key_env: "ADVISOR_API_KEY",
   timeout_ms: 10_000
 

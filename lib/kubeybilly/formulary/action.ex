@@ -90,6 +90,17 @@ defmodule Kubeybilly.Formulary.Action do
   def names, do: @public_names
 
   @doc """
+  The parameters each public action requires, keyed by action name.
+
+  Published so the advisor prompt can state them instead of leaving a
+  model to invent key names. A proposal carrying invented keys is
+  rejected by `new/2`, so an unstated requirement means the advisor can
+  never propose a usable mitigation.
+  """
+  @spec required_params() :: %{name() => [atom()]}
+  def required_params, do: Map.take(@required_params, @public_names)
+
+  @doc """
   Build a publicly selectable action.
 
   Unknown names, missing keys, unknown keys, and malformed values are all
