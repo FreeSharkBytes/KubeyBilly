@@ -285,15 +285,23 @@ defmodule Kubeybilly.Incident.Machine do
     {:keep_state, %{data | task: task}}
   end
 
-  def handle_event(:info, {ref, {:ok, outcome}}, :verifying, %{task: %Task{ref: ref}} = data)
-      when outcome in [:recovered, :unchanged, :worse] do
+  # The verifier's diagnosis rides onto the closing timeline event rather
+  # than being dropped here: an escalated incident whose record says only
+  # "unchanged" gives the human on call nothing to act on.
+  def handle_event(
+        :info,
+        {ref, {:ok, outcome, detail}},
+        :verifying,
+        %{task: %Task{ref: ref}} = data
+      )
+      when outcome in [:recovered, :unchanged, :worse] and is_map(detail) do
     Process.demonitor(ref, [:flush])
     data = update_record(%{data | task: nil}, &%{&1 | verification_outcome: outcome})
 
     case outcome do
-      :recovered -> close(data, :verifying, :recovered, :verified_recovered, %{})
-      :unchanged -> close(data, :verifying, :escalated, :verified_unchanged, %{})
-      :worse -> handle_worse(data)
+      :recovered -> close(data, :verifying, :recovered, :verified_recovered, detail)
+      :unchanged -> close(data, :verifying, :escalated, :verified_unchanged, detail)
+      :worse -> handle_worse(data, detail)
     end
   end
 
@@ -318,7 +326,12 @@ defmodule Kubeybilly.Incident.Machine do
       |> shutdown_task()
       |> update_record(&%{&1 | verification_outcome: :unchanged})
 
+    # No verifier answered, so the diagnosis is the silence itself; it
+    # still uses the same keys, because the log reads them the same way.
     close(data, :verifying, :escalated, :verification_window_expired, %{
+      reason: :verifier_timed_out,
+      unmet: [],
+      polls: 0,
       window_ms: data.verification_timeout_ms
     })
   end
@@ -481,7 +494,11 @@ defmodule Kubeybilly.Incident.Machine do
   # A worse outcome runs the recorded inverse, except where plan/03
   # freezes instead: a rollback's inverse redeploys a known-bad revision,
   # and irreversible actions have nothing to run.
-  defp handle_worse(data) do
+  #
+  # Either branch carries the verifier's diagnosis, because both are the
+  # event that closes verification; `reverted_hard_stop` then reports the
+  # revert's own result and nothing about the window.
+  defp handle_worse(data, detail) do
     action = data.record.action
 
     if action.inverse != nil and action.name != :rollback_deployment do
@@ -490,16 +507,19 @@ defmodule Kubeybilly.Incident.Machine do
         :verifying,
         :reverting,
         :worse_reverting,
-        %{inverse: action.inverse.name},
+        Map.put(detail, :inverse, action.inverse.name),
         [
           {:next_event, :internal, :revert}
         ]
       )
     else
-      close(data, :verifying, :escalated, :frozen_after_worse, %{
-        action: action.name,
-        inverse_class: action.inverse_class
-      })
+      close(
+        data,
+        :verifying,
+        :escalated,
+        :frozen_after_worse,
+        Map.merge(detail, %{action: action.name, inverse_class: action.inverse_class})
+      )
     end
   end
 

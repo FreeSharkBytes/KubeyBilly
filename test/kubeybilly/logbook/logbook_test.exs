@@ -94,7 +94,8 @@ defmodule Kubeybilly.LogbookTest do
            reason: "the rollback tier permits automatic action at confidence 0.9"
          }},
         {at(~T[10:00:04]), :executed, %{result: %{dry_run: false}}},
-        {at(~T[10:01:34]), :verified_recovered, %{}}
+        {at(~T[10:01:34]), :verified_recovered,
+         %{reason: :recovered_sustained, unmet: [], polls: 3}}
       ],
       signature: signature,
       decision: decision,
@@ -286,6 +287,159 @@ defmodule Kubeybilly.LogbookTest do
     assert {:ok, markdown} = Logbook.generate(record, root: root)
     assert markdown =~ "Rule budget-actions-per-incident refused the action"
     assert markdown =~ "No verification ran"
+  end
+
+  ## The verification diagnosis
+
+  defp unchanged_record do
+    %{
+      recovered_rollback_record()
+      | verification_outcome: :unchanged,
+        outcome: :escalated,
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:02]), :evidence_sealed, %{}},
+          {at(~T[10:00:04]), :executed, %{result: %{dry_run: false}}},
+          {at(~T[10:01:34]), :verified_unchanged,
+           %{
+             reason: :window_expired,
+             unmet: [:no_restarts_since_settle, :rolled_to_available],
+             polls: 7
+           }}
+        ]
+    }
+  end
+
+  test "the verification section states the reason in prose", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(unchanged_record(), root: root)
+
+    assert markdown =~ "closed at 2026-07-24 10:01:34 (UTC), after 7 polls."
+    assert markdown =~ "Why: the window expired before recovery was reached."
+  end
+
+  test "the verification section lists the unmet conditions by name", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(unchanged_record(), root: root)
+
+    assert markdown =~ "Recovery conditions still unmet when the window closed:"
+
+    assert markdown =~
+             "- no_restarts_since_settle: containers kept restarting after the action's " <>
+               "own rollout had settled"
+
+    assert markdown =~
+             "- rolled_to_available: the ReplicaSet the rollback moved to never became " <>
+               "fully available"
+  end
+
+  test "a recovered verification says why it was believed", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(recovered_rollback_record(), root: root)
+
+    assert markdown =~ "closed at 2026-07-24 10:01:34 (UTC), after 3 polls."
+    assert markdown =~ "Why: recovery held for two consecutive polls."
+    refute markdown =~ "Recovery conditions still unmet"
+  end
+
+  test "the timeline names an empty diagnosis list rather than trailing off",
+       %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(recovered_rollback_record(), root: root)
+
+    assert markdown =~
+             "| verified recovered | polls: 3; reason: recovered_sustained; unmet: none |"
+  end
+
+  test "the escalation open question explains the verdict, not an empty parenthetical",
+       %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(unchanged_record(), root: root)
+
+    refute markdown =~ "()"
+
+    assert markdown =~
+             "The incident escalated on \"verified unchanged\": the window expired " <>
+               "before recovery was reached, with 2 recovery conditions still unmet " <>
+               "(listed under Verification). A human needs to take it from here; the " <>
+               "evidence above is the handoff."
+  end
+
+  test "an escalation whose closing event carries no detail drops the parenthetical",
+       %{root: root} do
+    record = %{
+      recovered_rollback_record()
+      | verification_outcome: nil,
+        outcome: :escalated,
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:03]), :no_signature_match, %{}}
+        ]
+    }
+
+    assert {:ok, markdown} = Logbook.generate(record, root: root)
+    refute markdown =~ "()"
+
+    assert markdown =~
+             "The incident escalated on \"no signature match\". A human needs to take it " <>
+               "from here"
+  end
+
+  ## Declined incidents
+
+  defp declined_record do
+    reason = "the rollback tier needs confidence 0.8 and the signature offered 0.55"
+
+    %{
+      recovered_rollback_record()
+      | decision: %Decision{
+          verdict: :deny,
+          rule_id: "tier-min-confidence",
+          chain: ["kill-switch", "mode", "scope", "deny-kinds", "budgets", "tier-min-confidence"],
+          reason: reason
+        },
+        verification_outcome: nil,
+        outcome: :declined,
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:02]), :evidence_sealed, %{}},
+          {at(~T[10:00:03]), :policy_denied,
+           %{verdict: :deny, rule_id: "tier-min-confidence", reason: reason}}
+        ]
+    }
+  end
+
+  test "a declined incident hands the decision back to a human", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(declined_record(), root: root)
+
+    assert markdown =~
+             "- Rule tier-min-confidence refused the proposed rollback_deployment, so " <>
+               "nothing on the cluster was touched: the rollback tier needs confidence " <>
+               "0.8 and the signature offered 0.55. A human decides whether to proceed " <>
+               "by hand; nothing here will act on this incident again."
+  end
+
+  test "a declined incident's open questions are not only capture gaps", %{root: root} do
+    assert {:ok, markdown} = Logbook.generate(declined_record(), root: root)
+
+    refute markdown =~ "None. Nothing here is waiting on a human decision."
+    assert markdown =~ "tier-min-confidence"
+  end
+
+  test "an approval denial is already a human decision, so it asks nothing",
+       %{root: root} do
+    record = %{
+      declined_record()
+      | decision: %Decision{
+          verdict: :needs_approval,
+          rule_id: "tier-approval",
+          chain: ["tier-approval"],
+          reason: "the rollback tier asks a human at confidence 0.9"
+        },
+        timeline: [
+          {at(~T[10:00:00]), :opened, %{}},
+          {at(~T[10:00:03]), :approval_requested, %{verdict: :needs_approval}},
+          {at(~T[10:00:40]), :approval_denied, %{}}
+        ]
+    }
+
+    assert {:ok, markdown} = Logbook.generate(record, root: root)
+    refute markdown =~ "A human decides whether to proceed by hand"
   end
 
   ## The narrative section

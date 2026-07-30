@@ -12,8 +12,31 @@ defmodule Kubeybilly.Verifier do
 
   alias Kubeybilly.Incident.Record
 
+  @typedoc "One of the three documented verification outcomes."
+  @type outcome :: :recovered | :unchanged | :worse
+
+  @typedoc """
+  Why the verifier landed where it did, in the log's vocabulary.
+
+  An outcome alone cannot be handed to a human: "unchanged" is a verdict,
+  not an explanation. The diagnosis crosses the boundary with the outcome
+  so the incident record and `log.md` say the same thing the verifier's
+  own telemetry says. Keys an implementation is expected to supply:
+
+    * `:reason` - the deciding clause, for example `:window_expired`,
+      `:recovered_sustained`, `:restart_rate_exceeded`,
+      `:ready_replicas_dropped`, `:polls_failed`, `:no_baseline`
+    * `:unmet` - recovery conditions still unmet, empty on recovery
+    * `:polls` - how many polls ran inside the window
+
+  The map may be empty: a verifier with nothing to add is allowed, and
+  every reader treats a missing key as "not recorded" rather than
+  failing.
+  """
+  @type detail :: map()
+
   @doc """
-  Watch the verification window and judge the outcome.
+  Watch the verification window and judge the outcome, with the reasoning.
 
   The baseline is the pre-action snapshot from the evidence bundle
   (`metrics/baseline.json`), nil when the bundle recorded a gap there.
@@ -22,7 +45,7 @@ defmodule Kubeybilly.Verifier do
   never returns still cannot wedge an incident.
   """
   @callback verify(Record.t(), baseline :: map() | nil, opts :: keyword()) ::
-              {:ok, :recovered | :unchanged | :worse}
+              {:ok, outcome(), detail()}
 
   @doc """
   The configured verifier implementation.
